@@ -27,7 +27,7 @@ The Pearl kernel is a hand-tuned `int8` tensor-core engine for the NoisyGEMM + k
 - ⚡ **Native & lightweight** — direct CUDA Driver API, near-zero CPU load (blocking-sync design), runs great on weak rigs and many-GPU boxes.
 - 🔒 **Self-contained & protected** — a single binary with everything embedded and encrypted; no loose kernel files to manage or leak.
 - 🔥 **Built-in overclocking** — lock clocks and apply core/memory offsets and a power limit straight from the miner (no third-party OC tool required).
-- 🌐 **Multi-pool & dialects** — works with standard Pearl Stratum pools (HeroMiners, LuckyPool, Kryptex) and the AlphaPool dialect out of the box.
+- 🌐 **Multi-pool & dialects** — works with standard Pearl Stratum pools (BaikalMine, HeroMiners, LuckyPool, Kryptex) and the AlphaPool dialect out of the box.
 - 🖥️ **Clean live dashboard** — per-GPU hashrate, accepted/stale/rejected shares, efficiency (GH/W), temps, clocks, fans and power at a glance.
 - 🛠️ **HiveOS ready** — drops straight into a HiveOS custom-miner slot.
 - ♻️ **Resilient** — automatic reconnect and pool fail-over; the mining pipeline never stalls.
@@ -38,7 +38,7 @@ The Pearl kernel is a hand-tuned `int8` tensor-core engine for the NoisyGEMM + k
 
 ### 🪟 Windows
 1. Download and unpack the **Windows** release.
-2. Open the `.bat` for your pool (`HeroMiners.bat`, `LuckyPool.bat`, `AlphaPool.bat`) in a text editor and set your **wallet** and **worker** name.
+2. Open the `.bat` for your pool (`Baikal.bat`, `HeroMiners.bat`, `LuckyPool.bat`, `AlphaPool.bat`) in a text editor and set your **wallet** and **worker** name.
 3. Double-click the `.bat` to start mining. *(Run as Administrator if you want the built-in overclock to apply.)*
 
 ### 🐧 Linux
@@ -56,10 +56,10 @@ Add a **Custom miner** flight sheet with these fields:
 | Field | Value |
 |---|---|
 | **Miner name** | `ForgeMiner` *(auto-fills from the URL)* |
-| **Installation URL** | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.0.0/ForgeMiner-1.0.0.tar.gz` |
+| **Installation URL** | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.0.1/ForgeMiner-1.0.1.tar.gz` |
 | **Hash algorithm** | *(leave empty)* |
 | **Wallet and worker template** | `%WAL%.%WORKER_NAME%` *(with a Pearl wallet attached)* — or hard-code `YOUR_WALLET.%WORKER_NAME%` |
-| **Pool URL** | `45.151.62.119:3361` *(LuckyPool)* · `ru.pearl.herominers.com:1200` *(HeroMiners)* · `prl-ru.kryptex.network:7048` *(Kryptex)* |
+| **Pool URL** | `pearl.baikalmine.com:2010` *(BaikalMine, 0.5% fee)* · `ru.pearl.herominers.com:1200` *(HeroMiners)* · `45.151.62.119:3361` *(LuckyPool)* · `prl-ru.kryptex.network:7048` *(Kryptex)* |
 | **Pass** | `x` |
 | **Extra config arguments** | *empty for Stratum* · `FORGE_PROTO=alpha` for AlphaPool · OC e.g. `FORGE_CCLK=2505` |
 
