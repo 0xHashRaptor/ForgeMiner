@@ -1,6 +1,6 @@
 <h1 align="center">⚒️ ForgeMiner</h1>
 
-<p align="center"><b>A fast, native NVIDIA GPU miner for Pearl (PRL)</b></p>
+<p align="center"><b>A fast, native NVIDIA GPU miner — first coin: Pearl (PRL), more soon</b></p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/version-1.0.0-orange.svg">
@@ -13,9 +13,9 @@
 
 ## ⚒️ Overview
 
-**ForgeMiner** is a high-performance, fully native miner for the **Pearl (PRL)** Proof-of-Useful-Work blockchain. It talks to the GPU directly through the CUDA Driver API — **no Python, no WSL, no extra runtimes** — so it starts instantly and runs lean even on low-spec rigs.
+**ForgeMiner** is a high-performance, fully native NVIDIA GPU miner. It talks to the GPU directly through the CUDA Driver API — **no Python, no WSL, no extra runtimes** — so it starts instantly and runs lean even on low-spec rigs. **Its first supported coin is Pearl (PRL)** (Proof-of-Useful-Work); more coins are on the way.
 
-The mining kernel is a hand-tuned `int8` tensor-core engine purpose-built for the Pearl NoisyGEMM + keyed-BLAKE3 proof, with a separate per-architecture kernel for every supported card so each GPU runs at its peak.
+The Pearl kernel is a hand-tuned `int8` tensor-core engine for the NoisyGEMM + keyed-BLAKE3 proof, with a separate per-architecture build for every supported card so each GPU runs at its peak.
 
 > ForgeMiner is closed-source. Releases are published on our [Telegram channel](https://t.me/ForgeMiner).
 
@@ -27,7 +27,7 @@ The mining kernel is a hand-tuned `int8` tensor-core engine purpose-built for th
 - ⚡ **Native & lightweight** — direct CUDA Driver API, near-zero CPU load (blocking-sync design), runs great on weak rigs and many-GPU boxes.
 - 🔒 **Self-contained & protected** — a single binary with everything embedded and encrypted; no loose kernel files to manage or leak.
 - 🔥 **Built-in overclocking** — lock clocks and apply core/memory offsets and a power limit straight from the miner (no third-party OC tool required).
-- 🌐 **Multi-pool & dialects** — works with standard Pearl Stratum pools (HeroMiners, LuckyPool) and the AlphaPool dialect out of the box.
+- 🌐 **Multi-pool & dialects** — works with standard Pearl Stratum pools (HeroMiners, LuckyPool, Kryptex) and the AlphaPool dialect out of the box.
 - 🖥️ **Clean live dashboard** — per-GPU hashrate, accepted/stale/rejected shares, efficiency (GH/W), temps, clocks, fans and power at a glance.
 - 🛠️ **HiveOS ready** — drops straight into a HiveOS custom-miner slot.
 - ♻️ **Resilient** — automatic reconnect and pool fail-over; the mining pipeline never stalls.
@@ -66,7 +66,7 @@ Options can be passed as **command-line flags** *(`--flag value`)* **or** as **e
 | `--wallet` | `FORGE_WALLET` | Your payout wallet address. |
 | `--worker` | `FORGE_WORKER` | Worker / rig name shown on the pool. |
 | `--password` | `FORGE_PASS` | Pool password (usually `x`). |
-| `--proto` | `FORGE_PROTO` | Pool dialect: `stratum` (HeroMiners, LuckyPool) or `alpha` (AlphaPool). |
+| `--proto` | `FORGE_PROTO` | Pool dialect: `stratum` (HeroMiners, LuckyPool, Kryptex) or `alpha` (AlphaPool). |
 
 ### 🔥 Overclocking
 > 💡 **Tip:** ForgeMiner is **core-clock bound and memory-light** — for the best hashrate set the **core high**; memory can stay low. Overclocking requires **root** (Linux/HiveOS) or **Administrator** (Windows).
@@ -102,7 +102,7 @@ Options can be passed as **command-line flags** *(`--flag value`)* **or** as **e
 
 ## 💼 Developer Fee
 
-ForgeMiner has a built-in developer fee of **3%**, mined seamlessly in the background so your reported hashrate stays steady. It funds ongoing development and new algorithms.
+Built-in developer fee: **3%**.
 
 ---
 
