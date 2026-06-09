@@ -51,7 +51,19 @@ FORGE_PROTO=stratum ./forge
 …or use the included `start.sh` after editing your wallet.
 
 ### ⛏️ HiveOS
-Install as a custom miner — see [`hiveos/README`](hiveos) in the release. The flight-sheet **Miner name** is `ForgeMiner`; put your wallet/pool in the flight sheet as usual.
+Add a **Custom miner** flight sheet with these fields:
+
+| Field | Value |
+|---|---|
+| **Miner name** | `ForgeMiner` *(auto-fills from the URL)* |
+| **Installation URL** | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.0.0/ForgeMiner-1.0.0.tar.gz` |
+| **Hash algorithm** | *(leave empty)* |
+| **Wallet and worker template** | `%WAL%.%WORKER_NAME%` *(with a Pearl wallet attached)* — or hard-code `YOUR_WALLET.%WORKER_NAME%` |
+| **Pool URL** | `45.151.62.119:3361` *(LuckyPool)* · `ru.pearl.herominers.com:1200` *(HeroMiners)* · `prl-ru.kryptex.network:7048` *(Kryptex)* |
+| **Pass** | `x` |
+| **Extra config arguments** | *empty for Stratum* · `FORGE_PROTO=alpha` for AlphaPool · OC e.g. `FORGE_CCLK=2505` |
+
+Apply → the dashboard shows per-GPU hashrate, temps, fans and shares. Run **one** miner per rig.
 
 ---
 
