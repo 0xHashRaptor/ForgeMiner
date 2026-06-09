@@ -1,0 +1,109 @@
+<h1 align="center">⚒️ ForgeMiner</h1>
+
+<p align="center"><b>A fast, native NVIDIA GPU miner for Pearl (PRL)</b></p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/version-1.0.0-orange.svg">
+  <img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20HiveOS-blue.svg">
+  <img src="https://img.shields.io/badge/GPU-NVIDIA%20RTX%2030%2F40%2F50-76b900.svg">
+  <a href="https://t.me/ForgeMiner"><img src="https://img.shields.io/badge/Telegram-Releases-26A5E4.svg?logo=telegram"></a>
+</p>
+
+---
+
+## ⚒️ Overview
+
+**ForgeMiner** is a high-performance, fully native miner for the **Pearl (PRL)** Proof-of-Useful-Work blockchain. It talks to the GPU directly through the CUDA Driver API — **no Python, no WSL, no extra runtimes** — so it starts instantly and runs lean even on low-spec rigs.
+
+The mining kernel is a hand-tuned `int8` tensor-core engine purpose-built for the Pearl NoisyGEMM + keyed-BLAKE3 proof, with a separate per-architecture kernel for every supported card so each GPU runs at its peak.
+
+> ForgeMiner is closed-source. Releases are published on our [Telegram channel](https://t.me/ForgeMiner).
+
+---
+
+## ✨ Miner Features
+
+- 🚀 **Architecture-tuned kernels** — a dedicated `int8` kernel per GPU generation (Ampere / Ada / Blackwell), auto-selected at launch. Class-leading on RTX 40-series.
+- ⚡ **Native & lightweight** — direct CUDA Driver API, near-zero CPU load (blocking-sync design), runs great on weak rigs and many-GPU boxes.
+- 🔒 **Self-contained & protected** — a single binary with everything embedded and encrypted; no loose kernel files to manage or leak.
+- 🔥 **Built-in overclocking** — lock clocks and apply core/memory offsets and a power limit straight from the miner (no third-party OC tool required).
+- 🌐 **Multi-pool & dialects** — works with standard Pearl Stratum pools (HeroMiners, LuckyPool) and the AlphaPool dialect out of the box.
+- 🖥️ **Clean live dashboard** — per-GPU hashrate, accepted/stale/rejected shares, efficiency (GH/W), temps, clocks, fans and power at a glance.
+- 🛠️ **HiveOS ready** — drops straight into a HiveOS custom-miner slot.
+- ♻️ **Resilient** — automatic reconnect and pool fail-over; the mining pipeline never stalls.
+
+---
+
+## 🚀 Quick Start
+
+### 🪟 Windows
+1. Download and unpack the **Windows** release.
+2. Open the `.bat` for your pool (`HeroMiners.bat`, `LuckyPool.bat`, `AlphaPool.bat`) in a text editor and set your **wallet** and **worker** name.
+3. Double-click the `.bat` to start mining. *(Run as Administrator if you want the built-in overclock to apply.)*
+
+### 🐧 Linux
+```bash
+chmod +x forge
+FORGE_POOL=ru.pearl.herominers.com:1200 \
+FORGE_WALLET=YOUR_WALLET FORGE_WORKER=rig01 \
+FORGE_PROTO=stratum ./forge
+```
+…or use the included `start.sh` after editing your wallet.
+
+### ⛏️ HiveOS
+Install as a custom miner — see [`hiveos/README`](hiveos) in the release. The flight-sheet **Miner name** is `ForgeMiner`; put your wallet/pool in the flight sheet as usual.
+
+---
+
+## ⚙️ Miner Options
+
+Options can be passed as **command-line flags** *(`--flag value`)* **or** as **environment variables** *(`FORGE_FLAG`)* — handy for HiveOS and `.bat` files.
+
+| Flag | Env variable | Description |
+|------|--------------|-------------|
+| `--algorithm` | `FORGE_ALGO` | Algorithm to mine (`pearl`). |
+| `--pool` | `FORGE_POOL` | Pool address as `host:port`. |
+| `--wallet` | `FORGE_WALLET` | Your payout wallet address. |
+| `--worker` | `FORGE_WORKER` | Worker / rig name shown on the pool. |
+| `--password` | `FORGE_PASS` | Pool password (usually `x`). |
+| `--proto` | `FORGE_PROTO` | Pool dialect: `stratum` (HeroMiners, LuckyPool) or `alpha` (AlphaPool). |
+
+### 🔥 Overclocking
+> 💡 **Tip:** ForgeMiner is **core-clock bound and memory-light** — for the best hashrate set the **core high**; memory can stay low. Overclocking requires **root** (Linux/HiveOS) or **Administrator** (Windows).
+
+| Flag | Env variable | Description |
+|------|--------------|-------------|
+| `--cclk` | `FORGE_CCLK` | Lock GPU core clock (MHz). |
+| `--coff` | `FORGE_COFF` | GPU core clock offset (MHz, `+`/`-`). |
+| `--mclk` | `FORGE_MCLK` | Lock memory clock (MHz). |
+| `--moff` | `FORGE_MOFF` | Memory clock offset (MHz, `+`/`-`). |
+| `--plimit` | `FORGE_PLIMIT` | Power limit (Watts). |
+
+---
+
+## 📊 Supported Algorithms
+
+| Algorithm | Coin | Dev fee |
+|-----------|------|:-------:|
+| **PearlHash** | Pearl (PRL) | **3%** |
+
+*More algorithms are coming — follow the channel for updates.*
+
+**Supported GPUs:** NVIDIA RTX 30 (Ampere), RTX 40 (Ada), RTX 50 (Blackwell). *(Turing RTX 20 — experimental.)*
+
+---
+
+## 🔗 Resources
+
+- 📣 **Releases & news:** https://t.me/ForgeMiner
+- 💬 **Support & chat:** https://t.me/ForgeMinerChat
+
+---
+
+## 💼 Developer Fee
+
+ForgeMiner has a built-in developer fee of **3%**, mined seamlessly in the background so your reported hashrate stays steady. It funds ongoing development and new algorithms.
+
+---
+
+<p align="center"><sub>© 2026 ForgeMiner. Not affiliated with NVIDIA. Mine responsibly.</sub></p>
