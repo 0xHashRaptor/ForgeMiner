@@ -56,7 +56,7 @@ Add a **Custom miner** flight sheet with these fields:
 | Field | Value |
 |---|---|
 | **Miner name** | `ForgeMiner` *(auto-fills from the URL)* |
-| **Installation URL** | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.0.1/ForgeMiner-1.0.1.tar.gz` |
+| **Installation URL** | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.0.2/ForgeMiner-1.0.2.tar.gz` |
 | **Hash algorithm** | *(leave empty)* |
 | **Wallet and worker template** | `%WAL%.%WORKER_NAME%` *(with a Pearl wallet attached)* — or hard-code `YOUR_WALLET.%WORKER_NAME%` |
 | **Pool URL** | `pearl.baikalmine.com:2010` *(BaikalMine, 0.5% fee)* · `ru.pearl.herominers.com:1200` *(HeroMiners)* · `45.151.62.119:3361` *(LuckyPool)* · `prl-ru.kryptex.network:7048` *(Kryptex)* |

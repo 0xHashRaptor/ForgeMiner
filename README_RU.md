@@ -58,7 +58,7 @@ FORGE_PROTO=stratum ./forge
 | Поле | Значение |
 |---|---|
 | **Имя майнера** | `ForgeMiner` *(подставится из URL автоматически)* |
-| **Установочный URL** | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.0.1/ForgeMiner-1.0.1.tar.gz` |
+| **Установочный URL** | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.0.2/ForgeMiner-1.0.2.tar.gz` |
 | **Хэш алгоритм** | *(оставить пустым)* |
 | **Кошелёк и воркер шаблона** | `%WAL%.%WORKER_NAME%` *(если привязан Pearl-кошелёк)* — или впиши явно `ВАШ_КОШЕЛЁК.%WORKER_NAME%` |
 | **Адрес пула** | `pearl.baikalmine.com:2010` *(BaikalMine, комиссия 0.5%)* · `ru.pearl.herominers.com:1200` *(HeroMiners)* · `45.151.62.119:3361` *(LuckyPool)* · `prl-ru.kryptex.network:7048` *(Kryptex)* |
