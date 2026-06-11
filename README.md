@@ -24,7 +24,7 @@ The Pearl kernel is a hand-tuned `int8` tensor-core engine for the NoisyGEMM + k
 ## ✨ Miner Features
 
 - 🚀 **Architecture-tuned kernels** — a dedicated `int8` kernel per GPU generation (Turing / Ampere / Ada / Blackwell), auto-selected at launch. Class-leading on RTX 40-series.
-- 🆕 **v1.0.3** — RTX **20-series (Turing) now mines on Stratum pools** (HeroMiners / LuckyPool / Kryptex), not just AlphaPool; **~4% faster** on RTX 30 / 40 / 50 via `ldmatrix` tensor loads.
+- 🆕 **v1.0.3** — RTX **20-series (Turing) now mines on Stratum pools** (HeroMiners / LuckyPool / Kryptex), not just AlphaPool; **~4% faster** on RTX 30 / 40 / 50 at the same clocks and power.
 - ⚡ **Native & lightweight** — direct CUDA Driver API, near-zero CPU load (blocking-sync design), runs great on weak rigs and many-GPU boxes.
 - 🔒 **Self-contained & protected** — a single binary with everything embedded and encrypted; no loose kernel files to manage or leak.
 - 🔥 **Built-in overclocking** — lock clocks and apply core/memory offsets and a power limit straight from the miner (no third-party OC tool required).
