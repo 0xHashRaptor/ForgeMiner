@@ -3,9 +3,9 @@
 <p align="center"><b>Быстрый нативный майнер для NVIDIA — первая монета Pearl (PRL), скоро другие</b></p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.0-orange.svg">
+  <img src="https://img.shields.io/badge/version-1.0.3-orange.svg">
   <img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20HiveOS-blue.svg">
-  <img src="https://img.shields.io/badge/GPU-NVIDIA%20RTX%2030%2F40%2F50-76b900.svg">
+  <img src="https://img.shields.io/badge/GPU-NVIDIA%20RTX%2020%2F30%2F40%2F50-76b900.svg">
   <a href="https://t.me/ForgeMiner"><img src="https://img.shields.io/badge/Telegram-Releases-26A5E4.svg?logo=telegram"></a>
 </p>
 
@@ -25,7 +25,8 @@
 
 ## ✨ Особенности майнера
 
-- 🚀 **Ядра под архитектуру** — отдельное `int8`-ядро под каждое поколение (Ampere / Ada / Blackwell), выбирается автоматически при запуске. Лидер по скорости на RTX 40-й серии.
+- 🚀 **Ядра под архитектуру** — отдельное `int8`-ядро под каждое поколение (Turing / Ampere / Ada / Blackwell), выбирается автоматически при запуске. Лидер по скорости на RTX 40-й серии.
+- 🆕 **v1.0.3** — RTX **20-я серия (Turing) теперь майнит на Stratum-пулах** (HeroMiners / LuckyPool / Kryptex), а не только AlphaPool; **+4%** на RTX 30 / 40 / 50 за счёт `ldmatrix`-загрузки тензорных ядер.
 - ⚡ **Нативный и лёгкий** — прямой CUDA Driver API, почти нулевая нагрузка на CPU (blocking-sync), отлично работает на слабых и многокарточных ригах.
 - 🔒 **Самодостаточный и защищённый** — единый бинарь, всё вшито и зашифровано; никаких отдельных файлов-ядер, которые нужно таскать или которые можно «утащить».
 - 🔥 **Встроенный разгон** — лок частот, оффсеты ядра/памяти и лимит мощности прямо из майнера (сторонние OC-утилиты не нужны).
@@ -103,7 +104,7 @@ FORGE_PROTO=stratum ./forge
 
 *Скоро будут другие алгоритмы — следите за каналом.*
 
-**Поддерживаемые GPU:** NVIDIA RTX 30 (Ampere), RTX 40 (Ada), RTX 50 (Blackwell). *(Turing RTX 20 — экспериментально.)*
+**Поддерживаемые GPU:** NVIDIA RTX 20 (Turing), RTX 30 (Ampere), RTX 40 (Ada), RTX 50 (Blackwell). *(RTX 20-й серии нужен драйвер 545+.)*
 
 ---
 
