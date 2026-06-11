@@ -3,9 +3,9 @@
 <p align="center"><b>A fast, native NVIDIA GPU miner — first coin: Pearl (PRL), more soon</b></p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.0-orange.svg">
+  <img src="https://img.shields.io/badge/version-1.0.3-orange.svg">
   <img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20HiveOS-blue.svg">
-  <img src="https://img.shields.io/badge/GPU-NVIDIA%20RTX%2030%2F40%2F50-76b900.svg">
+  <img src="https://img.shields.io/badge/GPU-NVIDIA%20RTX%2020%2F30%2F40%2F50-76b900.svg">
   <a href="https://t.me/ForgeMiner"><img src="https://img.shields.io/badge/Telegram-Releases-26A5E4.svg?logo=telegram"></a>
 </p>
 
@@ -23,7 +23,8 @@ The Pearl kernel is a hand-tuned `int8` tensor-core engine for the NoisyGEMM + k
 
 ## ✨ Miner Features
 
-- 🚀 **Architecture-tuned kernels** — a dedicated `int8` kernel per GPU generation (Ampere / Ada / Blackwell), auto-selected at launch. Class-leading on RTX 40-series.
+- 🚀 **Architecture-tuned kernels** — a dedicated `int8` kernel per GPU generation (Turing / Ampere / Ada / Blackwell), auto-selected at launch. Class-leading on RTX 40-series.
+- 🆕 **v1.0.3** — RTX **20-series (Turing) now mines on Stratum pools** (HeroMiners / LuckyPool / Kryptex), not just AlphaPool; **~4% faster** on RTX 30 / 40 / 50 via `ldmatrix` tensor loads.
 - ⚡ **Native & lightweight** — direct CUDA Driver API, near-zero CPU load (blocking-sync design), runs great on weak rigs and many-GPU boxes.
 - 🔒 **Self-contained & protected** — a single binary with everything embedded and encrypted; no loose kernel files to manage or leak.
 - 🔥 **Built-in overclocking** — lock clocks and apply core/memory offsets and a power limit straight from the miner (no third-party OC tool required).
@@ -101,7 +102,7 @@ Options can be passed as **command-line flags** *(`--flag value`)* **or** as **e
 
 *More algorithms are coming — follow the channel for updates.*
 
-**Supported GPUs:** NVIDIA RTX 30 (Ampere), RTX 40 (Ada), RTX 50 (Blackwell). *(Turing RTX 20 — experimental.)*
+**Supported GPUs:** NVIDIA RTX 20 (Turing), RTX 30 (Ampere), RTX 40 (Ada), RTX 50 (Blackwell). *(RTX 20-series needs driver 545+.)*
 
 ---
 
