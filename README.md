@@ -15,7 +15,7 @@
 
 **ForgeMiner** is a high-performance, fully native NVIDIA GPU miner. It talks to the GPU directly through the CUDA Driver API — **no Python, no WSL, no extra runtimes** — so it starts instantly and runs lean even on low-spec rigs. **Its first supported coin is Pearl (PRL)** (Proof-of-Useful-Work); more coins are on the way.
 
-The Pearl kernel is a hand-tuned `int8` tensor-core engine for the NoisyGEMM + keyed-BLAKE3 proof, with a separate per-architecture build for every supported card so each GPU runs at its peak.
+The Pearl kernel is a hand-tuned tensor-core engine, with a separate per-architecture build for every supported card so each GPU runs at its peak.
 
 > ForgeMiner is closed-source. Releases are published on our [Telegram channel](https://t.me/ForgeMiner).
 
@@ -23,7 +23,7 @@ The Pearl kernel is a hand-tuned `int8` tensor-core engine for the NoisyGEMM + k
 
 ## ✨ Miner Features
 
-- 🚀 **Architecture-tuned kernels** — a dedicated `int8` kernel per GPU generation (Turing / Ampere / Ada / Blackwell), auto-selected at launch. Class-leading on RTX 40-series.
+- 🚀 **Architecture-tuned kernels** — a dedicated kernel per GPU generation (Turing / Ampere / Ada / Blackwell), auto-selected at launch. Class-leading on RTX 40-series.
 - 🆕 **v1.0.3** — RTX **20-series (Turing) now mines on Stratum pools** (HeroMiners / LuckyPool / Kryptex), not just AlphaPool; **~4% faster** on RTX 30 / 40 / 50 at the same clocks and power.
 - ⚡ **Native & lightweight** — direct CUDA Driver API, near-zero CPU load (blocking-sync design), runs great on weak rigs and many-GPU boxes.
 - 🔒 **Self-contained & protected** — a single binary with everything embedded and encrypted; no loose kernel files to manage or leak.
