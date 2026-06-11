@@ -3,7 +3,7 @@
 <p align="center"><b>A fast, native NVIDIA GPU miner — first coin: Pearl (PRL), more soon</b></p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.3-orange.svg">
+  <img src="https://img.shields.io/badge/version-1.0.4-orange.svg">
   <img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20HiveOS-blue.svg">
   <img src="https://img.shields.io/badge/GPU-NVIDIA%20RTX%2020%2F30%2F40%2F50-76b900.svg">
   <a href="https://t.me/ForgeMiner"><img src="https://img.shields.io/badge/Telegram-Releases-26A5E4.svg?logo=telegram"></a>
@@ -24,7 +24,8 @@ The Pearl kernel is a hand-tuned tensor-core engine, with a separate per-archite
 ## ✨ Miner Features
 
 - 🚀 **Architecture-tuned kernels** — a dedicated kernel per GPU generation (Turing / Ampere / Ada / Blackwell), auto-selected at launch. Class-leading on RTX 40-series.
-- 🆕 **v1.0.3** — RTX **20-series (Turing) now mines on Stratum pools** (HeroMiners / LuckyPool / Kryptex), not just AlphaPool; **~4% faster** on RTX 30 / 40 / 50 at the same clocks and power.
+- 🆕 **v1.0.4** — pick which GPUs to mine (`--gpu 0,1,2,6`) and set a **different overclock per card**; dashboard stability fix for long runs.
+- 🆕 **v1.0.3** — RTX **20-series (Turing) now mines on Stratum pools** (HeroMiners / LuckyPool / Kryptex), not just AlphaPool; **~4% faster** on RTX 30 / 40 / 50.
 - ⚡ **Native & lightweight** — direct CUDA Driver API, near-zero CPU load (blocking-sync design), runs great on weak rigs and many-GPU boxes.
 - 🔒 **Self-contained & protected** — a single binary with everything embedded and encrypted; no loose kernel files to manage or leak.
 - 🔥 **Built-in overclocking** — lock clocks and apply core/memory offsets and a power limit straight from the miner (no third-party OC tool required).
@@ -80,9 +81,13 @@ Options can be passed as **command-line flags** *(`--flag value`)* **or** as **e
 | `--worker` | `FORGE_WORKER` | Worker / rig name shown on the pool. |
 | `--password` | `FORGE_PASS` | Pool password (usually `x`). |
 | `--proto` | `FORGE_PROTO` | Pool dialect: `stratum` (HeroMiners, LuckyPool, Kryptex) or `alpha` (AlphaPool). |
+| `--gpu` | `FORGE_GPU` | Mine only these GPU indices, e.g. `--gpu 0,1,2,6` (default: all GPUs). |
 
 ### 🔥 Overclocking
 > 💡 **Tip:** ForgeMiner is **core-clock bound and memory-light** — for the best hashrate set the **core high**; memory can stay low. Overclocking requires **root** (Linux/HiveOS) or **Administrator** (Windows).
+>
+> 🆕 **Per-GPU OC:** each flag takes a single value (applied to all cards) **or a comma list** that maps to `--gpu` — so mixed-card rigs can OC each card differently:
+> `--gpu 0,1,2,6 --coff 300,250,300,200 --plimit 280,280,300,260`
 
 | Flag | Env variable | Description |
 |------|--------------|-------------|
