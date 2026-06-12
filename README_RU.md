@@ -3,7 +3,7 @@
 <p align="center"><b>Быстрый нативный майнер для NVIDIA — первая монета Pearl (PRL), скоро другие</b></p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.5-orange.svg">
+  <img src="https://img.shields.io/badge/version-1.0.6-orange.svg">
   <img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20HiveOS-blue.svg">
   <img src="https://img.shields.io/badge/GPU-NVIDIA%20RTX%2020%2F30%2F40%2F50-76b900.svg">
   <a href="https://t.me/ForgeMiner"><img src="https://img.shields.io/badge/Telegram-Releases-26A5E4.svg?logo=telegram"></a>
@@ -60,7 +60,7 @@ FORGE_PROTO=stratum ./forge
 | Поле | Значение |
 |---|---|
 | **Имя майнера** | `ForgeMiner` *(подставится из URL автоматически)* |
-| **Установочный URL** | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.0.5/ForgeMiner-1.0.5.tar.gz` |
+| **Установочный URL** | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.0.6/ForgeMiner-1.0.6.tar.gz` |
 | **Хэш алгоритм** | *(оставить пустым)* |
 | **Кошелёк и воркер шаблона** | `%WAL%.%WORKER_NAME%` *(если привязан Pearl-кошелёк)* — или впиши явно `ВАШ_КОШЕЛЁК.%WORKER_NAME%` |
 | **Адрес пула** | `pearl.baikalmine.com:2010` *(BaikalMine, комиссия 0.5%)* · `ru.pearl.herominers.com:1200` *(HeroMiners)* · `45.151.62.119:3361` *(LuckyPool)* · `prl-ru.kryptex.network:7048` *(Kryptex)* |
@@ -83,7 +83,8 @@ FORGE_PROTO=stratum ./forge
 | `--worker` | `FORGE_WORKER` | Имя воркера/рига на пуле. |
 | `--password` | `FORGE_PASS` | Пароль пула (обычно `x`). |
 | `--proto` | `FORGE_PROTO` | Диалект пула: `stratum` (HeroMiners, LuckyPool, Kryptex) или `alpha` (AlphaPool). |
-| `--gpu` | `FORGE_GPU` | Майнить только на этих индексах карт, напр. `--gpu 0,1,2,6` (по умолчанию — все). |
+| `--gpu` | `FORGE_GPU` | Майнить только на этих индексах карт, напр. `--gpu 0,1,2,6` (по умолчанию — все). Индексы как в `nvidia-smi`. |
+| — | `FORGE_LOWVRAM` | Режим экономии видеопамяти для карт на 8 ГБ (примерно вдвое меньше VRAM): `1` — включить, `0` — выключить. По умолчанию определяется автоматически. |
 
 ### 🔥 Разгон
 > 💡 **Совет:** ForgeMiner **упирается в частоту ядра и почти не зависит от памяти** — для максимального хешрейта ставьте **высокое ядро**; память может оставаться низкой. Разгон требует **root** (Linux/HiveOS) или **Администратора** (Windows).
