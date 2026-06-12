@@ -3,7 +3,7 @@
 <p align="center"><b>Быстрый нативный майнер для NVIDIA — первая монета Pearl (PRL), скоро другие</b></p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.4-orange.svg">
+  <img src="https://img.shields.io/badge/version-1.0.5-orange.svg">
   <img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20HiveOS-blue.svg">
   <img src="https://img.shields.io/badge/GPU-NVIDIA%20RTX%2020%2F30%2F40%2F50-76b900.svg">
   <a href="https://t.me/ForgeMiner"><img src="https://img.shields.io/badge/Telegram-Releases-26A5E4.svg?logo=telegram"></a>
@@ -60,7 +60,7 @@ FORGE_PROTO=stratum ./forge
 | Поле | Значение |
 |---|---|
 | **Имя майнера** | `ForgeMiner` *(подставится из URL автоматически)* |
-| **Установочный URL** | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.0.2/ForgeMiner-1.0.2.tar.gz` |
+| **Установочный URL** | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.0.5/ForgeMiner-1.0.5.tar.gz` |
 | **Хэш алгоритм** | *(оставить пустым)* |
 | **Кошелёк и воркер шаблона** | `%WAL%.%WORKER_NAME%` *(если привязан Pearl-кошелёк)* — или впиши явно `ВАШ_КОШЕЛЁК.%WORKER_NAME%` |
 | **Адрес пула** | `pearl.baikalmine.com:2010` *(BaikalMine, комиссия 0.5%)* · `ru.pearl.herominers.com:1200` *(HeroMiners)* · `45.151.62.119:3361` *(LuckyPool)* · `prl-ru.kryptex.network:7048` *(Kryptex)* |
