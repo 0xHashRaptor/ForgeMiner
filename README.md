@@ -3,7 +3,7 @@
 <p align="center"><b>A fast, native NVIDIA GPU miner — first coin: Pearl (PRL), more soon</b></p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.7-orange.svg">
+  <img src="https://img.shields.io/badge/version-1.0.8-orange.svg">
   <img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20HiveOS-blue.svg">
   <img src="https://img.shields.io/badge/GPU-NVIDIA%20RTX%2020%2F30%2F40%2F50-76b900.svg">
   <a href="https://t.me/ForgeMiner"><img src="https://img.shields.io/badge/Telegram-Releases-26A5E4.svg?logo=telegram"></a>
@@ -24,6 +24,7 @@ The Pearl kernel is a hand-tuned tensor-core engine, with a separate per-archite
 ## ✨ Miner Features
 
 - 🚀 **Architecture-tuned kernels** — a dedicated kernel per GPU generation (Turing / Ampere / Ada / Blackwell), auto-selected at launch. Class-leading on RTX 40-series.
+- 🆕 **v1.0.8** — **much faster on multi-GPU & PCIe-riser rigs** (what most miners run): removed a per-iteration host transfer that bottlenecked GPUs on x1 risers — **up to +40–50%** on riser rigs. All GPU generations.
 - 🆕 **v1.0.7** — **faster on RTX 50-series (Blackwell)**: **~+4–5%** at the same clocks and power — on par with the fastest miners. RTX 30/40 unchanged.
 - 🆕 **v1.0.4** — pick which GPUs to mine (`--gpu 0,1,2,6`) and set a **different overclock per card**; dashboard stability fix for long runs.
 - 🆕 **v1.0.3** — RTX **20-series (Turing) now mines on Stratum pools** (HeroMiners / LuckyPool / Kryptex), not just AlphaPool; **~4% faster** on RTX 30 / 40 / 50.
@@ -59,7 +60,7 @@ Add a **Custom miner** flight sheet with these fields:
 | Field | Value |
 |---|---|
 | **Miner name** | `ForgeMiner` *(auto-fills from the URL)* |
-| **Installation URL** | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.0.7/ForgeMiner-1.0.7.tar.gz` |
+| **Installation URL** | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.0.8/ForgeMiner-1.0.8.tar.gz` |
 | **Hash algorithm** | *(leave empty)* |
 | **Wallet and worker template** | `%WAL%.%WORKER_NAME%` *(with a Pearl wallet attached)* — or hard-code `YOUR_WALLET.%WORKER_NAME%` |
 | **Pool URL** | `pearl.baikalmine.com:2010` *(BaikalMine, 0.5% fee)* · `ru.pearl.herominers.com:1200` *(HeroMiners)* · `45.151.62.119:3361` *(LuckyPool)* · `prl-ru.kryptex.network:7048` *(Kryptex)* |
