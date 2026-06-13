@@ -24,7 +24,7 @@ The Pearl kernel is a hand-tuned tensor-core engine, with a separate per-archite
 ## ✨ Miner Features
 
 - 🚀 **Architecture-tuned kernels** — a dedicated kernel per GPU generation (Turing / Ampere / Ada / Blackwell), auto-selected at launch. Class-leading on RTX 40-series.
-- 🆕 **v1.0.7** — **faster on RTX 50-series (Blackwell)**: retuned the hash-fold stage for the 50-series scheduler, **~+4–5%** at the same clocks — on par with the fastest miners. RTX 30/40 unchanged.
+- 🆕 **v1.0.7** — **faster on RTX 50-series (Blackwell)**: **~+4–5%** at the same clocks and power — on par with the fastest miners. RTX 30/40 unchanged.
 - 🆕 **v1.0.4** — pick which GPUs to mine (`--gpu 0,1,2,6`) and set a **different overclock per card**; dashboard stability fix for long runs.
 - 🆕 **v1.0.3** — RTX **20-series (Turing) now mines on Stratum pools** (HeroMiners / LuckyPool / Kryptex), not just AlphaPool; **~4% faster** on RTX 30 / 40 / 50.
 - ⚡ **Native & lightweight** — direct CUDA Driver API, near-zero CPU load (blocking-sync design), runs great on weak rigs and many-GPU boxes.
