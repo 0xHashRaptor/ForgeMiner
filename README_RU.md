@@ -3,7 +3,7 @@
 <p align="center"><b>Быстрый нативный майнер для NVIDIA — первая монета Pearl (PRL), скоро другие</b></p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.6-orange.svg">
+  <img src="https://img.shields.io/badge/version-1.0.7-orange.svg">
   <img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20HiveOS-blue.svg">
   <img src="https://img.shields.io/badge/GPU-NVIDIA%20RTX%2020%2F30%2F40%2F50-76b900.svg">
   <a href="https://t.me/ForgeMiner"><img src="https://img.shields.io/badge/Telegram-Releases-26A5E4.svg?logo=telegram"></a>
@@ -26,6 +26,7 @@
 ## ✨ Особенности майнера
 
 - 🚀 **Ядра под архитектуру** — отдельное ядро под каждое поколение (Turing / Ampere / Ada / Blackwell), выбирается автоматически при запуске. Лидер по скорости на RTX 40-й серии.
+- 🆕 **v1.0.7** — **быстрее на RTX 50-й серии (Blackwell)**: перетюнен этап hash-fold под планировщик 50-й серии, **~+4–5%** на тех же клоках — наравне с самыми быстрыми майнерами. RTX 30/40 без изменений.
 - 🆕 **v1.0.4** — выбор карт для майнинга (`--gpu 0,1,2,6`) и **разный разгон на каждую карту**; фикс стабильности дашборда на долгих прогонах.
 - 🆕 **v1.0.3** — RTX **20-я серия (Turing) теперь майнит на Stratum-пулах** (HeroMiners / LuckyPool / Kryptex), а не только AlphaPool; **+4%** на RTX 30 / 40 / 50.
 - ⚡ **Нативный и лёгкий** — прямой CUDA Driver API, почти нулевая нагрузка на CPU (blocking-sync), отлично работает на слабых и многокарточных ригах.
@@ -60,7 +61,7 @@ FORGE_PROTO=stratum ./forge
 | Поле | Значение |
 |---|---|
 | **Имя майнера** | `ForgeMiner` *(подставится из URL автоматически)* |
-| **Установочный URL** | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.0.6/ForgeMiner-1.0.6.tar.gz` |
+| **Установочный URL** | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.0.7/ForgeMiner-1.0.7.tar.gz` |
 | **Хэш алгоритм** | *(оставить пустым)* |
 | **Кошелёк и воркер шаблона** | `%WAL%.%WORKER_NAME%` *(если привязан Pearl-кошелёк)* — или впиши явно `ВАШ_КОШЕЛЁК.%WORKER_NAME%` |
 | **Адрес пула** | `pearl.baikalmine.com:2010` *(BaikalMine, комиссия 0.5%)* · `ru.pearl.herominers.com:1200` *(HeroMiners)* · `45.151.62.119:3361` *(LuckyPool)* · `prl-ru.kryptex.network:7048` *(Kryptex)* |
