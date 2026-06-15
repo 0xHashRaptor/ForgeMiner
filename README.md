@@ -127,7 +127,7 @@ Options can be passed as **command-line flags** *(`--flag value`)* **or** as **e
 
 ## 💼 Developer Fee
 
-Built-in developer fee: **3%**.
+Built-in developer fee for Pearl: **3%**.
 
 ---
 
