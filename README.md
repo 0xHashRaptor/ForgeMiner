@@ -1,4 +1,8 @@
-<h1 align="center">⚒️ ForgeMiner</h1>
+<p align="center">
+  <img src="assets/forge_logo.png" width="130" alt="ForgeMiner logo">
+</p>
+
+<h1 align="center">ForgeMiner</h1>
 
 <p align="center"><b>A fast, native NVIDIA GPU miner — first coin: Pearl (PRL), more soon</b></p>
 
