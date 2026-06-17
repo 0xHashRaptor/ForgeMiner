@@ -9,7 +9,7 @@
 <p align="center">
   <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="https://img.shields.io/badge/version-1.0.12-orange.svg"></a>
   <a href="#быстрый-старт"><img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20HiveOS-blue.svg"></a>
-  <a href="#поддерживаемые-алгоритмы"><img src="https://img.shields.io/badge/GPU-NVIDIA%20RTX%2020%2F30%2F40%2F50-76b900.svg"></a>
+  <a href="#поддерживаемые-алгоритмы"><img src="https://img.shields.io/badge/GPU-NVIDIA%20RTX%2020%2F30%2F40%2F50%20%2B%20CMP-76b900.svg"></a>
   <a href="https://t.me/ForgeMiner"><img src="https://img.shields.io/badge/Telegram-Releases-26A5E4.svg?logo=telegram"></a>
 </p>
 
@@ -116,7 +116,7 @@ FORGE_PROTO=stratum ./forge
 
 *Скоро будут другие алгоритмы — следите за каналом.*
 
-Поддерживаемые GPU: NVIDIA RTX 20 (Turing), RTX 30 (Ampere), RTX 40 (Ada), RTX 50 (Blackwell). *(RTX 20-й серии нужен драйвер 545+.)*
+Поддерживаемые GPU: NVIDIA RTX 20 (Turing), RTX 30 (Ampere), RTX 40 (Ada), RTX 50 (Blackwell), и майнинговые карты NVIDIA CMP (например CMP 50HX). *(RTX 20-й серии и картам CMP нужен драйвер 545+.)*
 
 ---
 

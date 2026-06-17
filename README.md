@@ -9,7 +9,7 @@
 <p align="center">
   <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="https://img.shields.io/badge/version-1.0.12-orange.svg"></a>
   <a href="#quick-start"><img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20HiveOS-blue.svg"></a>
-  <a href="#supported-algorithms"><img src="https://img.shields.io/badge/GPU-NVIDIA%20RTX%2020%2F30%2F40%2F50-76b900.svg"></a>
+  <a href="#supported-algorithms"><img src="https://img.shields.io/badge/GPU-NVIDIA%20RTX%2020%2F30%2F40%2F50%20%2B%20CMP-76b900.svg"></a>
   <a href="https://t.me/ForgeMiner"><img src="https://img.shields.io/badge/Telegram-Releases-26A5E4.svg?logo=telegram"></a>
 </p>
 
@@ -114,7 +114,7 @@ Options can be passed as command-line flags (`--flag value`) or as environment v
 
 *More algorithms are coming — follow the channel for updates.*
 
-Supported GPUs: NVIDIA RTX 20 (Turing), RTX 30 (Ampere), RTX 40 (Ada), RTX 50 (Blackwell). *(RTX 20-series needs driver 545+.)*
+Supported GPUs: NVIDIA RTX 20 (Turing), RTX 30 (Ampere), RTX 40 (Ada), RTX 50 (Blackwell), and NVIDIA CMP mining cards (e.g. CMP 50HX). *(RTX 20-series and CMP cards need driver 545+.)*
 
 ---
 
