@@ -11,6 +11,7 @@
   <a href="#quick-start"><img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20HiveOS-blue.svg"></a>
   <a href="#supported-algorithms"><img src="https://img.shields.io/badge/GPU-NVIDIA%20RTX%2020%2F30%2F40%2F50%20%2B%20CMP-76b900.svg"></a>
   <a href="https://t.me/ForgeMiner"><img src="https://img.shields.io/badge/Telegram-Releases-26A5E4.svg?logo=telegram"></a>
+  <a href="https://discord.gg/vxUTbb9B"><img src="https://img.shields.io/badge/Discord-Community-5865F2.svg?logo=discord&logoColor=white"></a>
 </p>
 
 ---
@@ -21,7 +22,7 @@ ForgeMiner is a high-performance, fully native NVIDIA GPU miner. It talks to the
 
 Every algorithm ships a separate per-architecture build for each supported card, auto-selected at launch, so each GPU runs at its peak.
 
-> ForgeMiner is closed-source. Releases are published here and announced on the [Telegram channel](https://t.me/ForgeMiner).
+> ForgeMiner is closed-source. Releases are published here and announced on the [Telegram channel](https://t.me/ForgeMiner) and on [Discord](https://discord.gg/vxUTbb9B).
 
 ---
 
@@ -125,6 +126,7 @@ Supported GPUs: NVIDIA RTX 20 (Turing), RTX 30 (Ampere), RTX 40 (Ada), RTX 50 (B
 
 - Releases and news: https://t.me/ForgeMiner
 - Support and chat: https://t.me/ForgeMinerChat
+- Discord community: https://discord.gg/vxUTbb9B
 
 ---
 
