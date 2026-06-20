@@ -113,8 +113,8 @@ Options can be passed as command-line flags (`--flag value`) or as environment v
 
 | Algorithm | Coin | Dev fee |
 |-----------|------|:-------:|
-| PearlHash | Pearl (PRL) | 3% |
-| qhash | QubitCoin (QTC) | 2.5% |
+| PearlHash | Pearl (PRL) | 2% |
+| qhash | QubitCoin (QTC) | 1% |
 
 *More algorithms are coming — follow the channel for updates.*
 
