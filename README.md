@@ -108,6 +108,44 @@ Options can be passed as command-line flags (`--flag value`) or as environment v
 | `--plimit` | `FORGE_PLIMIT` | Power limit (Watts). |
 | `--fan` | `FORGE_FAN` | Fixed fan speed (%). Use `--fan-curve t:p,t:p,...` for a custom temperature-to-speed curve. |
 
+### Fan control
+
+Control the GPU fans yourself — a fixed speed, or a temperature curve. With no fan flag, ForgeMiner leaves the
+fans on the driver's automatic control. Setting fans requires Administrator (Windows) or root (Linux/HiveOS).
+On exit the driver's automatic fan control is restored.
+
+| Flag | Env variable | Description |
+|------|--------------|-------------|
+| `--fan` | `FORGE_FAN` | Fixed fan speed in % (one value = all cards, or a comma list mapped to `--gpu`). |
+| `--fan-curve` | `FORGE_FANCURVE` | Temperature → speed curve: `temp:percent` points, linear-interpolated. |
+
+**Fixed speed**
+
+```
+--fan 70                 every GPU at 70%
+--fan 60,70,80,100       per-GPU (maps to --gpu order: GPU0=60%, GPU1=70%, ...)
+```
+
+**Temperature curve** — the recommended way. Give `temp°C:fan%` points; ForgeMiner reads each card's live core
+temperature and sets its fan to the matching percent, interpolating linearly between the points:
+
+```
+--fan-curve 45:30,60:55,70:75,80:100
+```
+
+reads as: ≤45 °C → 30% · 60 °C → 55% · 70 °C → 75% · ≥80 °C → 100% · in-between (e.g. 65 °C) → ~65%.
+Use as many points as you like (they're sorted automatically). One curve applies to all selected GPUs. A fixed
+`--fan` for a card overrides the curve for that card.
+
+> **Note:** GeForce cards have a ~30% hardware fan floor — a request below that just lands at 30%.
+
+**HiveOS / Linux** — put it in the flight-sheet *Extra config arguments*, or use the env form:
+
+```
+--fan-curve 50:40,65:60,75:85,83:100
+FORGE_FANCURVE=50:40,65:60,75:85,83:100      (env equivalent; FORGE_FAN=70 for a fixed speed)
+```
+
 ---
 
 ## Supported algorithms
