@@ -4,10 +4,10 @@
 
 <h1 align="center">ForgeMiner</h1>
 
-<p align="center"><b>A fast, native NVIDIA GPU miner — Pearl (PRL) and QubitCoin (QTC), more soon</b></p>
+<p align="center"><b>A fast, native NVIDIA GPU miner — Pearl (PRL), QubitCoin (QTC) and KawPow (Ravencoin, Quai)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="https://img.shields.io/badge/version-1.1.12-orange.svg"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="https://img.shields.io/badge/version-1.2.0-orange.svg"></a>
   <a href="#quick-start"><img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20HiveOS-blue.svg"></a>
   <a href="#supported-algorithms"><img src="https://img.shields.io/badge/GPU-NVIDIA%20Pascal%20%7C%20RTX%2020%2F30%2F40%2F50%20%2B%20CMP-76b900.svg"></a>
   <a href="https://t.me/ForgeMiner"><img src="https://img.shields.io/badge/Telegram-Releases-26A5E4.svg?logo=telegram"></a>
@@ -18,7 +18,7 @@
 
 ## Overview
 
-ForgeMiner is a high-performance, fully native NVIDIA GPU miner. It talks to the GPU directly through the CUDA Driver API — no Python, no WSL, no extra runtimes — so it starts instantly and runs lean even on low-spec rigs. It mines **Pearl (PRL)** and **QubitCoin (QTC)** from a single binary — pick the coin with one flag — and more coins are on the way.
+ForgeMiner is a high-performance, fully native NVIDIA GPU miner. It talks to the GPU directly through the CUDA Driver API — no Python, no WSL, no extra runtimes — so it starts instantly and runs lean even on low-spec rigs. It mines **Pearl (PRL)**, **QubitCoin (QTC)** and **KawPow** (Ravencoin RVN, Quai QUAI) from a single binary — pick the coin with one flag — and more coins are on the way.
 
 Every algorithm ships a separate per-architecture build for each supported card, auto-selected at launch, so each GPU runs at its peak.
 
@@ -28,11 +28,11 @@ Every algorithm ships a separate per-architecture build for each supported card,
 
 ## Features
 
-- **Two coins, one binary** — mine Pearl (PRL) or QubitCoin (QTC); select with `--algorithm`. More coins coming.
+- **Multiple coins, one binary** — mine Pearl (PRL), QubitCoin (QTC) or KawPow (Ravencoin / Quai); select with `--algorithm`. More coins coming.
 - **Architecture-tuned kernels** — a dedicated kernel per GPU generation (Pascal / Turing / Ampere / Ada / Blackwell), auto-selected at launch.
 - **Efficient on crowded rigs** — keeps the GPUs fed even with many cards on a weak CPU, several miner instances, or slow x1 risers.
 - **Native and lightweight** — direct CUDA Driver API, near-zero CPU load (blocking-sync design); runs great on weak hosts and many-GPU boxes.
-- **Self-contained and protected** — a single binary with everything embedded and encrypted; no loose kernel files to manage or leak.
+- **Truly self-contained** — one executable with everything embedded and encrypted; no CUDA runtime, no NVRTC, no loose kernel or library files to manage or leak — even KawPow ships as a single `.exe`.
 - **Built-in overclocking and fan control** — lock clocks, apply core/memory offsets, set a power limit and control fans straight from the miner; no third-party OC tool required.
 - **Per-GPU control** — choose which cards to mine (`--gpu`) and set a different overclock per card on mixed rigs.
 - **Multi-pool with fail-over** — standard Stratum pools for both coins; automatic reconnect and pool fail-over.
@@ -47,9 +47,10 @@ See the [Releases](https://github.com/0xHashRaptor/ForgeMiner/releases) page for
 
 ### Windows
 1. Download and unpack the Windows release.
-2. Open the `.bat` for your coin/pool in a text editor and set your wallet and worker name:
-   - **Pearl:** `Baikal.bat`, `HeroMiners.bat`, `LuckyPool.bat`, `AlphaPool.bat`
+2. Open the `.bat` for your coin/pool/region in a text editor and set your wallet and worker name. Files are named `<algo>_<pool>_<region>.bat` (`_SSL` = encrypted connection):
+   - **Pearl:** `pearlhash_Baikal_Global.bat`, `pearlhash_HeroMiners_DE.bat`, `pearlhash_Kryptex_RU.bat`, `pearlhash_LuckyPool_EU.bat`, `pearlhash_AlphaPool_EU.bat`, …
    - **QubitCoin:** `qhash_LuckyPool_RU.bat`, `qhash_LuckyPool_CA.bat`, `qhash_k1pool_RU.bat`, `qhash_k1pool_EU.bat`
+   - **KawPow (Ravencoin / Quai):** `kawpow_RVN_Kryptex_Global.bat`, `kawpow_RVN_HeroMiners_US.bat`, `kawpow_RVN_2Miners_EU.bat`, `kawpow_QUAI_HeroMiners_DE.bat`, `kawpow_QUAI_Kryptex_EU.bat`, …
 3. Double-click the `.bat` to start mining. (Run as Administrator if you want the built-in overclock to apply.)
 
 ### Linux
@@ -59,6 +60,8 @@ chmod +x forge
 FORGE_POOL=ru.pearl.herominers.com:1200 FORGE_WALLET=YOUR_PRL_WALLET FORGE_WORKER=rig01 FORGE_PROTO=stratum ./forge
 # QubitCoin (qhash)
 ./forge --algorithm qhash --wallet YOUR_QTC_WALLET --worker rig01 --pool ru.luckypool.io:8610
+# KawPow — Ravencoin (RVN) or Quai (QUAI); coin auto-detected from the pool host
+./forge --algorithm kawpow --wallet YOUR_RVN_WALLET --worker rig01 --pool us.ravencoin.herominers.com:1140
 ```
 …or use the included `start.sh` (Pearl) / `start-qhash.sh` (QubitCoin) after editing your wallet.
 
@@ -67,11 +70,13 @@ Add a Custom miner flight sheet:
 
 | Field | Pearl | QubitCoin (qhash) |
 |---|---|---|
-| Installation URL | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.1.12/ForgeMiner-1.1.12.tar.gz` | same URL |
+| Installation URL | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.2.0/ForgeMiner-1.2.0.tar.gz` | same URL |
 | Wallet template | `%WAL%.%WORKER_NAME%` (Pearl wallet) | your QTC address `.%WORKER_NAME%` |
 | Pool URL | `pearl.baikalmine.com:2010` · `ru.pearl.herominers.com:1200` · `prl-ru.kryptex.network:7048` | `ru.luckypool.io:8610` |
 | Pass | `x` | `x` |
 | Extra config | *empty for Stratum* · `FORGE_PROTO=alpha` for AlphaPool · OC e.g. `FORGE_CCLK=2505` | **`FORGE_ALGO=qhash`** · OC e.g. `FORGE_CCLK=2505` |
+
+For **KawPow** set `FORGE_ALGO=kawpow` in *Extra config* and use a Ravencoin or Quai pool — e.g. `us.ravencoin.herominers.com:1140` (RVN) or `de.quai.herominers.com:1185` (QUAI). The coin is auto-detected from the pool host; override with `FORGE_COIN=rvn` / `FORGE_COIN=quai` if needed.
 
 Apply → the dashboard shows per-GPU hashrate, temperatures, fans and shares. Run one miner per rig.
 
@@ -83,7 +88,8 @@ Options can be passed as command-line flags (`--flag value`) or as environment v
 
 | Flag | Env variable | Description |
 |------|--------------|-------------|
-| `--algorithm` | `FORGE_ALGO` | Algorithm to mine: `pearl` or `qhash` (QubitCoin). |
+| `--algorithm` | `FORGE_ALGO` | Algorithm to mine: `pearl`, `qhash` (QubitCoin) or `kawpow` (Ravencoin / Quai). |
+| `--coin` | `FORGE_COIN` | KawPow coin: `rvn` or `quai` (auto-detected from the pool host if omitted). *(KawPow only.)* |
 | `--pool` | `FORGE_POOL` | Pool address as `host:port`. |
 | `--wallet` | `FORGE_WALLET` | Your payout wallet address. |
 | `--worker` | `FORGE_WORKER` | Worker / rig name shown on the pool. |
@@ -154,6 +160,7 @@ FORGE_FANCURVE=50:40,65:60,75:85,83:100      (env equivalent; FORGE_FAN=70 for a
 |-----------|------|:-------:|
 | PearlHash | Pearl (PRL) | 2% |
 | qhash | QubitCoin (QTC) | 1% |
+| KawPow | Ravencoin (RVN), Quai (QUAI) | 0.7% |
 
 *More algorithms are coming — follow the channel for updates.*
 
