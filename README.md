@@ -7,7 +7,7 @@
 <p align="center"><b>A fast, native NVIDIA GPU miner — Pearl (PRL), QubitCoin (QTC) and KawPow (Ravencoin, Quai)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="https://img.shields.io/badge/version-1.2.0-orange.svg"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="https://img.shields.io/badge/version-1.2.1-orange.svg"></a>
   <a href="#quick-start"><img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20HiveOS-blue.svg"></a>
   <a href="#supported-algorithms"><img src="https://img.shields.io/badge/GPU-NVIDIA%20Pascal%20%7C%20RTX%2020%2F30%2F40%2F50%20%2B%20CMP-76b900.svg"></a>
   <a href="https://t.me/ForgeMiner"><img src="https://img.shields.io/badge/Telegram-Releases-26A5E4.svg?logo=telegram"></a>
@@ -70,7 +70,7 @@ Add a Custom miner flight sheet:
 
 | Field | Pearl | QubitCoin (qhash) |
 |---|---|---|
-| Installation URL | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.2.0/ForgeMiner-1.2.0.tar.gz` | same URL |
+| Installation URL | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.2.1/ForgeMiner-1.2.1.tar.gz` | same URL |
 | Wallet template | `%WAL%.%WORKER_NAME%` (Pearl wallet) | your QTC address `.%WORKER_NAME%` |
 | Pool URL | `pearl.baikalmine.com:2010` · `ru.pearl.herominers.com:1200` · `prl-ru.kryptex.network:7048` | `ru.luckypool.io:8610` |
 | Pass | `x` | `x` |
@@ -95,6 +95,7 @@ Options can be passed as command-line flags (`--flag value`) or as environment v
 | `--worker` | `FORGE_WORKER` | Worker / rig name shown on the pool. |
 | `--password` | `FORGE_PASS` | Pool password (usually `x`). |
 | `--proto` | `FORGE_PROTO` | Pearl pool dialect: `stratum` (HeroMiners, LuckyPool, Kryptex) or `alpha` (AlphaPool). *(Pearl only.)* |
+| `--efficient` | `FORGE_PEARL_EFFICIENT` | Pearl power-efficient mode (RTX 40 / Ada): noticeably lower power for nearly the same hashrate. Off by default (default targets maximum hashrate); on other GPUs it falls back to the default. *(Pearl only.)* |
 | `--gpu` | `FORGE_GPU` | Mine only these GPU indices, e.g. `--gpu 0,1,2,6` (default: all GPUs). Indices match `nvidia-smi` order. |
 | — | `FORGE_LOWVRAM` | Low-VRAM mode for 8 GB cards (Pearl). `1` force on, `0` force off. Auto-detected by default. |
 
@@ -164,7 +165,7 @@ FORGE_FANCURVE=50:40,65:60,75:85,83:100      (env equivalent; FORGE_FAN=70 for a
 
 *More algorithms are coming — follow the channel for updates.*
 
-Supported GPUs: NVIDIA Pascal P104-100 (Pearl), RTX 20 (Turing), RTX 30 (Ampere), RTX 40 (Ada), RTX 50 (Blackwell), and NVIDIA CMP mining cards (e.g. CMP 50HX). *(RTX 20-series and CMP cards need driver 545+.)*
+Supported GPUs: NVIDIA Pascal P104-100 8 GB (Pearl and KawPow), RTX 20 (Turing), RTX 30 (Ampere), RTX 40 (Ada), RTX 50 (Blackwell), and NVIDIA CMP mining cards (e.g. CMP 50HX). *(RTX 20-series and CMP cards need driver 545+.)*
 
 ---
 
