@@ -7,7 +7,7 @@
 <p align="center"><b>Быстрый нативный майнер для NVIDIA — Pearl (PRL), QubitCoin (QTC) и KawPow (Ravencoin, Quai)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="https://img.shields.io/badge/version-1.2.0-orange.svg"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="https://img.shields.io/badge/version-1.2.1-orange.svg"></a>
   <a href="#быстрый-старт"><img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20HiveOS-blue.svg"></a>
   <a href="#поддерживаемые-алгоритмы"><img src="https://img.shields.io/badge/GPU-NVIDIA%20Pascal%20%7C%20RTX%2020%2F30%2F40%2F50%20%2B%20CMP-76b900.svg"></a>
   <a href="https://t.me/ForgeMiner"><img src="https://img.shields.io/badge/Telegram-Releases-26A5E4.svg?logo=telegram"></a>
@@ -70,7 +70,7 @@ FORGE_POOL=ru.pearl.herominers.com:1200 FORGE_WALLET=ВАШ_PRL_КОШЕЛЁК F
 
 | Поле | Pearl | QubitCoin (qhash) |
 |---|---|---|
-| Installation URL | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.2.0/ForgeMiner-1.2.0.tar.gz` | тот же URL |
+| Installation URL | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.2.1/ForgeMiner-1.2.1.tar.gz` | тот же URL |
 | Wallet template | `%WAL%.%WORKER_NAME%` (кошелёк Pearl) | ваш QTC-адрес `.%WORKER_NAME%` |
 | Pool URL | `pearl.baikalmine.com:2010` · `ru.pearl.herominers.com:1200` · `prl-ru.kryptex.network:7048` | `ru.luckypool.io:8610` |
 | Pass | `x` | `x` |
@@ -95,6 +95,7 @@ Apply → дашборд покажет хешрейт по каждому GPU, 
 | `--worker` | `FORGE_WORKER` | Имя воркера / рига на пуле. |
 | `--password` | `FORGE_PASS` | Пароль пула (обычно `x`). |
 | `--proto` | `FORGE_PROTO` | Диалект пула Pearl: `stratum` (HeroMiners, LuckyPool, Kryptex) или `alpha` (AlphaPool). *(Только Pearl.)* |
+| `--efficient` | `FORGE_PEARL_EFFICIENT` | Энергоэффективный режим Pearl (RTX 40 / Ada): заметно ниже потребление при почти том же хешрейте. По умолчанию выключен (по умолчанию — максимальный хешрейт); на других картах переключается на обычный режим. *(Только Pearl.)* |
 | `--gpu` | `FORGE_GPU` | Майнить только указанные индексы GPU, напр. `--gpu 0,1,2,6` (по умолчанию все). Индексы — как в `nvidia-smi`. |
 | — | `FORGE_LOWVRAM` | Режим низкой видеопамяти для карт 8 ГБ (Pearl). `1` — принудительно вкл, `0` — выкл. По умолчанию автоопределение. |
 
@@ -164,7 +165,7 @@ FORGE_FANCURVE=50:40,65:60,75:85,83:100      (эквивалент через en
 
 *Скоро новые алгоритмы — следите за каналом.*
 
-Поддерживаемые GPU: NVIDIA Pascal P104-100 (Pearl), RTX 20 (Turing), RTX 30 (Ampere), RTX 40 (Ada), RTX 50 (Blackwell) и майнинговые карты NVIDIA CMP (напр. CMP 50HX). *(RTX 20-й серии и картам CMP нужен драйвер 545+.)*
+Поддерживаемые GPU: NVIDIA Pascal P104-100 8 ГБ (Pearl и KawPow), RTX 20 (Turing), RTX 30 (Ampere), RTX 40 (Ada), RTX 50 (Blackwell) и майнинговые карты NVIDIA CMP (напр. CMP 50HX). *(RTX 20-й серии и картам CMP нужен драйвер 545+.)*
 
 ---
 
