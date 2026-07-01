@@ -7,7 +7,7 @@
 <p align="center"><b>A fast, native NVIDIA GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai) and Cryptix (CYTX)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="https://img.shields.io/badge/version-1.3.1-orange.svg"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="https://img.shields.io/badge/version-1.3.2-orange.svg"></a>
   <a href="#quick-start"><img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20HiveOS-blue.svg"></a>
   <a href="#supported-algorithms"><img src="https://img.shields.io/badge/GPU-NVIDIA%20Pascal%20%7C%20RTX%2020%2F30%2F40%2F50%20%2B%20CMP-76b900.svg"></a>
   <a href="https://t.me/ForgeMiner"><img src="https://img.shields.io/badge/Telegram-Releases-26A5E4.svg?logo=telegram"></a>
@@ -76,7 +76,7 @@ Add a Custom miner flight sheet:
 
 | Field | Pearl | QubitCoin (qhash) |
 |---|---|---|
-| Installation URL | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.3.1/ForgeMiner-1.3.1.tar.gz` | same URL |
+| Installation URL | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.3.2/ForgeMiner-1.3.2.tar.gz` | same URL |
 | Wallet template | `%WAL%.%WORKER_NAME%` (Pearl wallet) | your QTC address `.%WORKER_NAME%` |
 | Pool URL | `pearl.baikalmine.com:2010` · `ru.pearl.herominers.com:1200` · `prl-ru.kryptex.network:7048` | `ru.luckypool.io:8610` |
 | Pass | `x` | `x` |
@@ -160,6 +160,39 @@ Use as many points as you like (they're sorted automatically). One curve applies
 --fan-curve 50:40,65:60,75:85,83:100
 FORGE_FANCURVE=50:40,65:60,75:85,83:100      (env equivalent; FORGE_FAN=70 for a fixed speed)
 ```
+
+---
+
+## Monitoring API
+
+ForgeMiner has a built-in **read-only** monitoring API and web dashboard. It is **off by default**, and it only ever reports stats — it never lets anyone control or reconfigure the miner.
+
+**Enable it**
+
+```
+--api                      on 127.0.0.1:7777 (this machine only)
+--api-bind 0.0.0.0:7777    on all interfaces (watch from your phone or another PC on the LAN)
+--api-bind 127.0.0.1:9000  any address/port you like
+```
+
+On HiveOS / mining OS, set it in *Extra config*: `FORGE_API=127.0.0.1:7777` (or `0.0.0.0:7777`). Everything below is served from that one port.
+
+**Web dashboard** — open `http://<ip>:7777` in a browser
+
+A live panel that refreshes on its own: total hashrate, 1h / 24h averages, power, efficiency, accept rate and shares; a live hashrate graph with a scale on the left; and a per-GPU table — card name, hashrate, temperature (and VRAM temp), core clock, memory clock, fan, power, efficiency, accepted / stale / rejected, with a **Total** row — plus pool, worker and wallet. It has a **dark / light theme** toggle and a **selectable refresh rate** (1s … 30s), both remembered by your browser. Nothing to install — it is built into the miner.
+
+**Endpoints**
+
+| Endpoint | Format | Use it with |
+|---|---|---|
+| `GET /` | HTML | The web dashboard (alias `/dashboard`). |
+| `GET /summary` (or `/stats`) | JSON | Grafana, custom dashboards, bots and scripts. Everything: total + per-GPU hashrate, temps, core/memory clocks, fans, power, efficiency, accepted/stale/rejected, accept rate, shares/min, difficulty, uptime, pool/worker/wallet, and a short hashrate history for graphs. |
+| `GET /metrics` | Prometheus | Grafana dashboards and alerts (`forge_hashrate_hs`, `forge_gpu_temperature_celsius`, `forge_gpu_fan_percent`, `forge_gpu_power_watts`, `forge_shares_total`, …). |
+| `miner_getstat1` (JSON-RPC, same port) | Claymore | **Awesome Miner, mmpOS** and the wider monitoring ecosystem — add forge as a custom / managed miner with the **Claymore / Ethminer** API on port **7777**. It shows up out of the box. |
+
+HiveOS is already covered by the built-in stats integration and needs none of this.
+
+> **Security:** the API is read-only and exposes only public info (hashrate, temperatures, pool, wallet). Keep the default `127.0.0.1` for local-only access; use `0.0.0.0` only inside your own network, behind a router / firewall / VPN.
 
 ---
 
