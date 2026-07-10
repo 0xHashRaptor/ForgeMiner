@@ -4,10 +4,10 @@
 
 <h1 align="center">ForgeMiner</h1>
 
-<p align="center"><b>A fast, native NVIDIA GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai) and Cryptix (CYTX)</b></p>
+<p align="center"><b>A fast, native NVIDIA GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX) and BTX (btx.dev)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="https://img.shields.io/badge/version-1.3.6-orange.svg"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="https://img.shields.io/badge/version-1.4.0-orange.svg"></a>
   <a href="#quick-start"><img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20HiveOS-blue.svg"></a>
   <a href="#supported-algorithms"><img src="https://img.shields.io/badge/GPU-NVIDIA%20Pascal%20%7C%20RTX%2020%2F30%2F40%2F50%20%2B%20CMP-76b900.svg"></a>
   <a href="https://t.me/ForgeMiner"><img src="https://img.shields.io/badge/Telegram-Releases-26A5E4.svg?logo=telegram"></a>
@@ -18,7 +18,7 @@
 
 ## Overview
 
-ForgeMiner is a high-performance, fully native NVIDIA GPU miner. It talks to the GPU directly through the CUDA Driver API — no Python, no WSL, no extra runtimes — so it starts instantly and runs lean even on low-spec rigs. It mines **Pearl (PRL)**, **QubitCoin (QTC)**, **KawPow** (Ravencoin RVN, Quai QUAI, Neurai XNA) and **Cryptix (CYTX)** from a single binary — pick the coin with one flag — and more coins are on the way.
+ForgeMiner is a high-performance, fully native NVIDIA GPU miner. It talks to the GPU directly through the CUDA Driver API — no Python, no WSL, no extra runtimes — so it starts instantly and runs lean even on low-spec rigs. It mines **Pearl (PRL)**, **QubitCoin (QTC)**, **KawPow** (Ravencoin RVN, Quai QUAI, Neurai XNA), **Cryptix (CYTX)** and **BTX (btx.dev)** from a single binary — pick the coin with one flag — and more coins are on the way.
 
 Every algorithm ships a separate per-architecture build for each supported card, auto-selected at launch, so each GPU runs at its peak.
 
@@ -28,14 +28,15 @@ Every algorithm ships a separate per-architecture build for each supported card,
 
 ## Features
 
-- **Multiple coins, one binary** — mine Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin / Quai / Neurai) or Cryptix (CYTX); select with `--algorithm`. More coins coming.
+- **Multiple coins, one binary** — mine Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin / Quai / Neurai), Cryptix (CYTX) or BTX (btx.dev); select with `--algorithm`. More coins coming.
 - **Architecture-tuned kernels** — a dedicated kernel per GPU generation (Pascal / Turing / Ampere / Ada / Blackwell), auto-selected at launch.
+- **Lower power on 30/40-series (Pearl)** — the Ampere/Ada Pearl kernels draw significantly less power at the same hashrate, automatically.
 - **Efficient on crowded rigs** — keeps the GPUs fed even with many cards on a weak CPU, several miner instances, or slow x1 risers.
 - **Native and lightweight** — direct CUDA Driver API, near-zero CPU load (blocking-sync design); runs great on weak hosts and many-GPU boxes.
 - **Truly self-contained** — one executable with everything embedded and encrypted; no CUDA runtime, no NVRTC, no loose kernel or library files to manage or leak — even KawPow ships as a single `.exe`.
 - **Built-in overclocking and fan control** — lock clocks, apply core/memory offsets, set a power limit and control fans straight from the miner; no third-party OC tool required.
 - **Per-GPU control** — choose which cards to mine (`--gpu`) and set a different overclock per card on mixed rigs.
-- **Multi-pool with fail-over** — standard Stratum pools for both coins; automatic reconnect and pool fail-over.
+- **Multi-pool with fail-over** — standard Stratum pools for all coins; automatic reconnect and pool fail-over.
 - **Clean live dashboard** — per-GPU hashrate, accepted/stale/rejected shares, efficiency, temperatures (incl. VRAM on Windows), clocks, fans and power at a glance.
 - **HiveOS ready** — drops straight into a HiveOS custom-miner slot.
 
@@ -53,6 +54,7 @@ See the [Releases](https://github.com/0xHashRaptor/ForgeMiner/releases) page for
    - **KawPow (Ravencoin / Quai):** `kawpow_RVN_Kryptex_Global.bat`, `kawpow_RVN_HeroMiners_US.bat`, `kawpow_RVN_2Miners_EU.bat`, `kawpow_QUAI_HeroMiners_DE.bat`, `kawpow_QUAI_Kryptex_EU.bat`, …
    - **KawPow (Neurai XNA):** `kawpow_XNA_Kryptex_Global.bat`, `kawpow_XNA_Kryptex_RU.bat`, `kawpow_XNA_Kryptex_EU.bat`, `kawpow_XNA_Vipor_RU.bat`, `kawpow_XNA_Vipor_DE.bat`, `kawpow_XNA_2Miners_EU.bat`, `kawpow_XNA_2Miners_US.bat`
    - **Cryptix (CYTX):** `cryptix_Baikalmine_Global.bat`, `cryptix_CryptixNetwork_Global.bat`
+   - **BTX (btx.dev):** `btx_lproute_EU.bat`, `btx_lproute_RU.bat`
 3. Double-click the `.bat` to start mining. (Run as Administrator if you want the built-in overclock to apply.)
 
 ### Linux
@@ -68,6 +70,8 @@ FORGE_POOL=ru.pearl.herominers.com:1200 FORGE_WALLET=YOUR_PRL_WALLET FORGE_WORKE
 ./forge --algorithm kawpow --coin xna --wallet YOUR_XNA_WALLET --worker rig01 --pool xna.2miners.com:6060
 # Cryptix (CYTX)
 ./forge --algorithm cryptix --wallet YOUR_CYTX_WALLET --worker rig01 --pool cytx.baikalmine.com:9010
+# BTX (btx.dev)
+./forge --algorithm btx --wallet YOUR_BTX_WALLET --worker rig01 --pool btx-eu.lproute.com:8660
 ```
 …or use the included `start.sh` (Pearl) / `start-qhash.sh` (QubitCoin) after editing your wallet.
 
@@ -76,7 +80,7 @@ Add a Custom miner flight sheet:
 
 | Field | Pearl | QubitCoin (qhash) |
 |---|---|---|
-| Installation URL | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.3.6/ForgeMiner-1.3.6.tar.gz` | same URL |
+| Installation URL | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.4.0/ForgeMiner-1.4.0.tar.gz` | same URL |
 | Wallet template | `%WAL%.%WORKER_NAME%` (Pearl wallet) | your QTC address `.%WORKER_NAME%` |
 | Pool URL | `pearl.baikalmine.com:2010` · `ru.pearl.herominers.com:1200` · `prl-ru.kryptex.network:7048` | `ru.luckypool.io:8610` |
 | Pass | `x` | `x` |
@@ -85,6 +89,8 @@ Add a Custom miner flight sheet:
 For **KawPow** set `FORGE_ALGO=kawpow` in *Extra config* and use a Ravencoin, Quai or Neurai pool — e.g. `us.ravencoin.herominers.com:1140` (RVN), `de.quai.herominers.com:1185` (QUAI) or `xna.2miners.com:6060` (XNA). The coin is auto-detected from the pool host; override with `FORGE_COIN=rvn` / `FORGE_COIN=quai` / `FORGE_COIN=xna` if needed (Neurai/Vipor pools need it set explicitly).
 
 For **Cryptix (CYTX)** set `FORGE_ALGO=cryptix` in *Extra config*, use your `cryptix:…` address as the wallet and a Cryptix pool — e.g. `cytx.baikalmine.com:9010`.
+
+For **BTX** set `FORGE_ALGO=btx` in *Extra config*, use your `btx1…` address as the wallet and a BTX pool — e.g. `btx-eu.lproute.com:8660`.
 
 Apply → the dashboard shows per-GPU hashrate, temperatures, fans and shares. Run one miner per rig.
 
@@ -96,14 +102,13 @@ Options can be passed as command-line flags (`--flag value`) or as environment v
 
 | Flag | Env variable | Description |
 |------|--------------|-------------|
-| `--algorithm` | `FORGE_ALGO` | Algorithm to mine: `pearl`, `qhash` (QubitCoin), `kawpow` (Ravencoin / Quai / Neurai) or `cryptix` (CYTX). |
+| `--algorithm` | `FORGE_ALGO` | Algorithm to mine: `pearl`, `qhash` (QubitCoin), `kawpow` (Ravencoin / Quai / Neurai), `cryptix` (CYTX) or `btx` (btx.dev). |
 | `--coin` | `FORGE_COIN` | KawPow coin: `rvn`, `quai` or `xna` (auto-detected from the pool host if omitted; set explicitly for Neurai / Vipor pools). *(KawPow only.)* |
 | `--pool` | `FORGE_POOL` | Pool address as `host:port`. |
 | `--wallet` | `FORGE_WALLET` | Your payout wallet address. |
 | `--worker` | `FORGE_WORKER` | Worker / rig name shown on the pool. |
 | `--password` | `FORGE_PASS` | Pool password (usually `x`). |
 | `--proto` | `FORGE_PROTO` | Pearl pool dialect: `stratum` (HeroMiners, LuckyPool, Kryptex) or `alpha` (AlphaPool). *(Pearl only.)* |
-| `--efficient` | `FORGE_PEARL_EFFICIENT` | Pearl power-efficient mode (RTX 40 / Ada): noticeably lower power for nearly the same hashrate. Off by default (default targets maximum hashrate); on other GPUs it falls back to the default. *(Pearl only.)* |
 | `--gpu` | `FORGE_GPU` | Mine only these GPU indices, e.g. `--gpu 0,1,2,6` (default: all GPUs). Indices match `nvidia-smi` order. |
 | — | `FORGE_LOWVRAM` | Low-VRAM mode for 8 GB cards (Pearl). `1` force on, `0` force off. Auto-detected by default. |
 
@@ -204,6 +209,7 @@ HiveOS is already covered by the built-in stats integration and needs none of th
 | qhash | QubitCoin (QTC) | 1% |
 | KawPow | Ravencoin (RVN), Quai (QUAI), Neurai (XNA) | 0.7% |
 | Cryptix | Cryptix (CYTX) | 2% |
+| BTX | BTX (btx.dev) | 1% |
 
 *More algorithms are coming — follow the channel for updates.*
 
