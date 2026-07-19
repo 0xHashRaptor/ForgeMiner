@@ -7,12 +7,12 @@
 <p align="center"><b>Быстрый нативный NVIDIA GPU-майнер — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX) и BTX (btx.dev)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="https://img.shields.io/badge/version-1.4.1-orange.svg"></a>
-  <a href="#загрузка"><img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20HiveOS%20%7C%20Docker-blue.svg"></a>
-  <a href="#поддерживаемые-карты"><img src="https://img.shields.io/badge/GPU-NVIDIA%20Pascal%20%7C%20RTX%2020%2F30%2F40%2F50%20%2B%20CMP-76b900.svg"></a>
-  <a href="https://forgeminer.org"><img src="https://img.shields.io/badge/site-forgeminer.org-ff6a1a.svg"></a>
-  <a href="https://t.me/ForgeMiner"><img src="https://img.shields.io/badge/Telegram-Releases-26A5E4.svg?logo=telegram"></a>
-  <a href="https://discord.gg/vxUTbb9B"><img src="https://img.shields.io/badge/Discord-Community-5865F2.svg?logo=discord&logoColor=white"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.4.1"></a>
+  <a href="#загрузка"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
+  <a href="#поддерживаемые-карты"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | RTX 20/30/40/50 + CMP"></a>
+  <a href="https://forgeminer.org"><img src="assets/badge_site.svg" alt="site: forgeminer.org"></a>
+  <a href="https://t.me/ForgeMiner"><img src="assets/badge_telegram.svg" alt="Telegram: Releases"></a>
+  <a href="https://discord.gg/vxUTbb9B"><img src="assets/badge_discord.svg" alt="Discord: Community"></a>
 </p>
 
 ---
