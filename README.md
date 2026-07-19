@@ -8,11 +8,27 @@
 
 <p align="center">
   <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="https://img.shields.io/badge/version-1.4.1-orange.svg"></a>
-  <a href="#quick-start"><img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20HiveOS-blue.svg"></a>
-  <a href="#supported-algorithms"><img src="https://img.shields.io/badge/GPU-NVIDIA%20Pascal%20%7C%20RTX%2020%2F30%2F40%2F50%20%2B%20CMP-76b900.svg"></a>
+  <a href="#download"><img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20HiveOS%20%7C%20Docker-blue.svg"></a>
+  <a href="#supported-gpus"><img src="https://img.shields.io/badge/GPU-NVIDIA%20Pascal%20%7C%20RTX%2020%2F30%2F40%2F50%20%2B%20CMP-76b900.svg"></a>
+  <a href="https://forgeminer.org"><img src="https://img.shields.io/badge/site-forgeminer.org-ff6a1a.svg"></a>
   <a href="https://t.me/ForgeMiner"><img src="https://img.shields.io/badge/Telegram-Releases-26A5E4.svg?logo=telegram"></a>
   <a href="https://discord.gg/vxUTbb9B"><img src="https://img.shields.io/badge/Discord-Community-5865F2.svg?logo=discord&logoColor=white"></a>
 </p>
+
+---
+
+## Contents
+
+- [Overview](#overview)
+- [Download](#download)
+- [Quick start](#quick-start)
+- [Coins & dev fee](#coins--dev-fee)
+- [Performance](#performance)
+- [Features](#features)
+- [Options](#options)
+- [Monitoring API](#monitoring-api)
+- [Supported GPUs](#supported-gpus)
+- [Resources](#resources)
 
 ---
 
@@ -22,25 +38,23 @@ ForgeMiner is a high-performance, fully native NVIDIA GPU miner. It talks to the
 
 Every algorithm ships a separate per-architecture build for each supported card, auto-selected at launch, so each GPU runs at its peak.
 
-> ForgeMiner is closed-source. Releases are published here and announced on the [Telegram channel](https://t.me/ForgeMiner) and on [Discord](https://discord.gg/vxUTbb9B).
+Website: **[forgeminer.org](https://forgeminer.org)** · ForgeMiner is closed-source; releases are published here and announced on [Telegram](https://t.me/ForgeMiner) and [Discord](https://discord.gg/vxUTbb9B).
+
+<!-- Tip: drop a dashboard screenshot here for instant credibility, e.g. -->
+<!-- <p align="center"><img src="assets/dashboard.png" width="720" alt="ForgeMiner live dashboard"></p> -->
 
 ---
 
-## Features
+## Download
 
-- **Multiple coins, one binary** — mine Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin / Quai / Neurai), Cryptix (CYTX) or BTX (btx.dev); select with `--algorithm`. More coins coming.
-- **Architecture-tuned kernels** — a dedicated kernel per GPU generation (Pascal / Turing / Ampere / Ada / Blackwell), auto-selected at launch.
-- **Lower power on 30/40-series (Pearl)** — the Ampere/Ada Pearl kernels draw significantly less power at the same hashrate, automatically.
-- **Efficient on crowded rigs** — keeps the GPUs fed even with many cards on a weak CPU, several miner instances, or slow x1 risers.
-- **Native and lightweight** — direct CUDA Driver API, near-zero CPU load (blocking-sync design); runs great on weak hosts and many-GPU boxes.
-- **Truly self-contained** — one executable with everything embedded and encrypted; no CUDA runtime, no NVRTC, no loose kernel or library files to manage or leak — even KawPow ships as a single `.exe`.
-- **Built-in overclocking and fan control** — lock clocks, apply core/memory offsets, set a power limit and control fans straight from the miner; no third-party OC tool required.
-- **Per-GPU control** — choose which cards to mine (`--gpu`) and set a different overclock per card on mixed rigs.
-- **Multi-pool with fail-over** — standard Stratum pools for all coins; automatic reconnect and pool fail-over.
-- **Clean live dashboard** — per-GPU hashrate, accepted/stale/rejected shares, efficiency, temperatures (incl. VRAM on Windows), clocks, fans and power at a glance.
-- **HiveOS ready** — drops straight into a HiveOS custom-miner slot.
+Grab the latest build from the [**Releases**](https://github.com/0xHashRaptor/ForgeMiner/releases) page:
 
-See the [Releases](https://github.com/0xHashRaptor/ForgeMiner/releases) page for version history and the latest changes.
+| Platform | Package |
+|---|---|
+| Windows | `ForgeMiner-<version>-windows.zip` |
+| Linux | `ForgeMiner-<version>-linux.tar.gz` (glibc 2.17+) |
+| HiveOS | `ForgeMiner-<version>.tar.gz` (flight-sheet install URL) |
+| Docker | `docker pull hashraptor/forge` (tags `:latest` and the version) |
 
 ---
 
@@ -48,180 +62,169 @@ See the [Releases](https://github.com/0xHashRaptor/ForgeMiner/releases) page for
 
 ### Windows
 1. Download and unpack the Windows release.
-2. Open the `.bat` for your coin/pool/region in a text editor and set your wallet and worker name. Files are named `<algo>_<pool>_<region>.bat` (`_SSL` = encrypted connection):
-   - **Pearl:** `pearlhash_Baikal_Global.bat`, `pearlhash_HeroMiners_DE.bat`, `pearlhash_Kryptex_RU.bat`, `pearlhash_LuckyPool_EU.bat`, `pearlhash_AlphaPool_EU.bat`, …
-   - **QubitCoin:** `qhash_LuckyPool_RU.bat`, `qhash_LuckyPool_CA.bat`, `qhash_k1pool_RU.bat`, `qhash_k1pool_EU.bat`
-   - **KawPow (Ravencoin / Quai):** `kawpow_RVN_Kryptex_Global.bat`, `kawpow_RVN_HeroMiners_US.bat`, `kawpow_RVN_2Miners_EU.bat`, `kawpow_QUAI_HeroMiners_DE.bat`, `kawpow_QUAI_Kryptex_EU.bat`, …
-   - **KawPow (Neurai XNA):** `kawpow_XNA_Kryptex_Global.bat`, `kawpow_XNA_Kryptex_RU.bat`, `kawpow_XNA_Kryptex_EU.bat`, `kawpow_XNA_Vipor_RU.bat`, `kawpow_XNA_Vipor_DE.bat`, `kawpow_XNA_2Miners_EU.bat`, `kawpow_XNA_2Miners_US.bat`
-   - **Cryptix (CYTX):** `cryptix_Baikalmine_Global.bat`, `cryptix_CryptixNetwork_Global.bat`
-   - **BTX (btx.dev):** `btx_lproute_EU.bat`, `btx_lproute_RU.bat`
-3. Double-click the `.bat` to start mining. (Run as Administrator if you want the built-in overclock to apply.)
+2. Open the `.bat` for your coin/pool/region and set your wallet and worker. Files are named `<algo>_<pool>_<region>.bat` (`_SSL` = encrypted). One per coin:
+   - Pearl — `pearlhash_Baikal_Global.bat`, `pearlhash_HeroMiners_DE.bat`, `pearlhash_Kryptex_RU.bat`, …
+   - QubitCoin — `qhash_LuckyPool_RU.bat`, `qhash_k1pool_EU.bat`, …
+   - KawPow — `kawpow_RVN_HeroMiners_US.bat`, `kawpow_QUAI_Kryptex_EU.bat`, `kawpow_XNA_2Miners_EU.bat`, …
+   - Cryptix — `cryptix_Baikalmine_Global.bat`
+   - BTX — `btx_lproute_EU.bat`, `btx_lproute_RU.bat`
+3. Double-click to start. Run as Administrator to apply the built-in overclock.
 
 ### Linux
 ```bash
 chmod +x forge
 # Pearl
-FORGE_POOL=ru.pearl.herominers.com:1200 FORGE_WALLET=YOUR_PRL_WALLET FORGE_WORKER=rig01 FORGE_PROTO=stratum ./forge
-# QubitCoin (qhash)
-./forge --algorithm qhash --wallet YOUR_QTC_WALLET --worker rig01 --pool ru.luckypool.io:8610
-# KawPow — Ravencoin (RVN) or Quai (QUAI); coin auto-detected from the pool host
-./forge --algorithm kawpow --wallet YOUR_RVN_WALLET --worker rig01 --pool us.ravencoin.herominers.com:1140
-# KawPow — Neurai (XNA); set the coin explicitly
-./forge --algorithm kawpow --coin xna --wallet YOUR_XNA_WALLET --worker rig01 --pool xna.2miners.com:6060
-# Cryptix (CYTX)
-./forge --algorithm cryptix --wallet YOUR_CYTX_WALLET --worker rig01 --pool cytx.baikalmine.com:9010
-# BTX (btx.dev)
-./forge --algorithm btx --wallet YOUR_BTX_WALLET --worker rig01 --pool btx-eu.lproute.com:8660
+FORGE_POOL=ru.pearl.herominers.com:1200 FORGE_WALLET=YOUR_PRL_WALLET FORGE_WORKER=rig01 ./forge
+# QubitCoin
+./forge --algorithm qhash  --wallet YOUR_QTC_WALLET  --pool ru.luckypool.io:8610          --worker rig01
+# KawPow — RVN / QUAI (coin auto-detected from the pool) or XNA (set --coin xna)
+./forge --algorithm kawpow --wallet YOUR_RVN_WALLET  --pool us.ravencoin.herominers.com:1140 --worker rig01
+# Cryptix
+./forge --algorithm cryptix --wallet YOUR_CYTX_WALLET --pool cytx.baikalmine.com:9010        --worker rig01
+# BTX
+./forge --algorithm btx     --wallet YOUR_BTX_WALLET  --pool btx-eu.lproute.com:8660          --worker rig01
 ```
-…or use the included `start.sh` (Pearl) / `start-qhash.sh` (QubitCoin) after editing your wallet.
+
+### Docker
+```bash
+docker pull hashraptor/forge
+docker run --rm --gpus all hashraptor/forge \
+  --algorithm pearlhash --wallet YOUR_PRL_WALLET --worker rig01 --pool pearl.baikalmine.com:2010
+# dashboard: add -p 7777:7777 and --api-bind 0.0.0.0:7777
+```
 
 ### HiveOS
-Add a Custom miner flight sheet:
+Custom miner flight sheet — installation URL `.../ForgeMiner-<version>.tar.gz`, wallet template `%WAL%.%WORKER_NAME%`, and in *Extra config* set `FORGE_ALGO=pearlhash` (or `qhash` / `kawpow` / `cryptix` / `btx`; for KawPow also `FORGE_COIN=rvn|quai|xna`). Ready-made flight sheets: **[forgeminer.org/#flightsheets](https://forgeminer.org/#flightsheets)**.
 
-| Field | Pearl | QubitCoin (qhash) |
-|---|---|---|
-| Installation URL | `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v1.4.1/ForgeMiner-1.4.1.tar.gz` | same URL |
-| Wallet template | `%WAL%.%WORKER_NAME%` (Pearl wallet) | your QTC address `.%WORKER_NAME%` |
-| Pool URL | `pearl.baikalmine.com:2010` · `ru.pearl.herominers.com:1200` · `prl-ru.kryptex.network:7048` | `ru.luckypool.io:8610` |
-| Pass | `x` | `x` |
-| Extra config | *empty for Stratum* · `FORGE_PROTO=alpha` for AlphaPool · OC e.g. `FORGE_CCLK=2505` | **`FORGE_ALGO=qhash`** · OC e.g. `FORGE_CCLK=2505` |
+---
 
-For **KawPow** set `FORGE_ALGO=kawpow` in *Extra config* and use a Ravencoin, Quai or Neurai pool — e.g. `us.ravencoin.herominers.com:1140` (RVN), `de.quai.herominers.com:1185` (QUAI) or `xna.2miners.com:6060` (XNA). The coin is auto-detected from the pool host; override with `FORGE_COIN=rvn` / `FORGE_COIN=quai` / `FORGE_COIN=xna` if needed (Neurai/Vipor pools need it set explicitly).
+## Coins & dev fee
 
-For **Cryptix (CYTX)** set `FORGE_ALGO=cryptix` in *Extra config*, use your `cryptix:…` address as the wallet and a Cryptix pool — e.g. `cytx.baikalmine.com:9010`.
+| Coin | `--algorithm` | Pools (ready-made `.bat` in the release) | Dev fee |
+|------|---------------|-------------------------------------------|:------:|
+| Pearl (PRL) | `pearlhash` | BaikalMine · HeroMiners · LuckyPool · Kryptex · 2Miners · AlphaPool | 2% |
+| QubitCoin (QTC) | `qhash` | LuckyPool · k1pool | 1% |
+| Ravencoin (RVN) | `kawpow` | HeroMiners · 2Miners · RavenMiner · Kryptex · k1pool | 0.7% |
+| Quai (QUAI) | `kawpow` `--coin quai` | HeroMiners · k1pool · Kryptex | 0.7% |
+| Neurai (XNA) | `kawpow` `--coin xna` | 2Miners · Vipor · Kryptex | 0.7% |
+| Cryptix (CYTX) | `cryptix` | BaikalMine · CryptixNetwork | 2% |
+| BTX (btx.dev) | `btx` | LuckyPool (lproute) | 1% |
 
-For **BTX** set `FORGE_ALGO=btx` in *Extra config*, use your `btx1…` address as the wallet and a BTX pool — e.g. `btx-eu.lproute.com:8660`.
+The dev fee is interleaved (no graph dips) and verifiable on your pool. No hidden second fee. *More algorithms are on the way.*
 
-Apply → the dashboard shows per-GPU hashrate, temperatures, fans and shares. Run one miner per rig.
+---
+
+## Performance
+
+Pearl hashrate per GPU — **community-verified, varies with overclock and power limit**:
+
+| GPU | Pearl (PearlHash) |
+|-----|:-----------------:|
+| RTX 5080 | ~195 TH/s |
+| RTX 4070 Ti | ~122 TH/s |
+| RTX 3060 Ti | ~58 TH/s |
+| P104-100 (8 GB) | ~6.5 TH/s |
+
+KawPow on the P104-100 runs at about **11.5 MH/s** per card. Post your own numbers in [Telegram](https://t.me/ForgeMinerChat) or [Discord](https://discord.gg/vxUTbb9B) — the table grows with the community.
+
+---
+
+## Features
+
+- **Multiple coins, one binary** — Pearl, QubitCoin, KawPow (RVN / QUAI / XNA), Cryptix or BTX; select with `--algorithm`.
+- **Architecture-tuned kernels** — a dedicated kernel per GPU generation (Pascal / Turing / Ampere / Ada / Blackwell), auto-selected at launch.
+- **Native and lightweight** — direct CUDA Driver API, near-zero CPU load; no Python, WSL or extra runtimes. Starts in a second, runs on weak hosts and many-GPU boxes.
+- **Efficient on crowded rigs** — keeps the GPUs fed even with many cards on a weak CPU, several miner instances, or slow x1 risers.
+- **One self-contained binary** — everything embedded; no CUDA runtime or loose kernel files to manage. Even KawPow ships as a single executable.
+- **Built-in overclocking & fan control** — lock clocks, apply offsets, set a power limit and drive fans straight from the miner — a different OC per card on mixed rigs. No third-party tool.
+- **Multi-pool with fail-over** — standard Stratum for every coin, SSL/TLS pools, automatic reconnect and pool fail-over.
+- **Live dashboard & read-only API** — per-GPU hashrate, temps (incl. VRAM on Windows), clocks, fans, power and shares — plus JSON, Prometheus and Claymore-compatible endpoints.
+- **HiveOS ready** — drops straight into a custom-miner slot.
 
 ---
 
 ## Options
 
-Options can be passed as command-line flags (`--flag value`) or as environment variables (`FORGE_FLAG`) — handy for HiveOS and `.bat` files.
+Anything you pass on the command line has an `FORGE_*` environment-variable twin — handy for HiveOS *Extra config* and `.bat` files.
 
-| Flag | Env variable | Description |
-|------|--------------|-------------|
-| `--algorithm` | `FORGE_ALGO` | Algorithm to mine: `pearl`, `qhash` (QubitCoin), `kawpow` (Ravencoin / Quai / Neurai), `cryptix` (CYTX) or `btx` (btx.dev). |
-| `--coin` | `FORGE_COIN` | KawPow coin: `rvn`, `quai` or `xna` (auto-detected from the pool host if omitted; set explicitly for Neurai / Vipor pools). *(KawPow only.)* |
-| `--pool` | `FORGE_POOL` | Pool address as `host:port`. |
-| `--wallet` | `FORGE_WALLET` | Your payout wallet address. |
-| `--worker` | `FORGE_WORKER` | Worker / rig name shown on the pool. |
+| Flag | Env | Description |
+|------|-----|-------------|
+| `--algorithm` | `FORGE_ALGO` | `pearlhash`, `qhash`, `kawpow`, `cryptix` or `btx`. |
+| `--coin` | `FORGE_COIN` | KawPow coin: `rvn`, `quai` or `xna` (auto-detected from the pool; set explicitly for Neurai / Vipor). |
+| `--pool` | `FORGE_POOL` | Pool `host:port`. SSL/TLS supported; list several for fail-over. |
+| `--wallet` | `FORGE_WALLET` | Payout wallet address. |
+| `--worker` | `FORGE_WORKER` | Worker / rig name. |
 | `--password` | `FORGE_PASS` | Pool password (usually `x`). |
-| `--proto` | `FORGE_PROTO` | Pearl pool dialect: `stratum` (HeroMiners, LuckyPool, Kryptex) or `alpha` (AlphaPool). *(Pearl only.)* |
-| `--gpu` | `FORGE_GPU` | Mine only these GPU indices, e.g. `--gpu 0,1,2,6` (default: all GPUs). Indices match `nvidia-smi` order. |
-| — | `FORGE_LOWVRAM` | Low-VRAM mode for 8 GB cards (Pearl). `1` force on, `0` force off. Auto-detected by default. |
+| `--proto` | `FORGE_PROTO` | Pearl dialect: `stratum` or `alpha` (AlphaPool). |
+| `--gpu` | `FORGE_GPU` | Mine only these indices, e.g. `0,1,2,6` (`nvidia-smi` order). |
+| — | `FORGE_LOWVRAM` | Low-VRAM mode for 8 GB cards (Pearl). Auto by default. |
 
-### Overclocking and fans
+<details>
+<summary><b>Overclocking &amp; fan control</b></summary>
 
-> **Tip:** ForgeMiner is core-clock bound and memory-light — for the best hashrate set the core high; memory can stay low. Overclocking requires root (Linux/HiveOS) or Administrator (Windows).
->
-> **Per-GPU OC:** each flag takes a single value (applied to all cards) or a comma list that maps to `--gpu`:
-> `--gpu 0,1,2,6 --coff 300,250,300,200 --plimit 280,280,300,260`
+> ForgeMiner is core-clock bound and memory-light — push the core high, leave memory low. Overclocking needs root (Linux/HiveOS) or Administrator (Windows). Each flag takes one value, or a comma list mapped to `--gpu`.
 
-| Flag | Env variable | Description |
-|------|--------------|-------------|
-| `--cclk` | `FORGE_CCLK` | Lock GPU core clock (MHz). |
-| `--coff` | `FORGE_COFF` | GPU core clock offset (MHz, `+`/`-`). |
+| Flag | Env | Description |
+|------|-----|-------------|
+| `--cclk` | `FORGE_CCLK` | Lock core clock (MHz). |
+| `--coff` | `FORGE_COFF` | Core clock offset (MHz, +/−). |
 | `--mclk` | `FORGE_MCLK` | Lock memory clock (MHz). |
-| `--moff` | `FORGE_MOFF` | Memory clock offset (MHz, `+`/`-`). |
+| `--moff` | `FORGE_MOFF` | Memory clock offset (MHz, +/−). |
 | `--plimit` | `FORGE_PLIMIT` | Power limit (Watts). |
-| `--fan` | `FORGE_FAN` | Fixed fan speed (%). Use `--fan-curve t:p,t:p,...` for a custom temperature-to-speed curve. |
+| `--fan` | `FORGE_FAN` | Fixed fan speed (%). |
+| `--fan-curve` | `FORGE_FANCURVE` | Temperature→speed curve, e.g. `45:30,60:55,70:75,80:100`. |
 
-### Fan control
-
-Control the GPU fans yourself — a fixed speed, or a temperature curve. With no fan flag, ForgeMiner leaves the
-fans on the driver's automatic control. Setting fans requires Administrator (Windows) or root (Linux/HiveOS).
-On exit the driver's automatic fan control is restored.
-
-| Flag | Env variable | Description |
-|------|--------------|-------------|
-| `--fan` | `FORGE_FAN` | Fixed fan speed in % (one value = all cards, or a comma list mapped to `--gpu`). |
-| `--fan-curve` | `FORGE_FANCURVE` | Temperature → speed curve: `temp:percent` points, linear-interpolated. |
-
-**Fixed speed**
-
+```text
+# per-GPU (values map to --gpu order)
+--gpu 0,1,2,6 --coff 300,250,300,200 --plimit 280,280,300,260
 ```
---fan 70                 every GPU at 70%
---fan 60,70,80,100       per-GPU (maps to --gpu order: GPU0=60%, GPU1=70%, ...)
-```
-
-**Temperature curve** — the recommended way. Give `temp°C:fan%` points; ForgeMiner reads each card's live core
-temperature and sets its fan to the matching percent, interpolating linearly between the points:
-
-```
---fan-curve 45:30,60:55,70:75,80:100
-```
-
-reads as: ≤45 °C → 30% · 60 °C → 55% · 70 °C → 75% · ≥80 °C → 100% · in-between (e.g. 65 °C) → ~65%.
-Use as many points as you like (they're sorted automatically). One curve applies to all selected GPUs. A fixed
-`--fan` for a card overrides the curve for that card.
-
-> **Note:** GeForce cards have a ~30% hardware fan floor — a request below that just lands at 30%.
-
-**HiveOS / Linux** — put it in the flight-sheet *Extra config arguments*, or use the env form:
-
-```
---fan-curve 50:40,65:60,75:85,83:100
-FORGE_FANCURVE=50:40,65:60,75:85,83:100      (env equivalent; FORGE_FAN=70 for a fixed speed)
-```
+GeForce cards have a ~30% hardware fan floor; the driver's automatic control is restored on exit.
+</details>
 
 ---
 
 ## Monitoring API
 
-ForgeMiner has a built-in **read-only** monitoring API and web dashboard. It is **off by default**, and it only ever reports stats — it never lets anyone control or reconfigure the miner.
+Off by default and **read-only** — it only reports stats, it can never control or reconfigure the miner.
 
-**Enable it**
-
+```text
+--api                    on 127.0.0.1:7777 (this machine only)
+--api-bind 0.0.0.0:7777  on the LAN (watch from your phone / another PC)
 ```
---api                      on 127.0.0.1:7777 (this machine only)
---api-bind 0.0.0.0:7777    on all interfaces (watch from your phone or another PC on the LAN)
---api-bind 127.0.0.1:9000  any address/port you like
-```
+On HiveOS set `FORGE_API=127.0.0.1:7777` in *Extra config*.
 
-On HiveOS / mining OS, set it in *Extra config*: `FORGE_API=127.0.0.1:7777` (or `0.0.0.0:7777`). Everything below is served from that one port.
-
-**Web dashboard** — open `http://<ip>:7777` in a browser
-
-A live panel that refreshes on its own: total hashrate, 1h / 24h averages, power, efficiency, accept rate and shares; a live hashrate graph with a scale on the left; and a per-GPU table — card name, hashrate, temperature (and VRAM temp), core clock, memory clock, fan, power, efficiency, accepted / stale / rejected, with a **Total** row — plus pool, worker and wallet. It has a **dark / light theme** toggle and a **selectable refresh rate** (1s … 30s), both remembered by your browser. Nothing to install — it is built into the miner.
-
-**Endpoints**
-
-| Endpoint | Format | Use it with |
+| Endpoint | Format | Use with |
 |---|---|---|
-| `GET /` | HTML | The web dashboard (alias `/dashboard`). |
-| `GET /summary` (or `/stats`) | JSON | Grafana, custom dashboards, bots and scripts. Everything: total + per-GPU hashrate, temps, core/memory clocks, fans, power, efficiency, accepted/stale/rejected, accept rate, shares/min, difficulty, uptime, pool/worker/wallet, and a short hashrate history for graphs. |
-| `GET /metrics` | Prometheus | Grafana dashboards and alerts (`forge_hashrate_hs`, `forge_gpu_temperature_celsius`, `forge_gpu_fan_percent`, `forge_gpu_power_watts`, `forge_shares_total`, …). |
-| `miner_getstat1` (JSON-RPC, same port) | Claymore | **Awesome Miner, mmpOS** and the wider monitoring ecosystem — add forge as a custom / managed miner with the **Claymore / Ethminer** API on port **7777**. It shows up out of the box. |
+| `GET /` | HTML | The web dashboard (total + per-GPU hashrate, temps, VRAM temp, clocks, fans, power, shares, live graph; dark/light theme). |
+| `GET /summary` | JSON | Grafana, bots, custom dashboards. |
+| `GET /metrics` | Prometheus | Grafana dashboards and alerts. |
+| `miner_getstat1` | Claymore | Awesome Miner, mmpOS and the wider monitoring ecosystem. |
 
-HiveOS is already covered by the built-in stats integration and needs none of this.
-
-> **Security:** the API is read-only and exposes only public info (hashrate, temperatures, pool, wallet). Keep the default `127.0.0.1` for local-only access; use `0.0.0.0` only inside your own network, behind a router / firewall / VPN.
+> Keep the default `127.0.0.1` for local-only access; use `0.0.0.0` only behind your own router / firewall / VPN.
 
 ---
 
-## Supported algorithms
+## Supported GPUs
 
-| Algorithm | Coin | Dev fee |
-|-----------|------|:-------:|
-| PearlHash | Pearl (PRL) | 2% |
-| qhash | QubitCoin (QTC) | 1% |
-| KawPow | Ravencoin (RVN), Quai (QUAI), Neurai (XNA) | 0.7% |
-| Cryptix | Cryptix (CYTX) | 2% |
-| BTX | BTX (btx.dev) | 1% |
+Kernels are tuned per architecture, so a whole generation is covered — desktop and laptop alike.
 
-*More algorithms are coming — follow the channel for updates.*
-
-Supported GPUs: NVIDIA Pascal P104-100 8 GB (Pearl, KawPow and Cryptix), RTX 20 (Turing), RTX 30 (Ampere), RTX 40 (Ada), RTX 50 (Blackwell), and NVIDIA CMP mining cards (e.g. CMP 50HX). *(RTX 20-series and CMP cards need driver 545+.)*
+| Generation | Cards |
+|---|---|
+| **Blackwell** (RTX 50) | 5090 · 5080 · 5070 Ti · 5070 · 5060 Ti · 5060 · 50-series Laptop |
+| **Ada** (RTX 40) | 4090 · 4080 (S) · 4070 Ti (S) · 4070 (S) · 4060 Ti · 4060 · 40-series Laptop |
+| **Ampere** (RTX 30) | 3090 Ti · 3090 · 3080 Ti · 3080 · 3070 Ti · 3070 · 3060 Ti · 3060 · 30-series Laptop |
+| **Turing** (RTX 20) | 2080 Ti · 2080 (S) · 2070 (S) · 2060 (S) · 20-series Laptop *(driver 545+)* |
+| **Pascal** | P104-100 · P106 · P108 (8 GB mining cards) — Pearl, KawPow, Cryptix |
+| **CMP** | 90HX · 50HX · 40HX · 30HX *(driver 545+)* |
 
 ---
 
 ## Resources
 
-- Releases and news: https://t.me/ForgeMiner
-- Support and chat: https://t.me/ForgeMinerChat
-- Discord community: https://discord.gg/vxUTbb9B
+- **Website:** [forgeminer.org](https://forgeminer.org)
+- **Releases & news:** [t.me/ForgeMiner](https://t.me/ForgeMiner)
+- **Support & chat:** [t.me/ForgeMinerChat](https://t.me/ForgeMinerChat)
+- **Discord:** [discord.gg/vxUTbb9B](https://discord.gg/vxUTbb9B)
 
 ---
 
