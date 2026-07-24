@@ -4,7 +4,7 @@
 
 <h1 align="center">ForgeMiner</h1>
 
-<p align="center"><b>A fast, native NVIDIA GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX) and BTX (btx.dev)</b></p>
+<p align="center"><b>A fast, native NVIDIA GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev) and Xelis (XEL)</b></p>
 
 <p align="center">
   <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.4.2"></a>
@@ -36,7 +36,7 @@
 
 ## Overview
 
-ForgeMiner is a high-performance, fully native NVIDIA GPU miner. It talks to the GPU directly through the CUDA Driver API — no Python, no WSL, no extra runtimes — so it starts instantly and runs lean even on low-spec rigs. It mines **Pearl (PRL)**, **QubitCoin (QTC)**, **KawPow** (Ravencoin RVN, Quai QUAI, Neurai XNA), **Cryptix (CYTX)** and **BTX (btx.dev)** from a single binary — pick the coin with one flag — and more coins are on the way.
+ForgeMiner is a high-performance, fully native NVIDIA GPU miner. It talks to the GPU directly through the CUDA Driver API — no Python, no WSL, no extra runtimes — so it starts instantly and runs lean even on low-spec rigs. It mines **Pearl (PRL)**, **QubitCoin (QTC)**, **KawPow** (Ravencoin RVN, Quai QUAI, Neurai XNA), **Cryptix (CYTX)**, **BTX (btx.dev)** and **Xelis (XEL)** from a single binary — pick the coin with one flag — and more coins are on the way.
 
 Every algorithm ships a separate per-architecture build for each supported card, auto-selected at launch, so each GPU runs at its peak.
 
@@ -70,6 +70,7 @@ Grab the latest build from the [**Releases**](https://github.com/0xHashRaptor/Fo
    - KawPow — `kawpow_RVN_HeroMiners_US.bat`, `kawpow_QUAI_Kryptex_EU.bat`, `kawpow_XNA_2Miners_EU.bat`, …
    - Cryptix — `cryptix_Baikalmine_Global.bat`
    - BTX — `btx_lproute_EU.bat`, `btx_lproute_RU.bat`
+   - Xelis — `xelis_XEL_HeroMiners_DE.bat`, `xelis_XEL_Kryptex_Global.bat`, …
 3. Double-click to start. Run as Administrator to apply the built-in overclock.
 
 ### Linux
@@ -85,6 +86,8 @@ FORGE_POOL=ru.pearl.herominers.com:1200 FORGE_WALLET=YOUR_PRL_WALLET FORGE_WORKE
 ./forge --algorithm cryptix --wallet YOUR_CYTX_WALLET --pool cytx.baikalmine.com:9010        --worker rig01
 # BTX
 ./forge --algorithm btx     --wallet YOUR_BTX_WALLET  --pool btx-eu.lproute.com:8660          --worker rig01
+# Xelis
+./forge --algorithm xelis   --wallet YOUR_XEL_WALLET  --pool de.xelis.herominers.com:1225      --worker rig01
 ```
 
 ### Docker
@@ -96,7 +99,7 @@ docker run --rm --gpus all hashraptor/forge \
 ```
 
 ### HiveOS
-Custom miner flight sheet — installation URL `.../ForgeMiner-<version>.tar.gz`, wallet template `%WAL%.%WORKER_NAME%`, and in *Extra config* set `FORGE_ALGO=pearlhash` (or `qhash` / `kawpow` / `cryptix` / `btx`; for KawPow also `FORGE_COIN=rvn|quai|xna`). Ready-made flight sheets: **[forgeminer.org/#flightsheets](https://forgeminer.org/#flightsheets)**.
+Custom miner flight sheet — installation URL `.../ForgeMiner-<version>.tar.gz`, wallet template `%WAL%.%WORKER_NAME%`, and in *Extra config* set `FORGE_ALGO=pearlhash` (or `qhash` / `kawpow` / `cryptix` / `btx` / `xelis`; for KawPow also `FORGE_COIN=rvn|quai|xna`). Ready-made flight sheets: **[forgeminer.org/#flightsheets](https://forgeminer.org/#flightsheets)**.
 
 ---
 
@@ -105,12 +108,13 @@ Custom miner flight sheet — installation URL `.../ForgeMiner-<version>.tar.gz`
 | Coin | `--algorithm` | Pools (ready-made `.bat` in the release) | Dev fee |
 |------|---------------|-------------------------------------------|:------:|
 | Pearl (PRL) | `pearlhash` | BaikalMine · HeroMiners · LuckyPool · Kryptex · 2Miners · AlphaPool | 2% |
+| Cryptix (CYTX) | `cryptix` | BaikalMine · CryptixNetwork | 2% |
 | QubitCoin (QTC) | `qhash` | LuckyPool · k1pool | 1% |
+| BTX (btx.dev) | `btx` | LuckyPool (lproute) | 1% |
+| Xelis (XEL) | `xelis` | HeroMiners · Kryptex | 1% |
 | Ravencoin (RVN) | `kawpow` | HeroMiners · 2Miners · RavenMiner · Kryptex · k1pool | 0.7% |
 | Quai (QUAI) | `kawpow` `--coin quai` | HeroMiners · k1pool · Kryptex | 0.7% |
 | Neurai (XNA) | `kawpow` `--coin xna` | 2Miners · Vipor · Kryptex | 0.7% |
-| Cryptix (CYTX) | `cryptix` | BaikalMine · CryptixNetwork | 2% |
-| BTX (btx.dev) | `btx` | LuckyPool (lproute) | 1% |
 
 The dev fee is interleaved (no graph dips) and verifiable on your pool. No hidden second fee. *More algorithms are on the way.*
 
@@ -133,8 +137,8 @@ KawPow on the P104-100 runs at about **11.5 MH/s** per card. Post your own numbe
 
 ## Features
 
-- **Multiple coins, one binary** — Pearl, QubitCoin, KawPow (RVN / QUAI / XNA), Cryptix or BTX; select with `--algorithm`.
-- **Architecture-tuned kernels** — a dedicated kernel per GPU generation (Pascal / Turing / Ampere / Ada / Blackwell), auto-selected at launch.
+- **Multiple coins, one binary** — Pearl, QubitCoin, KawPow (RVN / QUAI / XNA), Cryptix, BTX or Xelis; select with `--algorithm`.
+- **Architecture-tuned kernels** — a dedicated kernel per GPU generation (Pascal / Volta / Turing / Ampere / Ada / Blackwell), auto-selected at launch.
 - **Native and lightweight** — direct CUDA Driver API, near-zero CPU load; no Python, WSL or extra runtimes. Starts in a second, runs on weak hosts and many-GPU boxes.
 - **Efficient on crowded rigs** — keeps the GPUs fed even with many cards on a weak CPU, several miner instances, or slow x1 risers.
 - **One self-contained binary** — everything embedded; no CUDA runtime or loose kernel files to manage. Even KawPow ships as a single executable.
@@ -151,7 +155,7 @@ Anything you pass on the command line has an `FORGE_*` environment-variable twin
 
 | Flag | Env | Description |
 |------|-----|-------------|
-| `--algorithm` | `FORGE_ALGO` | `pearlhash`, `qhash`, `kawpow`, `cryptix` or `btx`. |
+| `--algorithm` | `FORGE_ALGO` | `pearlhash`, `qhash`, `kawpow`, `cryptix`, `btx` or `xelis`. |
 | `--coin` | `FORGE_COIN` | KawPow coin: `rvn`, `quai` or `xna` (auto-detected from the pool; set explicitly for Neurai / Vipor). |
 | `--pool` | `FORGE_POOL` | Pool `host:port`. SSL/TLS supported; list several for fail-over. |
 | `--wallet` | `FORGE_WALLET` | Payout wallet address. |
@@ -216,8 +220,11 @@ Kernels are tuned per architecture, so a whole generation is covered — desktop
 | **Ada** (RTX 40) | 4090 · 4080 (S) · 4070 Ti (S) · 4070 (S) · 4060 Ti · 4060 · 40-series Laptop |
 | **Ampere** (RTX 30) | 3090 Ti · 3090 · 3080 Ti · 3080 · 3070 Ti · 3070 · 3060 Ti · 3060 · 30-series Laptop |
 | **Turing** (RTX 20) | 2080 Ti · 2080 (S) · 2070 (S) · 2060 (S) · 20-series Laptop *(driver 545+)* |
-| **Pascal** | P104-100 · P106 · P108 (8 GB mining cards) — Pearl, KawPow, Cryptix |
+| **Volta** | Tesla V100 |
+| **Pascal** | GTX 10-series · P104-100 · P106 · P108 (8 GB mining cards) |
 | **CMP** | 90HX · 50HX · 40HX · 30HX *(driver 545+)* |
+
+*All coins run on every listed generation.*
 
 ---
 
