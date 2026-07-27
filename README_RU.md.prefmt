@@ -65,21 +65,19 @@ ForgeMiner — высокопроизводительный, полностью 
 ### Windows
 1. Скачайте и распакуйте Windows-релиз.
 2. Откройте `.bat` под свою монету/пул/регион и впишите кошелёк и воркер. Файлы называются `<algo>_<pool>_<region>.bat` (`_SSL` = шифрование). По одному на монету:
-   - Pearl — `pearlhash_Kryptex_Global.bat`, `pearlhash_Kryptex_EU.bat`, `pearlhash_Kryptex_RU.bat`
-   - QubitCoin — `qhash_LuckyPool_RU.bat`, `qhash_LuckyPool_CA.bat`, `qhash_k1pool_EU.bat`
-   - KawPow · RVN — `kawpow_RVN_Kryptex_Global.bat`, `kawpow_RVN_Kryptex_EU.bat`, `kawpow_RVN_Kryptex_RU.bat`
-   - KawPow · QUAI — `kawpow_QUAI_Kryptex_Global.bat`, `kawpow_QUAI_Kryptex_EU.bat`, `kawpow_QUAI_Kryptex_RU.bat`
-   - KawPow · XNA — `kawpow_XNA_Kryptex_Global.bat`, `kawpow_XNA_Kryptex_EU.bat`, `kawpow_XNA_Kryptex_RU.bat`
-   - Cryptix — `cryptix_Baikalmine_Global.bat`, `cryptix_CryptixNetwork_Global.bat`
+   - Pearl — `pearlhash_Kryptex_Global.bat`, `pearlhash_Baikal_Global.bat`, …
+   - QubitCoin — `qhash_LuckyPool_RU.bat`, `qhash_k1pool_EU.bat`, …
+   - KawPow — `kawpow_RVN_Kryptex_Global.bat`, `kawpow_QUAI_Kryptex_Global.bat`, `kawpow_XNA_Kryptex_Global.bat`, …
+   - Cryptix — `cryptix_Baikalmine_Global.bat`
    - BTX — `btx_lproute_EU.bat`, `btx_lproute_RU.bat`
-   - Xelis — `xelis_XEL_Kryptex_Global.bat`, `xelis_XEL_Kryptex_RU.bat`
+   - Xelis — `xelis_XEL_Kryptex_Global.bat`, `xelis_XEL_HeroMiners_DE.bat`, …
 3. Двойной клик — запуск. Для встроенного разгона — «Запуск от имени администратора».
 
 ### Linux
 ```bash
 chmod +x forge
 # Pearl
-./forge --algorithm pearlhash --wallet YOUR_PRL_WALLET --pool prl.kryptex.network:7048   --worker rig01
+FORGE_POOL=prl.kryptex.network:7048 FORGE_WALLET=YOUR_PRL_WALLET FORGE_WORKER=rig01 ./forge
 # QubitCoin
 ./forge --algorithm qhash  --wallet YOUR_QTC_WALLET  --pool ru.luckypool.io:8610          --worker rig01
 # KawPow — RVN / QUAI (монета определяется по пулу) или XNA (задать --coin xna)

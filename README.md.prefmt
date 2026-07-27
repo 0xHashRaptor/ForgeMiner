@@ -65,21 +65,19 @@ Grab the latest build from the [**Releases**](https://github.com/0xHashRaptor/Fo
 ### Windows
 1. Download and unpack the Windows release.
 2. Open the `.bat` for your coin/pool/region and set your wallet and worker. Files are named `<algo>_<pool>_<region>.bat` (`_SSL` = encrypted). One per coin:
-   - Pearl — `pearlhash_Kryptex_Global.bat`, `pearlhash_Kryptex_EU.bat`, `pearlhash_Kryptex_RU.bat`
-   - QubitCoin — `qhash_LuckyPool_RU.bat`, `qhash_LuckyPool_CA.bat`, `qhash_k1pool_EU.bat`
-   - KawPow · RVN — `kawpow_RVN_Kryptex_Global.bat`, `kawpow_RVN_Kryptex_EU.bat`, `kawpow_RVN_Kryptex_RU.bat`
-   - KawPow · QUAI — `kawpow_QUAI_Kryptex_Global.bat`, `kawpow_QUAI_Kryptex_EU.bat`, `kawpow_QUAI_Kryptex_RU.bat`
-   - KawPow · XNA — `kawpow_XNA_Kryptex_Global.bat`, `kawpow_XNA_Kryptex_EU.bat`, `kawpow_XNA_Kryptex_RU.bat`
-   - Cryptix — `cryptix_Baikalmine_Global.bat`, `cryptix_CryptixNetwork_Global.bat`
+   - Pearl — `pearlhash_Kryptex_Global.bat`, `pearlhash_Baikal_Global.bat`, `pearlhash_HeroMiners_DE.bat`, …
+   - QubitCoin — `qhash_LuckyPool_RU.bat`, `qhash_k1pool_EU.bat`, …
+   - KawPow — `kawpow_RVN_Kryptex_Global.bat`, `kawpow_QUAI_Kryptex_Global.bat`, `kawpow_XNA_Kryptex_Global.bat`, …
+   - Cryptix — `cryptix_Baikalmine_Global.bat`
    - BTX — `btx_lproute_EU.bat`, `btx_lproute_RU.bat`
-   - Xelis — `xelis_XEL_Kryptex_Global.bat`, `xelis_XEL_Kryptex_RU.bat`
+   - Xelis — `xelis_XEL_Kryptex_Global.bat`, `xelis_XEL_HeroMiners_DE.bat`, …
 3. Double-click to start. Run as Administrator to apply the built-in overclock.
 
 ### Linux
 ```bash
 chmod +x forge
 # Pearl
-./forge --algorithm pearlhash --wallet YOUR_PRL_WALLET --pool prl.kryptex.network:7048   --worker rig01
+FORGE_POOL=prl.kryptex.network:7048 FORGE_WALLET=YOUR_PRL_WALLET FORGE_WORKER=rig01 ./forge
 # QubitCoin
 ./forge --algorithm qhash  --wallet YOUR_QTC_WALLET  --pool ru.luckypool.io:8610          --worker rig01
 # KawPow — RVN / QUAI (coin auto-detected from the pool) or XNA (set --coin xna)

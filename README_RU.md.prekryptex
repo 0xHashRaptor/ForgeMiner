@@ -4,10 +4,10 @@
 
 <h1 align="center">ForgeMiner</h1>
 
-<p align="center"><b>Быстрый нативный NVIDIA GPU-майнер — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev) и Xelis (XEL)</b></p>
+<p align="center"><b>Быстрый нативный NVIDIA GPU-майнер — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX) и BTX (btx.dev)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.5.0"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.4.2"></a>
   <a href="#загрузка"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#поддерживаемые-карты"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -36,7 +36,7 @@
 
 ## Обзор
 
-ForgeMiner — высокопроизводительный, полностью нативный NVIDIA GPU-майнер. Он работает с картой напрямую через CUDA Driver API — без Python, WSL и лишних рантаймов — поэтому стартует мгновенно и легко идёт даже на слабых ригах. Майнит **Pearl (PRL)**, **QubitCoin (QTC)**, **KawPow** (Ravencoin RVN, Quai QUAI, Neurai XNA), **Cryptix (CYTX)**, **BTX (btx.dev)** и **Xelis (XEL)** из одного бинарника — монета выбирается одним флагом — и новые монеты в разработке.
+ForgeMiner — высокопроизводительный, полностью нативный NVIDIA GPU-майнер. Он работает с картой напрямую через CUDA Driver API — без Python, WSL и лишних рантаймов — поэтому стартует мгновенно и легко идёт даже на слабых ригах. Майнит **Pearl (PRL)**, **QubitCoin (QTC)**, **KawPow** (Ravencoin RVN, Quai QUAI, Neurai XNA), **Cryptix (CYTX)** и **BTX (btx.dev)** из одного бинарника — монета выбирается одним флагом — и новые монеты в разработке.
 
 Под каждый алгоритм для каждой карты идёт отдельная сборка под её архитектуру, которая выбирается автоматически при запуске — так каждая GPU работает на пике.
 
@@ -65,43 +65,38 @@ ForgeMiner — высокопроизводительный, полностью 
 ### Windows
 1. Скачайте и распакуйте Windows-релиз.
 2. Откройте `.bat` под свою монету/пул/регион и впишите кошелёк и воркер. Файлы называются `<algo>_<pool>_<region>.bat` (`_SSL` = шифрование). По одному на монету:
-   - Pearl — `pearlhash_Kryptex_Global.bat`, `pearlhash_Kryptex_EU.bat`, `pearlhash_Kryptex_RU.bat`
-   - QubitCoin — `qhash_LuckyPool_RU.bat`, `qhash_LuckyPool_CA.bat`, `qhash_k1pool_EU.bat`
-   - KawPow · RVN — `kawpow_RVN_Kryptex_Global.bat`, `kawpow_RVN_Kryptex_EU.bat`, `kawpow_RVN_Kryptex_RU.bat`
-   - KawPow · QUAI — `kawpow_QUAI_Kryptex_Global.bat`, `kawpow_QUAI_Kryptex_EU.bat`, `kawpow_QUAI_Kryptex_RU.bat`
-   - KawPow · XNA — `kawpow_XNA_Kryptex_Global.bat`, `kawpow_XNA_Kryptex_EU.bat`, `kawpow_XNA_Kryptex_RU.bat`
-   - Cryptix — `cryptix_Baikalmine_Global.bat`, `cryptix_CryptixNetwork_Global.bat`
+   - Pearl — `pearlhash_Baikal_Global.bat`, `pearlhash_Kryptex_RU.bat`, …
+   - QubitCoin — `qhash_LuckyPool_RU.bat`, `qhash_k1pool_EU.bat`, …
+   - KawPow — `kawpow_RVN_HeroMiners_US.bat`, `kawpow_QUAI_Kryptex_EU.bat`, `kawpow_XNA_2Miners_EU.bat`, …
+   - Cryptix — `cryptix_Baikalmine_Global.bat`
    - BTX — `btx_lproute_EU.bat`, `btx_lproute_RU.bat`
-   - Xelis — `xelis_XEL_Kryptex_Global.bat`, `xelis_XEL_Kryptex_RU.bat`
 3. Двойной клик — запуск. Для встроенного разгона — «Запуск от имени администратора».
 
 ### Linux
 ```bash
 chmod +x forge
 # Pearl
-./forge --algorithm pearlhash --wallet YOUR_PRL_WALLET --pool prl.kryptex.network:7048   --worker rig01
+FORGE_POOL=ru.pearl.herominers.com:1200 FORGE_WALLET=YOUR_PRL_WALLET FORGE_WORKER=rig01 ./forge
 # QubitCoin
 ./forge --algorithm qhash  --wallet YOUR_QTC_WALLET  --pool ru.luckypool.io:8610          --worker rig01
 # KawPow — RVN / QUAI (монета определяется по пулу) или XNA (задать --coin xna)
-./forge --algorithm kawpow --wallet YOUR_RVN_WALLET  --pool rvn.kryptex.network:7031        --worker rig01
+./forge --algorithm kawpow --wallet YOUR_RVN_WALLET  --pool us.ravencoin.herominers.com:1140 --worker rig01
 # Cryptix
 ./forge --algorithm cryptix --wallet YOUR_CYTX_WALLET --pool cytx.baikalmine.com:9010        --worker rig01
 # BTX
 ./forge --algorithm btx     --wallet YOUR_BTX_WALLET  --pool btx-eu.lproute.com:8660          --worker rig01
-# Xelis
-./forge --algorithm xelis   --wallet YOUR_XEL_WALLET  --pool xel.kryptex.network:7019         --worker rig01
 ```
 
 ### Docker
 ```bash
 docker pull hashraptor/forge
 docker run --rm --gpus all hashraptor/forge \
-  --algorithm pearlhash --wallet YOUR_PRL_WALLET --worker rig01 --pool prl.kryptex.network:7048
+  --algorithm pearlhash --wallet YOUR_PRL_WALLET --worker rig01 --pool pearl.baikalmine.com:2010
 # дашборд: добавьте -p 7777:7777 и --api-bind 0.0.0.0:7777
 ```
 
 ### HiveOS
-Custom miner — installation URL `.../ForgeMiner-<версия>.tar.gz`, шаблон кошелька `%WAL%.%WORKER_NAME%`, а в *Extra config* задайте `FORGE_ALGO=pearlhash` (или `qhash` / `kawpow` / `cryptix` / `btx` / `xelis`; для KawPow ещё `FORGE_COIN=rvn|quai|xna`). Готовые флайт-шиты: **[forgeminer.org/#flightsheets](https://forgeminer.org/#flightsheets)**.
+Custom miner — installation URL `.../ForgeMiner-<версия>.tar.gz`, шаблон кошелька `%WAL%.%WORKER_NAME%`, а в *Extra config* задайте `FORGE_ALGO=pearlhash` (или `qhash` / `kawpow` / `cryptix` / `btx`; для KawPow ещё `FORGE_COIN=rvn|quai|xna`). Готовые флайт-шиты: **[forgeminer.org/#flightsheets](https://forgeminer.org/#flightsheets)**.
 
 ---
 
@@ -109,14 +104,13 @@ Custom miner — installation URL `.../ForgeMiner-<версия>.tar.gz`, шаб
 
 | Монета | `--algorithm` | Пулы (готовые `.bat` в релизе) | Комиссия |
 |--------|---------------|--------------------------------|:------:|
-| Pearl (PRL) | `pearlhash` | Kryptex · BaikalMine · HeroMiners · LuckyPool · 2Miners · AlphaPool | 2% |
-| Cryptix (CYTX) | `cryptix` | BaikalMine · CryptixNetwork | 2% |
+| Pearl (PRL) | `pearlhash` | BaikalMine · HeroMiners · LuckyPool · Kryptex · 2Miners · AlphaPool | 2% |
 | QubitCoin (QTC) | `qhash` | LuckyPool · k1pool | 1% |
+| Ravencoin (RVN) | `kawpow` | HeroMiners · 2Miners · RavenMiner · Kryptex · k1pool | 0.7% |
+| Quai (QUAI) | `kawpow` `--coin quai` | HeroMiners · k1pool · Kryptex | 0.7% |
+| Neurai (XNA) | `kawpow` `--coin xna` | 2Miners · Vipor · Kryptex | 0.7% |
+| Cryptix (CYTX) | `cryptix` | BaikalMine · CryptixNetwork | 2% |
 | BTX (btx.dev) | `btx` | LuckyPool (lproute) | 1% |
-| Xelis (XEL) | `xelis` | Kryptex · HeroMiners | 1% |
-| Ravencoin (RVN) | `kawpow` | Kryptex · HeroMiners · 2Miners · RavenMiner · k1pool | 0.7% |
-| Quai (QUAI) | `kawpow` `--coin quai` | Kryptex · HeroMiners · k1pool | 0.7% |
-| Neurai (XNA) | `kawpow` `--coin xna` | Kryptex · 2Miners · Vipor | 0.7% |
 
 Комиссия чередуется в потоке (без провалов на графике) и проверяется на пуле. Скрытой второй комиссии нет. *Больше алгоритмов в разработке.*
 
@@ -139,8 +133,8 @@ KawPow на P104-100 — около **11.5 MH/s** на карту. Присыл�
 
 ## Возможности
 
-- **Много монет, один бинарь** — Pearl, QubitCoin, KawPow (RVN / QUAI / XNA), Cryptix, BTX или Xelis; выбор через `--algorithm`.
-- **Ядра под архитектуру** — отдельное ядро под каждое поколение (Pascal / Volta / Turing / Ampere / Ada / Blackwell), выбирается при старте.
+- **Много монет, один бинарь** — Pearl, QubitCoin, KawPow (RVN / QUAI / XNA), Cryptix или BTX; выбор через `--algorithm`.
+- **Ядра под архитектуру** — отдельное ядро под каждое поколение (Pascal / Turing / Ampere / Ada / Blackwell), выбирается при старте.
 - **Нативно и легко** — напрямую через CUDA Driver API, почти нулевая нагрузка на CPU; без Python, WSL и рантаймов. Стартует за секунду, идёт на слабых хостах и многокарточных ригах.
 - **Эффективно на забитых ригах** — держит карты загруженными даже при слабом CPU, нескольких инстансах или медленных x1-райзерах.
 - **Один самодостаточный бинарь** — всё внутри; без CUDA runtime и разбросанных файлов ядер. Даже KawPow — один исполняемый файл.
@@ -157,7 +151,7 @@ KawPow на P104-100 — около **11.5 MH/s** на карту. Присыл�
 
 | Флаг | Env | Описание |
 |------|-----|----------|
-| `--algorithm` | `FORGE_ALGO` | `pearlhash`, `qhash`, `kawpow`, `cryptix`, `btx` или `xelis`. |
+| `--algorithm` | `FORGE_ALGO` | `pearlhash`, `qhash`, `kawpow`, `cryptix` или `btx`. |
 | `--coin` | `FORGE_COIN` | Монета KawPow: `rvn`, `quai` или `xna` (определяется по пулу; для Neurai / Vipor задавать явно). |
 | `--pool` | `FORGE_POOL` | Пул `host:port`. SSL/TLS поддерживается; несколько адресов для failover. |
 | `--wallet` | `FORGE_WALLET` | Адрес кошелька для выплат. |
@@ -222,11 +216,8 @@ KawPow на P104-100 — около **11.5 MH/s** на карту. Присыл�
 | **Ada** (RTX 40) | 4090 · 4080 (S) · 4070 Ti (S) · 4070 (S) · 4060 Ti · 4060 · 40-й серии Laptop |
 | **Ampere** (RTX 30) | 3090 Ti · 3090 · 3080 Ti · 3080 · 3070 Ti · 3070 · 3060 Ti · 3060 · 30-й серии Laptop |
 | **Turing** (RTX 20) | 2080 Ti · 2080 (S) · 2070 (S) · 2060 (S) · 20-й серии Laptop *(драйвер 545+)* |
-| **Volta** | Tesla V100 |
-| **Pascal** | GTX 10-й серии · P104-100 · P106 · P108 (8 ГБ майнинг-карты) |
+| **Pascal** | P104-100 · P106 · P108 (8 ГБ майнинг-карты) — Pearl, KawPow, Cryptix |
 | **CMP** | 90HX · 50HX · 40HX · 30HX *(драйвер 545+)* |
-
-*Все монеты работают на каждом из перечисленных поколений.*
 
 ---
 
