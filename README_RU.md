@@ -65,36 +65,36 @@ ForgeMiner — высокопроизводительный, полностью 
 ### Windows
 1. Скачайте и распакуйте Windows-релиз.
 2. Откройте `.bat` под свою монету/пул/регион и впишите кошелёк и воркер. Файлы называются `<algo>_<pool>_<region>.bat` (`_SSL` = шифрование). По одному на монету:
-   - Pearl — `pearlhash_Baikal_Global.bat`, `pearlhash_Kryptex_RU.bat`, …
+   - Pearl — `pearlhash_Kryptex_Global.bat`, `pearlhash_Baikal_Global.bat`, …
    - QubitCoin — `qhash_LuckyPool_RU.bat`, `qhash_k1pool_EU.bat`, …
-   - KawPow — `kawpow_RVN_HeroMiners_US.bat`, `kawpow_QUAI_Kryptex_EU.bat`, `kawpow_XNA_2Miners_EU.bat`, …
+   - KawPow — `kawpow_RVN_Kryptex_Global.bat`, `kawpow_QUAI_Kryptex_Global.bat`, `kawpow_XNA_Kryptex_Global.bat`, …
    - Cryptix — `cryptix_Baikalmine_Global.bat`
    - BTX — `btx_lproute_EU.bat`, `btx_lproute_RU.bat`
-   - Xelis — `xelis_XEL_HeroMiners_DE.bat`, `xelis_XEL_Kryptex_Global.bat`, …
+   - Xelis — `xelis_XEL_Kryptex_Global.bat`, `xelis_XEL_HeroMiners_DE.bat`, …
 3. Двойной клик — запуск. Для встроенного разгона — «Запуск от имени администратора».
 
 ### Linux
 ```bash
 chmod +x forge
 # Pearl
-FORGE_POOL=ru.pearl.herominers.com:1200 FORGE_WALLET=YOUR_PRL_WALLET FORGE_WORKER=rig01 ./forge
+FORGE_POOL=prl.kryptex.network:7048 FORGE_WALLET=YOUR_PRL_WALLET FORGE_WORKER=rig01 ./forge
 # QubitCoin
 ./forge --algorithm qhash  --wallet YOUR_QTC_WALLET  --pool ru.luckypool.io:8610          --worker rig01
 # KawPow — RVN / QUAI (монета определяется по пулу) или XNA (задать --coin xna)
-./forge --algorithm kawpow --wallet YOUR_RVN_WALLET  --pool us.ravencoin.herominers.com:1140 --worker rig01
+./forge --algorithm kawpow --wallet YOUR_RVN_WALLET  --pool rvn.kryptex.network:7031        --worker rig01
 # Cryptix
 ./forge --algorithm cryptix --wallet YOUR_CYTX_WALLET --pool cytx.baikalmine.com:9010        --worker rig01
 # BTX
 ./forge --algorithm btx     --wallet YOUR_BTX_WALLET  --pool btx-eu.lproute.com:8660          --worker rig01
 # Xelis
-./forge --algorithm xelis   --wallet YOUR_XEL_WALLET  --pool de.xelis.herominers.com:1225      --worker rig01
+./forge --algorithm xelis   --wallet YOUR_XEL_WALLET  --pool xel.kryptex.network:7019         --worker rig01
 ```
 
 ### Docker
 ```bash
 docker pull hashraptor/forge
 docker run --rm --gpus all hashraptor/forge \
-  --algorithm pearlhash --wallet YOUR_PRL_WALLET --worker rig01 --pool pearl.baikalmine.com:2010
+  --algorithm pearlhash --wallet YOUR_PRL_WALLET --worker rig01 --pool prl.kryptex.network:7048
 # дашборд: добавьте -p 7777:7777 и --api-bind 0.0.0.0:7777
 ```
 
@@ -107,14 +107,14 @@ Custom miner — installation URL `.../ForgeMiner-<версия>.tar.gz`, шаб
 
 | Монета | `--algorithm` | Пулы (готовые `.bat` в релизе) | Комиссия |
 |--------|---------------|--------------------------------|:------:|
-| Pearl (PRL) | `pearlhash` | BaikalMine · HeroMiners · LuckyPool · Kryptex · 2Miners · AlphaPool | 2% |
+| Pearl (PRL) | `pearlhash` | Kryptex · BaikalMine · HeroMiners · LuckyPool · 2Miners · AlphaPool | 2% |
 | Cryptix (CYTX) | `cryptix` | BaikalMine · CryptixNetwork | 2% |
 | QubitCoin (QTC) | `qhash` | LuckyPool · k1pool | 1% |
 | BTX (btx.dev) | `btx` | LuckyPool (lproute) | 1% |
-| Xelis (XEL) | `xelis` | HeroMiners · Kryptex | 1% |
-| Ravencoin (RVN) | `kawpow` | HeroMiners · 2Miners · RavenMiner · Kryptex · k1pool | 0.7% |
-| Quai (QUAI) | `kawpow` `--coin quai` | HeroMiners · k1pool · Kryptex | 0.7% |
-| Neurai (XNA) | `kawpow` `--coin xna` | 2Miners · Vipor · Kryptex | 0.7% |
+| Xelis (XEL) | `xelis` | Kryptex · HeroMiners | 1% |
+| Ravencoin (RVN) | `kawpow` | Kryptex · HeroMiners · 2Miners · RavenMiner · k1pool | 0.7% |
+| Quai (QUAI) | `kawpow` `--coin quai` | Kryptex · HeroMiners · k1pool | 0.7% |
+| Neurai (XNA) | `kawpow` `--coin xna` | Kryptex · 2Miners · Vipor | 0.7% |
 
 Комиссия чередуется в потоке (без провалов на графике) и проверяется на пуле. Скрытой второй комиссии нет. *Больше алгоритмов в разработке.*
 
