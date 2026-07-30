@@ -1,0 +1,6 @@
+# Editing backups. These are made by the release tooling before it rewrites a file; four of them
+# reached the public repo once and showed up as clutter in the file listing.
+*.pre*
+*.bak
+*.orig
+*.tmp
