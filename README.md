@@ -7,7 +7,7 @@
 <p align="center"><b>A fast, native NVIDIA GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev) and Xelis (XEL)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.5.0"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.5.2"></a>
   <a href="#download"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#supported-gpus"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -92,6 +92,8 @@ chmod +x forge
 ./forge --algorithm xelis   --wallet YOUR_XEL_WALLET  --pool xel.kryptex.network:7019         --worker rig01
 ```
 
+The Linux binary is built against **glibc 2.17**, so it runs on anything from CentOS 7 / Ubuntu 14.04 upwards — no CUDA toolkit, no extra libraries, just the NVIDIA driver. Add `--api-bind 0.0.0.0:7777` to any of the commands above and open `http://<rig>:7777` for the built-in dashboard.
+
 ### Docker
 ```bash
 docker pull hashraptor/forge
@@ -101,7 +103,21 @@ docker run --rm --gpus all hashraptor/forge \
 ```
 
 ### HiveOS
-Custom miner flight sheet — installation URL `.../ForgeMiner-<version>.tar.gz`, wallet template `%WAL%.%WORKER_NAME%`, and in *Extra config* set `FORGE_ALGO=pearlhash` (or `qhash` / `kawpow` / `cryptix` / `btx` / `xelis`; for KawPow also `FORGE_COIN=rvn|quai|xna`). Ready-made flight sheets: **[forgeminer.org/#flightsheets](https://forgeminer.org/#flightsheets)**.
+Custom miner flight sheet — installation URL `.../ForgeMiner-<version>.tar.gz`, wallet template `%WAL%.%WORKER_NAME%`.
+
+*Extra config* accepts **both** forms, one per line, and you can mix them:
+
+```
+FORGE_ALGO=xelis            # or pearlhash / qhash / kawpow / cryptix / btx
+FORGE_COIN=xna              # KawPow only: rvn | quai | xna
+--gpu 0,1,3                 # mine only these cards
+--cclk 1500 --moff 1000     # overclock: also --coff / --mclk / --plimit
+--fan 70                    # or --fan-curve 45:30,60:55,70:75,80:100
+```
+
+Hashrate, temperatures and shares appear in the HiveOS dashboard on their own — no extra flag needed. Add `--api-bind 0.0.0.0:7777` only if you also want the miner's own web dashboard.
+
+Ready-made flight sheets: **[forgeminer.org/#flightsheets](https://forgeminer.org/#flightsheets)**.
 
 ---
 
@@ -129,8 +145,8 @@ Pearl hashrate per GPU — **community-verified, varies with overclock and power
 | GPU | Pearl (PearlHash) |
 |-----|:-----------------:|
 | RTX 5080 | ~195 TH/s |
-| RTX 4070 Ti | ~122 TH/s |
-| RTX 3060 Ti | ~58 TH/s |
+| RTX 4070 Ti | ~139 TH/s |
+| RTX 3060 Ti | ~55 TH/s |
 | P104-100 (8 GB) | ~6.5 TH/s |
 
 KawPow on the P104-100 runs at about **11.5 MH/s** per card. Post your own numbers in [Telegram](https://t.me/ForgeMinerChat) or [Discord](https://discord.gg/vxUTbb9B) — the table grows with the community.

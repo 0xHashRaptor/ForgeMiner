@@ -7,7 +7,7 @@
 <p align="center"><b>Быстрый нативный NVIDIA GPU-майнер — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev) и Xelis (XEL)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.5.0"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.5.2"></a>
   <a href="#загрузка"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#поддерживаемые-карты"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -92,6 +92,8 @@ chmod +x forge
 ./forge --algorithm xelis   --wallet YOUR_XEL_WALLET  --pool xel.kryptex.network:7019         --worker rig01
 ```
 
+Linux-сборка собрана под **glibc 2.17**, поэтому работает начиная с CentOS 7 / Ubuntu 14.04 — не нужен ни CUDA toolkit, ни дополнительные библиотеки, только драйвер NVIDIA. Добавьте `--api-bind 0.0.0.0:7777` к любой команде выше и откройте `http://<rig>:7777` — это встроенный дашборд.
+
 ### Docker
 ```bash
 docker pull hashraptor/forge
@@ -101,7 +103,21 @@ docker run --rm --gpus all hashraptor/forge \
 ```
 
 ### HiveOS
-Custom miner — installation URL `.../ForgeMiner-<версия>.tar.gz`, шаблон кошелька `%WAL%.%WORKER_NAME%`, а в *Extra config* задайте `FORGE_ALGO=pearlhash` (или `qhash` / `kawpow` / `cryptix` / `btx` / `xelis`; для KawPow ещё `FORGE_COIN=rvn|quai|xna`). Готовые флайт-шиты: **[forgeminer.org/#flightsheets](https://forgeminer.org/#flightsheets)**.
+Custom miner — installation URL `.../ForgeMiner-<версия>.tar.gz`, шаблон кошелька `%WAL%.%WORKER_NAME%`.
+
+*Extra config* принимает **обе** формы, по одной в строке, и их можно смешивать:
+
+```
+FORGE_ALGO=xelis            # или pearlhash / qhash / kawpow / cryptix / btx
+FORGE_COIN=xna              # только для KawPow: rvn | quai | xna
+--gpu 0,1,3                 # майнить только эти карты
+--cclk 1500 --moff 1000     # разгон: также --coff / --mclk / --plimit
+--fan 70                    # или --fan-curve 45:30,60:55,70:75,80:100
+```
+
+Хешрейт, температуры и шары появятся в панели HiveOS сами — отдельный флаг не нужен. `--api-bind 0.0.0.0:7777` добавляйте только если хотите ещё и собственный веб-дашборд майнера.
+
+Готовые флайт-шиты: **[forgeminer.org/#flightsheets](https://forgeminer.org/#flightsheets)**.
 
 ---
 
@@ -129,8 +145,8 @@ Custom miner — installation URL `.../ForgeMiner-<версия>.tar.gz`, шаб
 | GPU | Pearl (PearlHash) |
 |-----|:-----------------:|
 | RTX 5080 | ~195 TH/s |
-| RTX 4070 Ti | ~122 TH/s |
-| RTX 3060 Ti | ~58 TH/s |
+| RTX 4070 Ti | ~139 TH/s |
+| RTX 3060 Ti | ~55 TH/s |
 | P104-100 (8 ГБ) | ~6.5 TH/s |
 
 KawPow на P104-100 — около **11.5 MH/s** на карту. Присылайте свои цифры в [Telegram](https://t.me/ForgeMinerChat) или [Discord](https://discord.gg/vxUTbb9B) — таблица растёт вместе с сообществом.
