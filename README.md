@@ -14,7 +14,7 @@
 <p align="center">
   <a href="https://forgeminer.org"><img src="assets/badge_site.svg" alt="site: forgeminer.org"></a>
   <a href="https://t.me/ForgeMiner"><img src="assets/badge_telegram.svg" alt="Telegram: Releases"></a>
-  <a href="https://discord.gg/vxUTbb9B"><img src="assets/badge_discord.svg" alt="Discord: Community"></a>
+  <a href="https://discord.gg/CyU6ASQWSy"><img src="assets/badge_discord.svg" alt="Discord: Community"></a>
 </p>
 
 ---
@@ -40,7 +40,7 @@ ForgeMiner is a high-performance, fully native NVIDIA GPU miner. It talks to the
 
 Every algorithm ships a separate per-architecture build for each supported card, auto-selected at launch, so each GPU runs at its peak.
 
-Website: **[forgeminer.org](https://forgeminer.org)** · ForgeMiner is closed-source; releases are published here and announced on [Telegram](https://t.me/ForgeMiner) and [Discord](https://discord.gg/vxUTbb9B).
+Website: **[forgeminer.org](https://forgeminer.org)** · ForgeMiner is closed-source; releases are published here and announced on [Telegram](https://t.me/ForgeMiner) and [Discord](https://discord.gg/CyU6ASQWSy).
 
 <!-- Tip: drop a dashboard screenshot here for instant credibility, e.g. -->
 <!-- <p align="center"><img src="assets/dashboard.png" width="720" alt="ForgeMiner live dashboard"></p> -->
@@ -149,7 +149,7 @@ Pearl hashrate per GPU — **community-verified, varies with overclock and power
 | RTX 3060 Ti | ~55 TH/s |
 | P104-100 (8 GB) | ~6.5 TH/s |
 
-KawPow on the P104-100 runs at about **11.5 MH/s** per card. Post your own numbers in [Telegram](https://t.me/ForgeMinerChat) or [Discord](https://discord.gg/vxUTbb9B) — the table grows with the community.
+KawPow on the P104-100 runs at about **11.5 MH/s** per card. Post your own numbers in [Telegram](https://t.me/ForgeMinerChat) or [Discord](https://discord.gg/CyU6ASQWSy) — the table grows with the community.
 
 ---
 
@@ -251,7 +251,7 @@ Kernels are tuned per architecture, so a whole generation is covered — desktop
 - **Website:** [forgeminer.org](https://forgeminer.org)
 - **Releases & news:** [t.me/ForgeMiner](https://t.me/ForgeMiner)
 - **Support & chat:** [t.me/ForgeMinerChat](https://t.me/ForgeMinerChat)
-- **Discord:** [discord.gg/vxUTbb9B](https://discord.gg/vxUTbb9B)
+- **Discord:** [discord.gg/CyU6ASQWSy](https://discord.gg/CyU6ASQWSy)
 
 ---
 
