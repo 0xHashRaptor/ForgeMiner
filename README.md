@@ -7,7 +7,7 @@
 <p align="center"><b>A fast, native NVIDIA GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev) and Xelis (XEL)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.5.5"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.5.8"></a>
   <a href="#download"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#supported-gpus"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -79,17 +79,17 @@ Grab the latest build from the [**Releases**](https://github.com/0xHashRaptor/Fo
 ```bash
 chmod +x forge
 # Pearl
-./forge --algorithm pearlhash --wallet YOUR_PRL_WALLET --pool prl.kryptex.network:7048   --worker rig01
+./forge --algorithm pearlhash --wallet YOUR_PRL_WALLET --pool prl.kryptex.network:7048 --worker rig01
 # QubitCoin
-./forge --algorithm qhash  --wallet YOUR_QTC_WALLET  --pool ru.luckypool.io:8610          --worker rig01
+./forge --algorithm qhash --wallet YOUR_QTC_WALLET --pool ru.luckypool.io:8610 --worker rig01
 # KawPow — RVN / QUAI (coin auto-detected from the pool) or XNA (set --coin xna)
-./forge --algorithm kawpow --wallet YOUR_RVN_WALLET  --pool rvn.kryptex.network:7031        --worker rig01
+./forge --algorithm kawpow --wallet YOUR_RVN_WALLET --pool rvn.kryptex.network:7031 --worker rig01
 # Cryptix
-./forge --algorithm cryptix --wallet YOUR_CYTX_WALLET --pool cytx.baikalmine.com:9010        --worker rig01
+./forge --algorithm cryptix --wallet YOUR_CYTX_WALLET --pool cytx.baikalmine.com:9010 --worker rig01
 # BTX
-./forge --algorithm btx     --wallet YOUR_BTX_WALLET  --pool btx-eu.lproute.com:8660          --worker rig01
+./forge --algorithm btx --wallet YOUR_BTX_WALLET --pool btx-eu.lproute.com:8660 --worker rig01
 # Xelis
-./forge --algorithm xelis   --wallet YOUR_XEL_WALLET  --pool xel.kryptex.network:7019         --worker rig01
+./forge --algorithm xelis --wallet YOUR_XEL_WALLET --pool xel.kryptex.network:7019 --worker rig01
 ```
 
 The Linux binary is built against **glibc 2.17**, so it runs on anything from CentOS 7 / Ubuntu 14.04 upwards — no CUDA toolkit, no extra libraries, just the NVIDIA driver. Add `--api-bind 0.0.0.0:7777` to any of the commands above and open `http://<rig>:7777` for the built-in dashboard.
