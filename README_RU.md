@@ -14,7 +14,7 @@
 <p align="center">
   <a href="https://forgeminer.org"><img src="assets/badge_site.svg" alt="site: forgeminer.org"></a>
   <a href="https://t.me/ForgeMiner"><img src="assets/badge_telegram.svg" alt="Telegram: Releases"></a>
-  <a href="https://discord.gg/vxUTbb9B"><img src="assets/badge_discord.svg" alt="Discord: Community"></a>
+  <a href="https://discord.gg/CyU6ASQWSy"><img src="assets/badge_discord.svg" alt="Discord: Community"></a>
 </p>
 
 ---
@@ -40,7 +40,7 @@ ForgeMiner — высокопроизводительный, полностью 
 
 Под каждый алгоритм для каждой карты идёт отдельная сборка под её архитектуру, которая выбирается автоматически при запуске — так каждая GPU работает на пике.
 
-Сайт: **[forgeminer.org](https://forgeminer.org)** · ForgeMiner — closed-source; релизы публикуются здесь и анонсируются в [Telegram](https://t.me/ForgeMiner) и [Discord](https://discord.gg/vxUTbb9B).
+Сайт: **[forgeminer.org](https://forgeminer.org)** · ForgeMiner — closed-source; релизы публикуются здесь и анонсируются в [Telegram](https://t.me/ForgeMiner) и [Discord](https://discord.gg/CyU6ASQWSy).
 
 <!-- Совет: вставьте сюда скриншот дашборда — это сразу повышает доверие, напр. -->
 <!-- <p align="center"><img src="assets/dashboard.png" width="720" alt="Живой дашборд ForgeMiner"></p> -->
@@ -149,7 +149,7 @@ FORGE_COIN=xna              # только для KawPow: rvn | quai | xna
 | RTX 3060 Ti | ~55 TH/s |
 | P104-100 (8 ГБ) | ~6.5 TH/s |
 
-KawPow на P104-100 — около **11.5 MH/s** на карту. Присылайте свои цифры в [Telegram](https://t.me/ForgeMinerChat) или [Discord](https://discord.gg/vxUTbb9B) — таблица растёт вместе с сообществом.
+KawPow на P104-100 — около **11.5 MH/s** на карту. Присылайте свои цифры в [Telegram](https://t.me/ForgeMinerChat) или [Discord](https://discord.gg/CyU6ASQWSy) — таблица растёт вместе с сообществом.
 
 ---
 
@@ -251,7 +251,7 @@ KawPow на P104-100 — около **11.5 MH/s** на карту. Присыл�
 - **Сайт:** [forgeminer.org](https://forgeminer.org)
 - **Релизы и новости:** [t.me/ForgeMiner](https://t.me/ForgeMiner)
 - **Поддержка и чат:** [t.me/ForgeMinerChat](https://t.me/ForgeMinerChat)
-- **Discord:** [discord.gg/vxUTbb9B](https://discord.gg/vxUTbb9B)
+- **Discord:** [discord.gg/CyU6ASQWSy](https://discord.gg/CyU6ASQWSy)
 
 ---
 
