@@ -7,7 +7,7 @@
 <p align="center"><b>Быстрый нативный NVIDIA GPU-майнер — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev) и Xelis (XEL)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.5.11"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.5.12"></a>
   <a href="#загрузка"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#поддерживаемые-карты"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -177,7 +177,7 @@ KawPow на P104-100 — около **11.5 MH/s** на карту. Присыл�
 |------|-----|----------|
 | `--algorithm` | `FORGE_ALGO` | `pearlhash`, `qhash`, `kawpow`, `cryptix`, `btx` или `xelis`. |
 | `--coin` | `FORGE_COIN` | Монета KawPow: `rvn`, `quai` или `xna` (определяется по пулу; для Neurai / Vipor задавать явно). |
-| `--pool` | `FORGE_POOL` | Пул `host:port`. SSL/TLS поддерживается; несколько адресов для failover. |
+| `--pool` | `FORGE_POOL` | Пул `host:port`. TLS определяется автоматически; принимаются также `ssl://` / `stratum+ssl://` / `tls://`. Несколько адресов для failover. |
 | `--wallet` | `FORGE_WALLET` | Адрес кошелька для выплат. |
 | `--worker` | `FORGE_WORKER` | Имя воркера/рига. |
 | `--password` | `FORGE_PASS` | Пароль пула (обычно `x`). |
