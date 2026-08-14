@@ -80,17 +80,17 @@ ForgeMiner — высокопроизводительный, полностью 
 ```bash
 chmod +x forge
 # Pearl
-./forge --algorithm pearlhash --wallet YOUR_PRL_WALLET --pool prl.kryptex.network:7048   --worker rig01
+./forge --algorithm pearlhash --wallet YOUR_PRL_WALLET --pool prl.kryptex.network:7048 --worker rig01
 # QubitCoin
-./forge --algorithm qhash  --wallet YOUR_QTC_WALLET  --pool ru.luckypool.io:8610          --worker rig01
+./forge --algorithm qhash --wallet YOUR_QTC_WALLET --pool ru.luckypool.io:8610 --worker rig01
 # KawPow — RVN / QUAI (монета определяется по пулу) или XNA (задать --coin xna)
-./forge --algorithm kawpow --wallet YOUR_RVN_WALLET  --pool rvn.kryptex.network:7031        --worker rig01
+./forge --algorithm kawpow --wallet YOUR_RVN_WALLET --pool rvn.kryptex.network:7031 --worker rig01
 # Cryptix
-./forge --algorithm cryptix --wallet YOUR_CYTX_WALLET --pool cytx.baikalmine.com:9010        --worker rig01
+./forge --algorithm cryptix --wallet YOUR_CYTX_WALLET --pool cytx.baikalmine.com:9010 --worker rig01
 # BTX
-./forge --algorithm btx     --wallet YOUR_BTX_WALLET  --pool btx-eu.lproute.com:8660          --worker rig01
+./forge --algorithm btx --wallet YOUR_BTX_WALLET --pool btx-eu.lproute.com:8660 --worker rig01
 # Xelis
-./forge --algorithm xelis   --wallet YOUR_XEL_WALLET  --pool xel.kryptex.network:7019         --worker rig01
+./forge --algorithm xelis --wallet YOUR_XEL_WALLET --pool xel.kryptex.network:7019 --worker rig01
 ```
 
 Linux-сборка собрана под **glibc 2.17**, поэтому работает начиная с CentOS 7 / Ubuntu 14.04 — не нужен ни CUDA toolkit, ни дополнительные библиотеки, только драйвер NVIDIA. Добавьте `--api-bind 0.0.0.0:7777` к любой команде выше и откройте `http://<rig>:7777` — это встроенный дашборд.
