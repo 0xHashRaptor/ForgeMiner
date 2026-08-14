@@ -7,7 +7,7 @@
 <p align="center"><b>Быстрый нативный NVIDIA GPU-майнер — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev) и Xelis (XEL)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.5.12"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.5.15"></a>
   <a href="#загрузка"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#поддерживаемые-карты"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -16,8 +16,6 @@
   <a href="https://t.me/ForgeMiner"><img src="assets/badge_telegram.svg" alt="Telegram: Releases"></a>
   <a href="https://discord.gg/CyU6ASQWSy"><img src="assets/badge_discord.svg" alt="Discord: Community"></a>
 </p>
-
-<p align="center"><a href="README.md">English</a> · <b>Русский</b></p>
 
 ---
 
@@ -31,6 +29,7 @@
 - [Возможности](#возможности)
 - [Опции](#опции)
 - [API мониторинга](#api-мониторинга)
+- [Аппаратный разлок CMP (Linux)](#аппаратный-разлок-cmp-linux)
 - [Поддерживаемые карты](#поддерживаемые-карты)
 - [Ресурсы](#ресурсы)
 
@@ -40,7 +39,7 @@
 
 ForgeMiner — высокопроизводительный, полностью нативный NVIDIA GPU-майнер. Он работает с картой напрямую через CUDA Driver API — без Python, WSL и лишних рантаймов — поэтому стартует мгновенно и легко идёт даже на слабых ригах. Майнит **Pearl (PRL)**, **QubitCoin (QTC)**, **KawPow** (Ravencoin RVN, Quai QUAI, Neurai XNA), **Cryptix (CYTX)**, **BTX (btx.dev)** и **Xelis (XEL)** из одного бинарника — монета выбирается одним флагом — и новые монеты в разработке.
 
-Под каждый алгоритм для каждой карты идёт отдельная сборка под её архитектуру, которая выбирается автоматически при запуске — так каждая GPU работает на пике.
+Под каждый алгоритм для каждой карты идёт отдельная сборка под её архитектуру, которая выбирается автоматически при запуске — так каждая GPU работает на пике. Риги с CMP 50HX или CMP 90HX получают встроенный аппаратный разлок на Linux одной командой — см. [Аппаратный разлок CMP](#аппаратный-разлок-cmp-linux).
 
 Сайт: **[forgeminer.org](https://forgeminer.org)** · ForgeMiner — closed-source; релизы публикуются здесь и анонсируются в [Telegram](https://t.me/ForgeMiner) и [Discord](https://discord.gg/CyU6ASQWSy).
 
@@ -81,17 +80,17 @@ ForgeMiner — высокопроизводительный, полностью 
 ```bash
 chmod +x forge
 # Pearl
-./forge --algorithm pearlhash --wallet YOUR_PRL_WALLET --pool prl.kryptex.network:7048 --worker rig01
+./forge --algorithm pearlhash --wallet YOUR_PRL_WALLET --pool prl.kryptex.network:7048   --worker rig01
 # QubitCoin
-./forge --algorithm qhash --wallet YOUR_QTC_WALLET --pool ru.luckypool.io:8610 --worker rig01
+./forge --algorithm qhash  --wallet YOUR_QTC_WALLET  --pool ru.luckypool.io:8610          --worker rig01
 # KawPow — RVN / QUAI (монета определяется по пулу) или XNA (задать --coin xna)
-./forge --algorithm kawpow --wallet YOUR_RVN_WALLET --pool rvn.kryptex.network:7031 --worker rig01
+./forge --algorithm kawpow --wallet YOUR_RVN_WALLET  --pool rvn.kryptex.network:7031        --worker rig01
 # Cryptix
-./forge --algorithm cryptix --wallet YOUR_CYTX_WALLET --pool cytx.baikalmine.com:9010 --worker rig01
+./forge --algorithm cryptix --wallet YOUR_CYTX_WALLET --pool cytx.baikalmine.com:9010        --worker rig01
 # BTX
-./forge --algorithm btx --wallet YOUR_BTX_WALLET --pool btx-eu.lproute.com:8660 --worker rig01
+./forge --algorithm btx     --wallet YOUR_BTX_WALLET  --pool btx-eu.lproute.com:8660          --worker rig01
 # Xelis
-./forge --algorithm xelis --wallet YOUR_XEL_WALLET --pool xel.kryptex.network:7019 --worker rig01
+./forge --algorithm xelis   --wallet YOUR_XEL_WALLET  --pool xel.kryptex.network:7019         --worker rig01
 ```
 
 Linux-сборка собрана под **glibc 2.17**, поэтому работает начиная с CentOS 7 / Ubuntu 14.04 — не нужен ни CUDA toolkit, ни дополнительные библиотеки, только драйвер NVIDIA. Добавьте `--api-bind 0.0.0.0:7777` к любой команде выше и откройте `http://<rig>:7777` — это встроенный дашборд.
@@ -115,6 +114,7 @@ FORGE_COIN=xna              # только для KawPow: rvn | quai | xna
 --gpu 0,1,3                 # майнить только эти карты
 --cclk 1500 --moff 1000     # разгон: также --coff / --mclk / --plimit
 --fan 70                    # или --fan-curve 45:30,60:55,70:75,80:100
+--cmp-install               # разлочить CMP 50HX / 90HX на риге (безопасно оставлять навсегда)
 ```
 
 Хешрейт, температуры и шары появятся в панели HiveOS сами — отдельный флаг не нужен. `--api-bind 0.0.0.0:7777` добавляйте только если хотите ещё и собственный веб-дашборд майнера.
@@ -146,12 +146,12 @@ FORGE_COIN=xna              # только для KawPow: rvn | quai | xna
 
 | GPU | Pearl (PearlHash) |
 |-----|:-----------------:|
-| RTX 5080 | ~195 TH/s |
+| RTX 5080 | ~219 TH/s |
 | RTX 4070 Ti | ~139 TH/s |
-| RTX 3060 Ti | ~55 TH/s |
-| P104-100 (8 ГБ) | ~6.5 TH/s |
+| RTX 3060 Ti | ~52 TH/s |
+| P106-100 | ~4 TH/s |
 
-KawPow на P104-100 — около **11.5 MH/s** на карту. Присылайте свои цифры в [Telegram](https://t.me/ForgeMinerChat) или [Discord](https://discord.gg/CyU6ASQWSy) — таблица растёт вместе с сообществом.
+CMP 90HX / 50HX можно разлочить встроенным `--cmp-install` на Linux — см. [ниже](#аппаратный-разлок-cmp-linux). KawPow на P104-100 — около **11.5 MH/s** на карту. Присылайте свои цифры в [Telegram](https://t.me/ForgeMinerChat) или [Discord](https://discord.gg/CyU6ASQWSy) — таблица растёт вместе с сообществом.
 
 ---
 
@@ -159,6 +159,7 @@ KawPow на P104-100 — около **11.5 MH/s** на карту. Присыл�
 
 - **Много монет, один бинарь** — Pearl, QubitCoin, KawPow (RVN / QUAI / XNA), Cryptix, BTX или Xelis; выбор через `--algorithm`.
 - **Ядра под архитектуру** — отдельное ядро под каждое поколение (Pascal / Volta / Turing / Ampere / Ada / Blackwell), выбирается при старте.
+- **Аппаратный разлок CMP 50HX + 90HX (Linux)** — одна встроенная команда разлочивает обе карты со стокового задушенного хешрейта до полной скорости (примерно в 20 раз выше); никаких сторонних скриптов.
 - **Нативно и легко** — напрямую через CUDA Driver API, почти нулевая нагрузка на CPU; без Python, WSL и рантаймов. Стартует за секунду, идёт на слабых хостах и многокарточных ригах.
 - **Эффективно на забитых ригах** — держит карты загруженными даже при слабом CPU, нескольких инстансах или медленных x1-райзерах.
 - **Один самодостаточный бинарь** — всё внутри; без CUDA runtime и разбросанных файлов ядер. Даже KawPow — один исполняемый файл.
@@ -177,12 +178,15 @@ KawPow на P104-100 — около **11.5 MH/s** на карту. Присыл�
 |------|-----|----------|
 | `--algorithm` | `FORGE_ALGO` | `pearlhash`, `qhash`, `kawpow`, `cryptix`, `btx` или `xelis`. |
 | `--coin` | `FORGE_COIN` | Монета KawPow: `rvn`, `quai` или `xna` (определяется по пулу; для Neurai / Vipor задавать явно). |
-| `--pool` | `FORGE_POOL` | Пул `host:port`. TLS определяется автоматически; принимаются также `ssl://` / `stratum+ssl://` / `tls://`. Несколько адресов для failover. |
+| `--pool` | `FORGE_POOL` | Пул `host:port`. SSL/TLS поддерживается; несколько адресов для failover. |
 | `--wallet` | `FORGE_WALLET` | Адрес кошелька для выплат. |
 | `--worker` | `FORGE_WORKER` | Имя воркера/рига. |
 | `--password` | `FORGE_PASS` | Пароль пула (обычно `x`). |
 | `--proto` | `FORGE_PROTO` | Диалект Pearl: `stratum` или `alpha` (AlphaPool). |
 | `--gpu` | `FORGE_GPU` | Майнить только эти индексы, напр. `0,1,2,6` (порядок `nvidia-smi`). |
+| `--cmp-install` | — | Linux: поставить аппаратный разлок для CMP 50HX / 90HX (см. [ниже](#аппаратный-разлок-cmp-linux)). |
+| `--cmp-verify` | — | Linux: показать живой статус разлока по CMP-картам. |
+| `--cmp-rollback` | — | Linux: откатить разлок, вернуть прежний драйвер. |
 | — | `FORGE_LOWVRAM` | Режим low-VRAM для 8 ГБ карт (Pearl). По умолчанию авто. |
 
 <details>
@@ -230,6 +234,32 @@ KawPow на P104-100 — около **11.5 MH/s** на карту. Присыл�
 
 ---
 
+## Аппаратный разлок CMP (Linux)
+
+CMP 50HX и CMP 90HX с завода задушены аппаратно — стоковый хешрейт составляет лишь малую долю того, на что способен чип. Форж умеет поставить хелпер разлока прямо на риге — одна команда, одна перезагрузка, обе карты работают на полной скорости (примерно **в 20 раз выше** стокового задушенного хешрейта). Хелпер встроен в бинарь; ничего внешнего скачивать не нужно.
+
+Требуется Linux с ядром `6.10.0-hiveos` и драйвером NVIDIA `610.43.03`. Способ получить эту связку — HiveOS beta образ `0.6-229-beta-jammy@241231` (30 декабря 2024) идёт с ядром 6.10.14-hiveos, потом сверху ставится драйвер:
+```bash
+# Если uname -r ещё не 6.10.0-hiveos — сначала перепрошиваем (переустанавливает OS; rig.conf сохранится, локальные пакеты слетят):
+sudo hive-replace -y "https://download.hiveos.farm/history/hiveos-0.6-229-beta-jammy@241231.img.xz"
+
+# После ребута — обновляем драйвер до нужной версии:
+sudo nvidia-driver-update --force 610.43.03
+sudo reboot
+```
+Затрагивает только CMP 50HX и 90HX; остальные карты в смешанном риге работают без изменений. Полный разбор (проверка, подводные камни GRUB, откат): **[wiki · CMP hardware unlock](https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock)**.
+
+| Команда | Что делает |
+|---|---|
+| `sudo forge --cmp-install` | ставит хелпер разлока, перезагружает риг (10 сек на отмену) |
+| `sudo forge --cmp-install --no-reboot` | только установка, ребут делаете сами |
+| `sudo forge --cmp-verify` | живой статус разлока по CMP-картам |
+| `sudo forge --cmp-rollback` | вернуть прежний драйвер из бэкапа, ребут |
+
+Можно спокойно оставить `--cmp-install` в конце строки запуска полётника навсегда — если разлок уже стоит, форж напечатает одну строку и сразу идёт майнить. Полная инструкция (установка ядра/драйвера, коды выхода, FAQ): **[wiki · CMP hardware unlock](https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock)**.
+
+---
+
 ## Поддерживаемые карты
 
 Ядра затюнены под архитектуру, поэтому поддерживается всё поколение целиком — десктопные и ноутбучные.
@@ -237,15 +267,14 @@ KawPow на P104-100 — около **11.5 MH/s** на карту. Присыл�
 | Поколение | Карты |
 |---|---|
 | **Blackwell** (RTX 50) | 5090 · 5080 · 5070 Ti · 5070 · 5060 Ti · 5060 · 50-й серии Laptop |
-| **Hopper** | H100 · H200 — Pearl, Cryptix, QubitCoin *(нет карты для проверки; Xelis и BTX под это поколение не собраны)* |
 | **Ada** (RTX 40) | 4090 · 4080 (S) · 4070 Ti (S) · 4070 (S) · 4060 Ti · 4060 · 40-й серии Laptop |
 | **Ampere** (RTX 30) | 3090 Ti · 3090 · 3080 Ti · 3080 · 3070 Ti · 3070 · 3060 Ti · 3060 · 30-й серии Laptop |
 | **Turing** (RTX 20) | 2080 Ti · 2080 (S) · 2070 (S) · 2060 (S) · 20-й серии Laptop *(драйвер 545+)* |
 | **Volta** | Tesla V100 |
-| **Pascal** | GTX 10-й серии · P102-100 · P104-100 · P106 · P108 (майнинг-карты) |
-| **CMP** | 90HX · 50HX · 40HX · 30HX *(драйвер 545+)* |
+| **Pascal** | GTX 10-й серии · P104-100 · P106 · P108 (8 ГБ майнинг-карты) |
+| **CMP** | 170HX · 90HX · 50HX · 40HX · 30HX *(драйвер 545+)*. 50HX и 90HX получают встроенный [аппаратный разлок](#аппаратный-разлок-cmp-linux) на Linux. |
 
-*Все монеты работают на каждом из перечисленных поколений, кроме Hopper — см. примечание в его строке.*
+*Все монеты работают на каждом из перечисленных поколений.*
 
 ---
 
@@ -255,6 +284,7 @@ KawPow на P104-100 — около **11.5 MH/s** на карту. Присыл�
 - **Релизы и новости:** [t.me/ForgeMiner](https://t.me/ForgeMiner)
 - **Поддержка и чат:** [t.me/ForgeMinerChat](https://t.me/ForgeMinerChat)
 - **Discord:** [discord.gg/CyU6ASQWSy](https://discord.gg/CyU6ASQWSy)
+- **Инструкция по CMP-разлоку:** [wiki · CMP-unlock](https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock)
 
 ---
 
