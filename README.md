@@ -7,7 +7,7 @@
 <p align="center"><b>A fast, native NVIDIA GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev) and Xelis (XEL)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.5.15"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.5.16"></a>
   <a href="#download"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#supported-gpus"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -25,7 +25,6 @@
 - [Download](#download)
 - [Quick start](#quick-start)
 - [Coins & dev fee](#coins--dev-fee)
-- [Performance](#performance)
 - [Features](#features)
 - [Options](#options)
 - [Monitoring API](#monitoring-api)
@@ -39,7 +38,7 @@
 
 ForgeMiner is a high-performance, fully native NVIDIA GPU miner. It talks to the GPU directly through the CUDA Driver API — no Python, no WSL, no extra runtimes — so it starts instantly and runs lean even on low-spec rigs. It mines **Pearl (PRL)**, **QubitCoin (QTC)**, **KawPow** (Ravencoin RVN, Quai QUAI, Neurai XNA), **Cryptix (CYTX)**, **BTX (btx.dev)** and **Xelis (XEL)** from a single binary — pick the coin with one flag — and more coins are on the way.
 
-Every algorithm ships a separate per-architecture build for each supported card, auto-selected at launch, so each GPU runs at its peak. Rigs with CMP 50HX or CMP 90HX get built-in hardware unlock on Linux via one command — see [CMP hardware unlock](#cmp-hardware-unlock-linux).
+Every algorithm ships a separate per-architecture build for each supported card, auto-selected at launch, so each GPU runs at its peak. Rigs with CMP 40HX, 50HX, 70HX or 90HX get built-in hardware unlock on Linux via one command, on any kernel — see [CMP hardware unlock](#cmp-hardware-unlock-linux).
 
 Website: **[forgeminer.org](https://forgeminer.org)** · ForgeMiner is closed-source; releases are published here and announced on [Telegram](https://t.me/ForgeMiner) and [Discord](https://discord.gg/CyU6ASQWSy).
 
@@ -114,7 +113,8 @@ FORGE_COIN=xna              # KawPow only: rvn | quai | xna
 --gpu 0,1,3                 # mine only these cards
 --cclk 1500 --moff 1000     # overclock: also --coff / --mclk / --plimit
 --fan 70                    # or --fan-curve 45:30,60:55,70:75,80:100
---cmp-install               # unlock any CMP 50HX / 90HX on the rig (safe to leave in permanently)
+--cmp-install               # unlock any CMP 40HX/50HX/70HX/90HX on the rig (safe to leave in permanently)
+--temp-limit 80 --temp-resume 70   # pause a card on overheat, resume once it cools
 ```
 
 Hashrate, temperatures and shares appear in the HiveOS dashboard on their own — no extra flag needed. Add `--api-bind 0.0.0.0:7777` only if you also want the miner's own web dashboard.
@@ -140,30 +140,16 @@ The dev fee is interleaved (no graph dips) and verifiable on your pool. No hidde
 
 ---
 
-## Performance
-
-Pearl hashrate per GPU — **community-verified, varies with overclock and power limit**:
-
-| GPU | Pearl (PearlHash) |
-|-----|:-----------------:|
-| RTX 5080 | ~219 TH/s |
-| RTX 4070 Ti | ~139 TH/s |
-| RTX 3060 Ti | ~52 TH/s |
-| P106-100 | ~4 TH/s |
-
-CMP 90HX / 50HX can be unlocked with the built-in `--cmp-install` on Linux — see [below](#cmp-hardware-unlock-linux). KawPow on the P104-100 runs at about **11.5 MH/s** per card. Post your own numbers in [Telegram](https://t.me/ForgeMinerChat) or [Discord](https://discord.gg/CyU6ASQWSy) — the table grows with the community.
-
----
-
 ## Features
 
 - **Multiple coins, one binary** — Pearl, QubitCoin, KawPow (RVN / QUAI / XNA), Cryptix, BTX or Xelis; select with `--algorithm`.
 - **Architecture-tuned kernels** — a dedicated kernel per GPU generation (Pascal / Volta / Turing / Ampere / Ada / Blackwell), auto-selected at launch.
-- **CMP 50HX + 90HX hardware unlock (Linux)** — one embedded command unlocks both cards from the stock throttled hashrate to full speed (roughly 20× higher); no external scripts.
+- **CMP 40HX / 50HX / 70HX / 90HX hardware unlock (Linux)** — one embedded command unlocks any of these cards from the stock throttled hashrate to full speed; no external scripts, no exact kernel requirement (driver 610.43.03 still required).
 - **Native and lightweight** — direct CUDA Driver API, near-zero CPU load; no Python, WSL or extra runtimes. Starts in a second, runs on weak hosts and many-GPU boxes.
-- **Efficient on crowded rigs** — keeps the GPUs fed even with many cards on a weak CPU, several miner instances, or slow x1 risers.
+- **Efficient on crowded rigs** — keeps the GPUs fed even with many cards on a weak CPU, several miner instances or slow x1 risers.
 - **One self-contained binary** — everything embedded; no CUDA runtime or loose kernel files to manage. Even KawPow ships as a single executable.
 - **Built-in overclocking & fan control** — lock clocks, apply offsets, set a power limit and drive fans straight from the miner — a different OC per card on mixed rigs. No third-party tool.
+- **Temperature protection** — `--temp-limit` / `--temp-resume` pause a card automatically if it overheats, and resume once it cools back down.
 - **Multi-pool with fail-over** — standard Stratum for every coin, SSL/TLS pools, automatic reconnect and pool fail-over.
 - **Live dashboard & read-only API** — per-GPU hashrate, temps (incl. VRAM on Windows), clocks, fans, power and shares — plus JSON, Prometheus and Claymore-compatible endpoints.
 - **HiveOS ready** — drops straight into a custom-miner slot.
@@ -172,7 +158,7 @@ CMP 90HX / 50HX can be unlocked with the built-in `--cmp-install` on Linux — s
 
 ## Options
 
-Anything you pass on the command line has an `FORGE_*` environment-variable twin — handy for HiveOS *Extra config* and `.bat` files.
+Anything you pass on the command line has a `FORGE_*` environment-variable twin — handy for HiveOS *Extra config* and `.bat` files.
 
 | Flag | Env | Description |
 |------|-----|-------------|
@@ -184,7 +170,10 @@ Anything you pass on the command line has an `FORGE_*` environment-variable twin
 | `--password` | `FORGE_PASS` | Pool password (usually `x`). |
 | `--proto` | `FORGE_PROTO` | Pearl dialect: `stratum` or `alpha` (AlphaPool). |
 | `--gpu` | `FORGE_GPU` | Mine only these indices, e.g. `0,1,2,6` (`nvidia-smi` order). |
-| `--cmp-install` | — | Linux: install hardware unlock for CMP 50HX / 90HX (see [below](#cmp-hardware-unlock-linux)). |
+| `--temp-limit` | `FORGE_TEMP_LIMIT` | Pause a card automatically once it hits this temperature (°C). |
+| `--temp-resume` | `FORGE_TEMP_RESUME` | Resume a paused card once it cools to this temperature (°C). |
+| `--oc-delay` | `FORGE_OC_DELAY` | Delay applying overclock by N seconds after startup. |
+| `--cmp-install` | — | Linux: install hardware unlock for CMP 40HX / 50HX / 70HX / 90HX (see [below](#cmp-hardware-unlock-linux)). |
 | `--cmp-verify` | — | Linux: print live unlock status per CMP card. |
 | `--cmp-rollback` | — | Linux: undo the unlock, restore the previous driver. |
 | — | `FORGE_LOWVRAM` | Low-VRAM mode for 8 GB cards (Pearl). Auto by default. |
@@ -215,7 +204,7 @@ GeForce cards have a ~30% hardware fan floor; the driver's automatic control is 
 
 ## Monitoring API
 
-Off by default and **read-only** — it only reports stats, it can never control or reconfigure the miner.
+Off by default and **read-only** — it only reports stats; it can never control or reconfigure the miner.
 
 ```text
 --api                    on 127.0.0.1:7777 (this machine only)
@@ -236,18 +225,9 @@ On HiveOS set `FORGE_API=127.0.0.1:7777` in *Extra config*.
 
 ## CMP hardware unlock (Linux)
 
-CMP 50HX and CMP 90HX ship with a hardware throttle that keeps their hashrate at a small fraction of what the chip can actually do. Forge can install a hardware-unlock helper directly on the rig — one command, one reboot, both cards then run at full speed (roughly **20× higher** than the stock throttled hashrate). The helper is embedded in the miner binary; no external download, no manual steps.
+CMP 40HX, 50HX, 70HX and 90HX ship with a hardware throttle that keeps their hashrate at a small fraction of what the chip can actually do. Forge can install a hardware-unlock helper directly on the rig — one command, one reboot, the card then runs at full speed. The helper is embedded in the miner binary; no external download, no manual steps.
 
-Requires Linux kernel `6.10.0-hiveos` with NVIDIA driver `610.43.03`. To get that combination — HiveOS beta image `0.6-229-beta-jammy@241231` (Dec 30 2024) ships with 6.10.14-hiveos built in, then the driver goes on top:
-```bash
-# If uname -r isn't 6.10.0-hiveos yet — reflash first (reinstalls the OS; rig.conf preserved, local packages wiped):
-sudo hive-replace -y "https://download.hiveos.farm/history/hiveos-0.6-229-beta-jammy@241231.img.xz"
-
-# After the reboot, upgrade the driver to the exact version:
-sudo nvidia-driver-update --force 610.43.03
-sudo reboot
-```
-Only CMP 50HX and 90HX are touched; every other card on a mixed rig runs untouched. Full walkthrough (verification, GRUB pitfalls, rollback): **[wiki · CMP hardware unlock](https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock)**.
+Builds from source for whatever kernel the rig is actually running — no exact kernel version required (NVIDIA driver 610.43.03 is still required), tested clean across 10 different kernel versions. Only the detected CMP cards are touched; every other GPU on a mixed rig runs untouched. CMP 30HX is detected but never attempted — it's a permanent hardware limitation on that chip, not a bug or an oversight.
 
 | Command | What it does |
 |---|---|
@@ -256,7 +236,7 @@ Only CMP 50HX and 90HX are touched; every other card on a mixed rig runs untouch
 | `sudo forge --cmp-verify` | print live unlock status per CMP card |
 | `sudo forge --cmp-rollback` | restore the previous driver from backup, reboot |
 
-Safe to leave `--cmp-install` at the end of the flight-sheet command line permanently — if the unlock is already active forge prints one line and drops straight into mining. Full guide (kernel/driver install, exit codes, FAQ): **[wiki · CMP hardware unlock](https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock)**.
+Safe to leave `--cmp-install` at the end of the flight-sheet command line permanently — if the unlock is already active, forge prints one line and drops straight into mining. Full guide (verification, FAQ): **[wiki · CMP hardware unlock](https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock)**.
 
 ---
 
@@ -272,7 +252,7 @@ Kernels are tuned per architecture, so a whole generation is covered — desktop
 | **Turing** (RTX 20) | 2080 Ti · 2080 (S) · 2070 (S) · 2060 (S) · 20-series Laptop *(driver 545+)* |
 | **Volta** | Tesla V100 |
 | **Pascal** | GTX 10-series · P104-100 · P106 · P108 (8 GB mining cards) |
-| **CMP** | 170HX · 90HX · 50HX · 40HX · 30HX *(driver 545+)*. 50HX and 90HX get built-in [hardware unlock](#cmp-hardware-unlock-linux) on Linux. |
+| **CMP** | 170HX · 90HX · 70HX · 50HX · 40HX · 30HX *(driver 545+)*. 40HX/50HX/70HX/90HX get built-in [hardware unlock](#cmp-hardware-unlock-linux) on Linux; 30HX is a permanent hardware limitation, never supported; 170HX needs a separate tool. |
 
 *All coins run on every listed generation.*
 
@@ -284,7 +264,7 @@ Kernels are tuned per architecture, so a whole generation is covered — desktop
 - **Releases & news:** [t.me/ForgeMiner](https://t.me/ForgeMiner)
 - **Support & chat:** [t.me/ForgeMinerChat](https://t.me/ForgeMinerChat)
 - **Discord:** [discord.gg/CyU6ASQWSy](https://discord.gg/CyU6ASQWSy)
-- **CMP hardware unlock guide:** [wiki · CMP-unlock](https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock)
+- **CMP hardware unlock guide:** [wiki · CMP hardware unlock](https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock)
 
 ---
 
