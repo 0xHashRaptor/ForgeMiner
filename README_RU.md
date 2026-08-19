@@ -7,7 +7,7 @@
 <p align="center"><b>Быстрый нативный NVIDIA GPU-майнер — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev) и Xelis (XEL)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.5.16"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.5.17"></a>
   <a href="#загрузка"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#поддерживаемые-карты"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -173,6 +173,8 @@ FORGE_COIN=xna              # только для KawPow: rvn | quai | xna
 | `--temp-limit` | `FORGE_TEMP_LIMIT` | Автопауза карты при достижении этой температуры (°C). |
 | `--temp-resume` | `FORGE_TEMP_RESUME` | Возобновить карту после остывания до этой температуры (°C). |
 | `--oc-delay` | `FORGE_OC_DELAY` | Отложить применение разгона на N секунд после старта. |
+| `--log` | `FORGE_LOG` | Сохранять вывод в файл (вместе с таблицами, без цветовых кодов). По умолчанию выключено, пишет в конец. |
+| `--v1-tui` | — | Запуститься в классическом прокручивающемся виде вместо закреплённой панели. Клавиша `L` переключает в любой момент. |
 | `--cmp-install` | — | Linux: поставить аппаратный разлок для CMP 40HX / 50HX / 70HX / 90HX (см. [ниже](#аппаратный-разлок-cmp-linux)). |
 | `--cmp-verify` | — | Linux: показать живой статус разлока по CMP-картам. |
 | `--cmp-rollback` | — | Linux: откатить разлок, вернуть прежний драйвер. |

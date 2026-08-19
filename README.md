@@ -7,7 +7,7 @@
 <p align="center"><b>A fast, native NVIDIA GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev) and Xelis (XEL)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.5.16"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.5.17"></a>
   <a href="#download"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#supported-gpus"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -151,7 +151,7 @@ The dev fee is interleaved (no graph dips) and verifiable on your pool. No hidde
 - **Built-in overclocking & fan control** — lock clocks, apply offsets, set a power limit and drive fans straight from the miner — a different OC per card on mixed rigs. No third-party tool.
 - **Temperature protection** — `--temp-limit` / `--temp-resume` pause a card automatically if it overheats, and resume once it cools back down.
 - **Multi-pool with fail-over** — standard Stratum for every coin, SSL/TLS pools, automatic reconnect and pool fail-over.
-- **Live dashboard & read-only API** — per-GPU hashrate, temps (incl. VRAM on Windows), clocks, fans, power and shares — plus JSON, Prometheus and Claymore-compatible endpoints.
+- **Live dashboard & read-only API** — the per-card table stays pinned at the top with the log scrolling underneath (press `L` for the classic view). Per-GPU hashrate, temps (incl. VRAM on Windows), clocks, fans, power and shares, plus a delivery figure showing how much of the hashrate the pool actually credits — and JSON, Prometheus and Claymore-compatible endpoints.
 - **HiveOS ready** — drops straight into a custom-miner slot.
 
 ---
@@ -173,6 +173,8 @@ Anything you pass on the command line has a `FORGE_*` environment-variable twin 
 | `--temp-limit` | `FORGE_TEMP_LIMIT` | Pause a card automatically once it hits this temperature (°C). |
 | `--temp-resume` | `FORGE_TEMP_RESUME` | Resume a paused card once it cools to this temperature (°C). |
 | `--oc-delay` | `FORGE_OC_DELAY` | Delay applying overclock by N seconds after startup. |
+| `--log` | `FORGE_LOG` | Also write the scrolling output to a file (tables included, colours stripped). Off by default; appends. |
+| `--v1-tui` | — | Start in the classic scrolling view instead of the pinned dashboard. `L` switches between them at any time. |
 | `--cmp-install` | — | Linux: install hardware unlock for CMP 40HX / 50HX / 70HX / 90HX (see [below](#cmp-hardware-unlock-linux)). |
 | `--cmp-verify` | — | Linux: print live unlock status per CMP card. |
 | `--cmp-rollback` | — | Linux: undo the unlock, restore the previous driver. |
