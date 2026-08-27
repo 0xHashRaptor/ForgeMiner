@@ -4,10 +4,10 @@
 
 <h1 align="center">ForgeMiner</h1>
 
-<p align="center"><b>Быстрый нативный NVIDIA GPU-майнер — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev) и Xelis (XEL)</b></p>
+<p align="center"><b>Быстрый нативный NVIDIA GPU-майнер — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL) и Conflux (CFX)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.5.17"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.6.0"></a>
   <a href="#загрузка"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#поддерживаемые-карты"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -55,7 +55,7 @@ ForgeMiner — высокопроизводительный, полностью 
 |---|---|
 | Windows | `ForgeMiner-<версия>-windows.zip` |
 | Linux | `ForgeMiner-<версия>-linux.tar.gz` (glibc 2.17+) |
-| HiveOS | `ForgeMiner-<версия>.tar.gz` (install URL для полётника) |
+| HiveOS | `ForgeMiner-<версия>-hiveos.tar.gz` · полётники ставят `ForgeMiner.tar.gz`, его URL никогда не меняется |
 | Docker | `docker pull hashraptor/forge` (теги `:latest` и версия) |
 
 ---
@@ -90,6 +90,8 @@ chmod +x forge
 ./forge --algorithm btx --wallet YOUR_BTX_WALLET --pool btx-eu.lproute.com:8660 --worker rig01
 # Xelis
 ./forge --algorithm xelis --wallet YOUR_XEL_WALLET --pool xel.kryptex.network:7019 --worker rig01
+# Conflux (нужна карта от 12 ГБ, см. примечание под таблицей)
+./forge --algorithm cfx --wallet YOUR_CFX_WALLET --pool cfx.kryptex.network:7027 --worker rig01
 ```
 
 Linux-сборка собрана под **glibc 2.17**, поэтому работает начиная с CentOS 7 / Ubuntu 14.04 — не нужен ни CUDA toolkit, ни дополнительные библиотеки, только драйвер NVIDIA. Добавьте `--api-bind 0.0.0.0:7777` к любой команде выше и откройте `http://<rig>:7777` — это встроенный дашборд.
@@ -103,12 +105,12 @@ docker run --rm --gpus all hashraptor/forge \
 ```
 
 ### HiveOS
-Кастомный майнер — URL установки `.../ForgeMiner-<версия>.tar.gz`, шаблон кошелька `%WAL%.%WORKER_NAME%`.
+Кастомный майнер — URL установки `.../ForgeMiner.tar.gz`, шаблон кошелька `%WAL%.%WORKER_NAME%`. Этот URL всегда ведёт на текущий релиз, так что при обновлении править ничего не надо; версионный архив `-hiveos` на странице Releases — тот же пакет, зафиксированный на одной версии.
 
 *Extra config* принимает **обе** формы, по одной в строке, и их можно смешивать:
 
 ```
-FORGE_ALGO=xelis            # или pearlhash / qhash / kawpow / cryptix / btx
+FORGE_ALGO=xelis            # или pearlhash / qhash / kawpow / cryptix / btx / cfx
 FORGE_COIN=xna              # только для KawPow: rvn | quai | xna
 --gpu 0,1,3                 # майнить только эти карты
 --cclk 1500 --moff 1000     # разгон: также --coff / --mclk / --plimit
@@ -132,9 +134,14 @@ FORGE_COIN=xna              # только для KawPow: rvn | quai | xna
 | QubitCoin (QTC) | `qhash` | LuckyPool · k1pool | 1% |
 | BTX (btx.dev) | `btx` | LuckyPool (lproute) | 1% |
 | Xelis (XEL) | `xelis` | Kryptex · HeroMiners | 1% |
+| Conflux (CFX) | `cfx` | Kryptex · HeroMiners | 1.5% |
 | Ravencoin (RVN) | `kawpow` | Kryptex · HeroMiners · 2Miners · RavenMiner · k1pool | 0.7% |
 | Quai (QUAI) | `kawpow` `--coin quai` | Kryptex · HeroMiners · k1pool | 0.7% |
 | Neurai (XNA) | `kawpow` `--coin xna` | Kryptex · 2Miners · Vipor | 0.7% |
+
+Conflux требует около **8.6 ГБ видеопамяти**, и это требование медленно растёт вместе с сетью:
+карты на 8 ГБ монету не потянут, на 10 ГБ впритык, от 12 ГБ спокойно. Майнер проверяет карту на
+старте и говорит об этом с реальными числами, а не падает посреди подготовки.
 
 Комиссия чередуется в потоке (без провалов на графике) и проверяется на пуле. Скрытой второй комиссии нет. *Больше алгоритмов в разработке.*
 

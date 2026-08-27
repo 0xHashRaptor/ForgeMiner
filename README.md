@@ -4,10 +4,10 @@
 
 <h1 align="center">ForgeMiner</h1>
 
-<p align="center"><b>A fast, native NVIDIA GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev) and Xelis (XEL)</b></p>
+<p align="center"><b>A fast, native NVIDIA GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL) and Conflux (CFX)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.5.17"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.6.0"></a>
   <a href="#download"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#supported-gpus"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -55,7 +55,7 @@ Grab the latest build from the [**Releases**](https://github.com/0xHashRaptor/Fo
 |---|---|
 | Windows | `ForgeMiner-<version>-windows.zip` |
 | Linux | `ForgeMiner-<version>-linux.tar.gz` (glibc 2.17+) |
-| HiveOS | `ForgeMiner-<version>.tar.gz` (flight-sheet install URL) |
+| HiveOS | `ForgeMiner-<version>-hiveos.tar.gz` · flight sheets install `ForgeMiner.tar.gz`, whose URL never changes |
 | Docker | `docker pull hashraptor/forge` (tags `:latest` and the version) |
 
 ---
@@ -90,6 +90,8 @@ chmod +x forge
 ./forge --algorithm btx --wallet YOUR_BTX_WALLET --pool btx-eu.lproute.com:8660 --worker rig01
 # Xelis
 ./forge --algorithm xelis --wallet YOUR_XEL_WALLET --pool xel.kryptex.network:7019 --worker rig01
+# Conflux (needs a 12 GB card; see the note under the table below)
+./forge --algorithm cfx --wallet YOUR_CFX_WALLET --pool cfx.kryptex.network:7027 --worker rig01
 ```
 
 The Linux binary is built against **glibc 2.17**, so it runs on anything from CentOS 7 / Ubuntu 14.04 upwards — no CUDA toolkit, no extra libraries, just the NVIDIA driver. Add `--api-bind 0.0.0.0:7777` to any of the commands above and open `http://<rig>:7777` for the built-in dashboard.
@@ -103,12 +105,12 @@ docker run --rm --gpus all hashraptor/forge \
 ```
 
 ### HiveOS
-Custom miner flight sheet — installation URL `.../ForgeMiner-<version>.tar.gz`, wallet template `%WAL%.%WORKER_NAME%`.
+Custom miner flight sheet — installation URL `.../ForgeMiner.tar.gz`, wallet template `%WAL%.%WORKER_NAME%`. That URL always points at the current release, so an upgrade needs no editing; the versioned `-hiveos` archive on the Releases page is the same package pinned to one version.
 
 *Extra config* accepts **both** forms, one per line, and you can mix them:
 
 ```
-FORGE_ALGO=xelis            # or pearlhash / qhash / kawpow / cryptix / btx
+FORGE_ALGO=xelis            # or pearlhash / qhash / kawpow / cryptix / btx / cfx
 FORGE_COIN=xna              # KawPow only: rvn | quai | xna
 --gpu 0,1,3                 # mine only these cards
 --cclk 1500 --moff 1000     # overclock: also --coff / --mclk / --plimit
@@ -132,9 +134,14 @@ Ready-made flight sheets: **[forgeminer.org/#flightsheets](https://forgeminer.or
 | QubitCoin (QTC) | `qhash` | LuckyPool · k1pool | 1% |
 | BTX (btx.dev) | `btx` | LuckyPool (lproute) | 1% |
 | Xelis (XEL) | `xelis` | Kryptex · HeroMiners | 1% |
+| Conflux (CFX) | `cfx` | Kryptex · HeroMiners | 1.5% |
 | Ravencoin (RVN) | `kawpow` | Kryptex · HeroMiners · 2Miners · RavenMiner · k1pool | 0.7% |
 | Quai (QUAI) | `kawpow` `--coin quai` | Kryptex · HeroMiners · k1pool | 0.7% |
 | Neurai (XNA) | `kawpow` `--coin xna` | Kryptex · 2Miners · Vipor | 0.7% |
+
+Conflux needs about **8.6 GB of video memory**, and that requirement grows slowly as the chain
+advances: 8 GB cards cannot mine it, 10 GB is tight, 12 GB and up is comfortable. The miner checks
+your card at startup and says so with the actual numbers rather than failing partway through.
 
 The dev fee is interleaved (no graph dips) and verifiable on your pool. No hidden second fee. *More algorithms are on the way.*
 
