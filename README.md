@@ -55,7 +55,7 @@ Grab the latest build from the [**Releases**](https://github.com/0xHashRaptor/Fo
 |---|---|
 | Windows | `ForgeMiner-<version>-windows.zip` |
 | Linux | `ForgeMiner-<version>-linux.tar.gz` (glibc 2.17+) |
-| HiveOS | `ForgeMiner-<version>-hiveos.tar.gz` · flight sheets install `ForgeMiner.tar.gz`, whose URL never changes |
+| HiveOS | `ForgeMiner-<version>.tar.gz` · flight sheets install `ForgeMiner.tar.gz`, whose URL never changes |
 | Docker | `docker pull hashraptor/forge` (tags `:latest` and the version) |
 
 ---
@@ -64,15 +64,11 @@ Grab the latest build from the [**Releases**](https://github.com/0xHashRaptor/Fo
 
 ### Windows
 1. Download and unpack the Windows release.
-2. Open the `.bat` for your coin/pool/region and set your wallet and worker. Files are named `<algo>_<pool>_<region>.bat` (`_SSL` = encrypted). One per coin:
-   - Pearl — `pearlhash_Kryptex_Global.bat`, `pearlhash_Kryptex_EU.bat`, `pearlhash_Kryptex_RU.bat`
-   - QubitCoin — `qhash_LuckyPool_RU.bat`, `qhash_LuckyPool_CA.bat`, `qhash_k1pool_EU.bat`
-   - KawPow · RVN — `kawpow_RVN_Kryptex_Global.bat`, `kawpow_RVN_Kryptex_EU.bat`, `kawpow_RVN_Kryptex_RU.bat`
-   - KawPow · QUAI — `kawpow_QUAI_Kryptex_Global.bat`, `kawpow_QUAI_Kryptex_EU.bat`, `kawpow_QUAI_Kryptex_RU.bat`
-   - KawPow · XNA — `kawpow_XNA_Kryptex_Global.bat`, `kawpow_XNA_Kryptex_EU.bat`, `kawpow_XNA_Kryptex_RU.bat`
-   - Cryptix — `cryptix_Baikalmine_Global.bat`, `cryptix_CryptixNetwork_Global.bat`
-   - BTX — `btx_lproute_EU.bat`, `btx_lproute_RU.bat`
-   - Xelis — `xelis_XEL_Kryptex_Global.bat`, `xelis_XEL_Kryptex_RU.bat`
+2. Open the `.bat` for your coin/pool/region and set your wallet and worker. There is one folder per coin, 97 ready-made launchers in all (`-SSL` = encrypted connection):
+   - `Pearl (PRL)\` — 20: Kryptex, LuckyPool, HeroMiners, BaikalMine, 2Miners. AlphaPool sits in its own folder, `Pearl (PRL) - AlphaPool\`, because it speaks a different dialect.
+   - `Ravencoin (RVN)\` — 18 · `Quai (QUAI)\` — 14 · `Neurai (XNA)\` — 12
+   - `Conflux (CFX)\` and `Xelis (XEL)\` — 10 each
+   - `QubitCoin (QTC)\` — 6 · `BTX\` — 3 · `Cryptix (CYTX)\` — 2
 3. Double-click to start. Run as Administrator to apply the built-in overclock.
 
 ### Linux
@@ -87,7 +83,7 @@ chmod +x forge
 # Cryptix
 ./forge --algorithm cryptix --wallet YOUR_CYTX_WALLET --pool cytx.baikalmine.com:9010 --worker rig01
 # BTX
-./forge --algorithm btx --wallet YOUR_BTX_WALLET --pool btx-eu.lproute.com:8660 --worker rig01
+./forge --algorithm btx --wallet YOUR_BTX_WALLET --pool ssl://btx-eu.lproute.com:8665 --worker rig01
 # Xelis
 ./forge --algorithm xelis --wallet YOUR_XEL_WALLET --pool xel.kryptex.network:7019 --worker rig01
 # Conflux (needs a 12 GB card; see the note under the table below)
@@ -105,7 +101,7 @@ docker run --rm --gpus all hashraptor/forge \
 ```
 
 ### HiveOS
-Custom miner flight sheet — installation URL `.../ForgeMiner.tar.gz`, wallet template `%WAL%.%WORKER_NAME%`. That URL always points at the current release, so an upgrade needs no editing; the versioned `-hiveos` archive on the Releases page is the same package pinned to one version.
+Custom miner flight sheet — installation URL `.../ForgeMiner.tar.gz`, wallet template `%WAL%.%WORKER_NAME%`. That URL always points at the current release, so an upgrade needs no editing; the versioned `ForgeMiner-<version>.tar.gz` on the Releases page is the same package pinned to one version.
 
 *Extra config* accepts **both** forms, one per line, and you can mix them:
 
@@ -255,7 +251,7 @@ Kernels are tuned per architecture, so a whole generation is covered — desktop
 
 | Generation | Cards |
 |---|---|
-| **Blackwell** (RTX 50) | 5090 · 5080 · 5070 Ti · 5070 · 5060 Ti · 5060 · 50-series Laptop |
+| **Blackwell** (RTX 50) | 5090 · 5080 · 5070 Ti · 5070 · 5060 Ti · 5060 · 50-series Laptop *(driver 580+)* |
 | **Ada** (RTX 40) | 4090 · 4080 (S) · 4070 Ti (S) · 4070 (S) · 4060 Ti · 4060 · 40-series Laptop |
 | **Ampere** (RTX 30) | 3090 Ti · 3090 · 3080 Ti · 3080 · 3070 Ti · 3070 · 3060 Ti · 3060 · 30-series Laptop |
 | **Turing** (RTX 20) | 2080 Ti · 2080 (S) · 2070 (S) · 2060 (S) · 20-series Laptop *(driver 545+)* |

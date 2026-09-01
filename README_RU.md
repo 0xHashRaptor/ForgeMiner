@@ -55,7 +55,7 @@ ForgeMiner — высокопроизводительный, полностью 
 |---|---|
 | Windows | `ForgeMiner-<версия>-windows.zip` |
 | Linux | `ForgeMiner-<версия>-linux.tar.gz` (glibc 2.17+) |
-| HiveOS | `ForgeMiner-<версия>-hiveos.tar.gz` · полётники ставят `ForgeMiner.tar.gz`, его URL никогда не меняется |
+| HiveOS | `ForgeMiner-<версия>.tar.gz` · полётники ставят `ForgeMiner.tar.gz`, его URL никогда не меняется |
 | Docker | `docker pull hashraptor/forge` (теги `:latest` и версия) |
 
 ---
@@ -64,15 +64,11 @@ ForgeMiner — высокопроизводительный, полностью 
 
 ### Windows
 1. Скачайте и распакуйте Windows-релиз.
-2. Откройте `.bat` под свою монету/пул/регион и впишите кошелёк и воркер. Файлы называются `<algo>_<pool>_<region>.bat` (`_SSL` = шифрование). По одному на монету:
-   - Pearl — `pearlhash_Kryptex_Global.bat`, `pearlhash_Kryptex_EU.bat`, `pearlhash_Kryptex_RU.bat`
-   - QubitCoin — `qhash_LuckyPool_RU.bat`, `qhash_LuckyPool_CA.bat`, `qhash_k1pool_EU.bat`
-   - KawPow · RVN — `kawpow_RVN_Kryptex_Global.bat`, `kawpow_RVN_Kryptex_EU.bat`, `kawpow_RVN_Kryptex_RU.bat`
-   - KawPow · QUAI — `kawpow_QUAI_Kryptex_Global.bat`, `kawpow_QUAI_Kryptex_EU.bat`, `kawpow_QUAI_Kryptex_RU.bat`
-   - KawPow · XNA — `kawpow_XNA_Kryptex_Global.bat`, `kawpow_XNA_Kryptex_EU.bat`, `kawpow_XNA_Kryptex_RU.bat`
-   - Cryptix — `cryptix_Baikalmine_Global.bat`, `cryptix_CryptixNetwork_Global.bat`
-   - BTX — `btx_lproute_EU.bat`, `btx_lproute_RU.bat`
-   - Xelis — `xelis_XEL_Kryptex_Global.bat`, `xelis_XEL_Kryptex_RU.bat`
+2. Откройте `.bat` под свою монету/пул/регион и впишите кошелёк и воркер. На каждую монету — своя папка, всего 97 готовых запускаторов (`-SSL` = шифрованное соединение):
+   - `Pearl (PRL)\` — 20: Kryptex, LuckyPool, HeroMiners, BaikalMine, 2Miners. AlphaPool вынесен в отдельную папку `Pearl (PRL) - AlphaPool\`, у него другой диалект.
+   - `Ravencoin (RVN)\` — 18 · `Quai (QUAI)\` — 14 · `Neurai (XNA)\` — 12
+   - `Conflux (CFX)\` и `Xelis (XEL)\` — по 10
+   - `QubitCoin (QTC)\` — 6 · `BTX\` — 3 · `Cryptix (CYTX)\` — 2
 3. Двойной клик — запуск. Для встроенного разгона — «Запуск от имени администратора».
 
 ### Linux
@@ -87,7 +83,7 @@ chmod +x forge
 # Cryptix
 ./forge --algorithm cryptix --wallet YOUR_CYTX_WALLET --pool cytx.baikalmine.com:9010 --worker rig01
 # BTX
-./forge --algorithm btx --wallet YOUR_BTX_WALLET --pool btx-eu.lproute.com:8660 --worker rig01
+./forge --algorithm btx --wallet YOUR_BTX_WALLET --pool ssl://btx-eu.lproute.com:8665 --worker rig01
 # Xelis
 ./forge --algorithm xelis --wallet YOUR_XEL_WALLET --pool xel.kryptex.network:7019 --worker rig01
 # Conflux (нужна карта от 12 ГБ, см. примечание под таблицей)
@@ -105,7 +101,7 @@ docker run --rm --gpus all hashraptor/forge \
 ```
 
 ### HiveOS
-Кастомный майнер — URL установки `.../ForgeMiner.tar.gz`, шаблон кошелька `%WAL%.%WORKER_NAME%`. Этот URL всегда ведёт на текущий релиз, так что при обновлении править ничего не надо; версионный архив `-hiveos` на странице Releases — тот же пакет, зафиксированный на одной версии.
+Кастомный майнер — URL установки `.../ForgeMiner.tar.gz`, шаблон кошелька `%WAL%.%WORKER_NAME%`. Этот URL всегда ведёт на текущий релиз, так что при обновлении править ничего не надо; версионный архив `ForgeMiner-<версия>.tar.gz` на странице Releases — тот же пакет, зафиксированный на одной версии.
 
 *Extra config* принимает **обе** формы, по одной в строке, и их можно смешивать:
 
@@ -255,7 +251,7 @@ CMP 40HX, 50HX, 70HX и 90HX с завода задушены аппаратно
 
 | Поколение | Карты |
 |---|---|
-| **Blackwell** (RTX 50) | 5090 · 5080 · 5070 Ti · 5070 · 5060 Ti · 5060 · 50-й серии Laptop |
+| **Blackwell** (RTX 50) | 5090 · 5080 · 5070 Ti · 5070 · 5060 Ti · 5060 · 50-й серии Laptop *(драйвер 580+)* |
 | **Ada** (RTX 40) | 4090 · 4080 (S) · 4070 Ti (S) · 4070 (S) · 4060 Ti · 4060 · 40-й серии Laptop |
 | **Ampere** (RTX 30) | 3090 Ti · 3090 · 3080 Ti · 3080 · 3070 Ti · 3070 · 3060 Ti · 3060 · 30-й серии Laptop |
 | **Turing** (RTX 20) | 2080 Ti · 2080 (S) · 2070 (S) · 2060 (S) · 20-й серии Laptop *(драйвер 545+)* |
