@@ -7,7 +7,7 @@
 <p align="center"><b>Быстрый нативный NVIDIA GPU-майнер — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL) и Conflux (CFX)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.6.0"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.6.1"></a>
   <a href="#загрузка"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#поддерживаемые-карты"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -153,7 +153,7 @@ Conflux требует около **8.6 ГБ видеопамяти**, и это
 - **Один самодостаточный бинарь** — всё внутри; без CUDA runtime и разбросанных файлов ядер. Даже KawPow — один исполняемый файл.
 - **Встроенный разгон и кулеры** — фикс частот, оффсеты, лимит мощности и управление кулерами прямо из майнера — свой разгон на каждую карту. Без сторонних утилит.
 - **Термозащита** — `--temp-limit` / `--temp-resume` сами ставят карту на паузу при перегреве и возобновляют майнинг после остывания.
-- **Multi-pool с failover** — обычный Stratum для всех монет, SSL/TLS-пулы, авто-переподключение и failover.
+- **Multi-pool с failover** — обычный Stratum для всех монет. Шифрованный пул определяется сам, поэтому обычного `host:port` достаточно независимо от того, работает пул по TLS или нет; перечислите несколько адресов через запятую, и майнер перейдёт на следующий, когда пул отвалится.
 - **Живой дашборд и API только для чтения** — хешрейт по картам, температуры (в т.ч. VRAM на Windows), частоты, кулеры, мощность и шары — плюс JSON, Prometheus и Claymore-совместимые эндпоинты.
 - **Готов к HiveOS** — вставляется в слот кастомного майнера.
 
@@ -167,7 +167,7 @@ Conflux требует около **8.6 ГБ видеопамяти**, и это
 |------|-----|----------|
 | `--algorithm` | `FORGE_ALGO` | `pearlhash`, `qhash`, `kawpow`, `cryptix`, `btx` или `xelis`. |
 | `--coin` | `FORGE_COIN` | Монета KawPow: `rvn`, `quai` или `xna` (определяется по пулу; для Neurai / Vipor задавать явно). |
-| `--pool` | `FORGE_POOL` | Пул `host:port`. SSL/TLS поддерживается; несколько адресов для failover. |
+| `--pool` | `FORGE_POOL` | Пул `host:port`. TLS определяется автоматически — префикс `ssl://` нужен только чтобы навязать его. Несколько адресов через запятую для failover. |
 | `--wallet` | `FORGE_WALLET` | Адрес кошелька для выплат. |
 | `--worker` | `FORGE_WORKER` | Имя воркера/рига. |
 | `--password` | `FORGE_PASS` | Пароль пула (обычно `x`). |

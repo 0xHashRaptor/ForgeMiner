@@ -7,7 +7,7 @@
 <p align="center"><b>A fast, native NVIDIA GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL) and Conflux (CFX)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.6.0"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.6.1"></a>
   <a href="#download"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#supported-gpus"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -153,7 +153,7 @@ The dev fee is interleaved (no graph dips) and verifiable on your pool. No hidde
 - **One self-contained binary** — everything embedded; no CUDA runtime or loose kernel files to manage. Even KawPow ships as a single executable.
 - **Built-in overclocking & fan control** — lock clocks, apply offsets, set a power limit and drive fans straight from the miner — a different OC per card on mixed rigs. No third-party tool.
 - **Temperature protection** — `--temp-limit` / `--temp-resume` pause a card automatically if it overheats, and resume once it cools back down.
-- **Multi-pool with fail-over** — standard Stratum for every coin, SSL/TLS pools, automatic reconnect and pool fail-over.
+- **Multi-pool with fail-over** — standard Stratum for every coin. An encrypted pool is detected on its own, so a bare `host:port` works whether the pool speaks TLS or not; list several addresses through a comma and the miner moves to the next one when a pool drops.
 - **Live dashboard & read-only API** — the per-card table stays pinned at the top with the log scrolling underneath (press `L` for the classic view). Per-GPU hashrate, temps (incl. VRAM on Windows), clocks, fans, power and shares, plus a delivery figure showing how much of the hashrate the pool actually credits — and JSON, Prometheus and Claymore-compatible endpoints.
 - **HiveOS ready** — drops straight into a custom-miner slot.
 
@@ -167,7 +167,7 @@ Anything you pass on the command line has a `FORGE_*` environment-variable twin 
 |------|-----|-------------|
 | `--algorithm` | `FORGE_ALGO` | `pearlhash`, `qhash`, `kawpow`, `cryptix`, `btx` or `xelis`. |
 | `--coin` | `FORGE_COIN` | KawPow coin: `rvn`, `quai` or `xna` (auto-detected from the pool; set explicitly for Neurai / Vipor). |
-| `--pool` | `FORGE_POOL` | Pool `host:port`. SSL/TLS supported; list several for fail-over. |
+| `--pool` | `FORGE_POOL` | Pool `host:port`. TLS is detected automatically — prefix with `ssl://` only to force it. Comma-separate several for fail-over. |
 | `--wallet` | `FORGE_WALLET` | Payout wallet address. |
 | `--worker` | `FORGE_WORKER` | Worker / rig name. |
 | `--password` | `FORGE_PASS` | Pool password (usually `x`). |
