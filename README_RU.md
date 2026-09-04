@@ -7,7 +7,7 @@
 <p align="center"><b>Быстрый нативный NVIDIA GPU-майнер — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL) и Conflux (CFX)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.6.3"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.6.4"></a>
   <a href="#загрузка"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#поддерживаемые-карты"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -82,8 +82,9 @@ chmod +x forge
 ./forge --algorithm kawpow --wallet YOUR_RVN_WALLET --pool rvn.kryptex.network:7031 --worker rig01
 # Cryptix
 ./forge --algorithm cryptix --wallet YOUR_CYTX_WALLET --pool cytx.baikalmine.com:9010 --worker rig01
-# BTX
-./forge --algorithm btx --wallet YOUR_BTX_WALLET --pool ssl://btx-eu.lproute.com:8665 --worker rig01
+# BTX — 8666 это новый протокол LuckyPool. Старый порт ещё работает, но ему нужна схема:
+#       --pool stratum+tls://btx-eu.lproute.com:8665
+./forge --algorithm btx --wallet YOUR_BTX_WALLET --pool btx-eu.lproute.com:8666 --worker rig01
 # Xelis
 ./forge --algorithm xelis --wallet YOUR_XEL_WALLET --pool xel.kryptex.network:7019 --worker rig01
 # Conflux (нужна карта от 12 ГБ, см. примечание под таблицей)
