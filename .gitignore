@@ -4,3 +4,8 @@
 *.bak
 *.orig
 *.tmp
+
+# Staging that lives beside the two READMEs but is not part of them. release_assets/ holds
+# release-note drafts (the ones in there date from 1.1.2); nothing in this repo references them,
+# and a git add -A would have published them as if they were current documentation.
+/release_assets/
