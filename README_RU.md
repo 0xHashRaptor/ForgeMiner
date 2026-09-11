@@ -4,10 +4,10 @@
 
 <h1 align="center">ForgeMiner</h1>
 
-<p align="center"><b>Быстрый нативный NVIDIA GPU-майнер — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL) и Conflux (CFX)</b></p>
+<p align="center"><b>Быстрый нативный NVIDIA GPU-майнер — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX) и NOID (Parano1d)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.6.6"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.7.0"></a>
   <a href="#загрузка"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#поддерживаемые-карты"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -36,7 +36,7 @@
 
 ## Обзор
 
-ForgeMiner — высокопроизводительный, полностью нативный NVIDIA GPU-майнер. Он работает с картой напрямую через CUDA Driver API — без Python, WSL и лишних рантаймов — поэтому стартует мгновенно и легко идёт даже на слабых ригах. Майнит **Pearl (PRL)**, **QubitCoin (QTC)**, **KawPow** (Ravencoin RVN, Quai QUAI, Neurai XNA), **Cryptix (CYTX)**, **BTX (btx.dev)**, **Xelis (XEL)** и **Conflux (CFX)** из одного бинарника — монета выбирается одним флагом — и новые монеты в разработке.
+ForgeMiner — высокопроизводительный, полностью нативный NVIDIA GPU-майнер. Он работает с картой напрямую через CUDA Driver API — без Python, WSL и лишних рантаймов — поэтому стартует мгновенно и легко идёт даже на слабых ригах. Майнит **Pearl (PRL)**, **QubitCoin (QTC)**, **KawPow** (Ravencoin RVN, Quai QUAI, Neurai XNA), **Cryptix (CYTX)**, **BTX (btx.dev)**, **Xelis (XEL)**, **Conflux (CFX)** и **NOID (Parano1d)** из одного бинарника — монета выбирается одним флагом — и новые монеты в разработке.
 
 Для каждого алгоритма есть отдельная сборка под архитектуру каждой карты — она выбирается автоматически при запуске, так каждая GPU работает на пике. Риги с CMP 40HX, 50HX, 70HX или 90HX получают встроенный аппаратный разлок на Linux одной командой, на любом ядре — см. [Аппаратный разлок CMP](#аппаратный-разлок-cmp-linux).
 
@@ -64,11 +64,11 @@ ForgeMiner — высокопроизводительный, полностью 
 
 ### Windows
 1. Скачайте и распакуйте Windows-релиз.
-2. Откройте `.bat` под свою монету/пул/регион и впишите кошелёк и воркер. На каждую монету — своя папка, всего 98 готовых запускаторов (`-SSL` = шифрованное соединение):
-   - `Pearl (PRL)\` — 20: Kryptex, LuckyPool, HeroMiners, BaikalMine, 2Miners. AlphaPool вынесен в отдельную папку `Pearl (PRL) - AlphaPool\`, у него другой диалект.
+2. Откройте `.bat` под свою монету/пул/регион и впишите кошелёк и воркер. На каждую монету — своя папка, всего 102 готовых запускатора (`-SSL` = шифрованное соединение):
+   - `Pearl (PRL)\` — 22: Kryptex, LuckyPool, HeroMiners, BaikalMine, 2Miners, AlphaPool
    - `Ravencoin (RVN)\` — 19 · `Quai (QUAI)\` — 14 · `Neurai (XNA)\` — 12
    - `Conflux (CFX)\` и `Xelis (XEL)\` — по 10
-   - `QubitCoin (QTC)\` — 6 · `BTX\` — 3 · `Cryptix (CYTX)\` — 2
+   - `QubitCoin (QTC)\` — 6 · `BTX\` — 4 · `NOID (Parano1d)\` — 3 · `Cryptix (CYTX)\` — 2
 3. Двойной клик — запуск. Для встроенного разгона — «Запуск от имени администратора».
 
 ### Linux
@@ -89,6 +89,8 @@ chmod +x forge
 ./forge --algorithm xelis --wallet YOUR_XEL_WALLET --pool xel.kryptex.network:7019 --worker rig01
 # Conflux (нужна карта от 12 ГБ, см. примечание под таблицей)
 ./forge --algorithm cfx --wallet YOUR_CFX_WALLET --pool cfx.kryptex.network:7027 --worker rig01
+# NOID (RTX 30-й серии и новее)
+./forge --algorithm noid --wallet YOUR_NOID_WALLET --pool stratum+ssl://eu2.innovlab.cc:19601 --worker rig01
 ```
 
 Linux-сборка собрана под **glibc 2.17**, поэтому работает начиная с CentOS 7 / Ubuntu 14.04 — не нужен ни CUDA toolkit, ни дополнительные библиотеки, только драйвер NVIDIA. Добавьте `--api-bind 0.0.0.0:7777` к любой команде выше и откройте `http://<rig>:7777` — это встроенный дашборд.
@@ -107,7 +109,7 @@ docker run --rm --gpus all hashraptor/forge \
 *Extra config* принимает **обе** формы, по одной в строке, и их можно смешивать:
 
 ```
-FORGE_ALGO=xelis            # или pearlhash / qhash / kawpow / cryptix / btx / cfx
+FORGE_ALGO=xelis            # или pearlhash / qhash / kawpow / cryptix / btx / cfx / noid
 FORGE_COIN=xna              # только для KawPow: rvn | quai | xna
 --gpu 0,1,3                 # майнить только эти карты
 --cclk 1500 --moff 1000     # разгон: также --coff / --mclk / --plimit
@@ -126,6 +128,7 @@ FORGE_COIN=xna              # только для KawPow: rvn | quai | xna
 
 | Монета | `--algorithm` | Пулы (готовые `.bat` в релизе) | Комиссия |
 |--------|---------------|--------------------------------|:------:|
+| NOID (Parano1d) | `noid` | InnovLab · Suprnova | 2.5% |
 | Pearl (PRL) | `pearlhash` | Kryptex · BaikalMine · HeroMiners · LuckyPool · 2Miners · AlphaPool | 2% |
 | Cryptix (CYTX) | `cryptix` | BaikalMine · CryptixNetwork | 2% |
 | BTX (btx.dev) | `btx` | LuckyPool (lproute) | 2% |
@@ -140,13 +143,16 @@ Conflux требует около **8.6 ГБ видеопамяти**, и это
 карты на 8 ГБ монету не потянут, на 10 ГБ впритык, от 12 ГБ спокойно. Майнер проверяет карту на
 старте и говорит об этом с реальными числами, а не падает посреди подготовки.
 
+NOID работает на RTX 30-й серии и новее, включая CMP 90HX. На смешанном риге старые карты простаивают
+и один раз об этом пишут, остальные карты рига майнят.
+
 Комиссия чередуется в потоке (без провалов на графике) и проверяется на пуле. Скрытой второй комиссии нет. *Больше алгоритмов в разработке.*
 
 ---
 
 ## Возможности
 
-- **Много монет, один бинарь** — Pearl, QubitCoin, KawPow (RVN / QUAI / XNA), Cryptix, BTX, Xelis или Conflux; выбор через `--algorithm`.
+- **Много монет, один бинарь** — Pearl, QubitCoin, KawPow (RVN / QUAI / XNA), Cryptix, BTX, Xelis, Conflux или NOID; выбор через `--algorithm`.
 - **Ядра под архитектуру** — отдельное ядро под каждое поколение (Pascal / Volta / Turing / Ampere / Ada / Blackwell), выбирается при старте.
 - **Аппаратный разлок CMP 40HX / 50HX / 70HX / 90HX (Linux)** — одна встроенная команда разлочивает любую из этих карт со стокового задушенного хешрейта до полной скорости; никаких сторонних скриптов и точного совпадения ядра (драйвер 610.43.03 по-прежнему нужен).
 - **Нативно и легко** — напрямую через CUDA Driver API, почти нулевая нагрузка на CPU; без Python, WSL и рантаймов. Стартует за секунду, идёт на слабых хостах и многокарточных ригах.
@@ -166,13 +172,12 @@ Conflux требует около **8.6 ГБ видеопамяти**, и это
 
 | Флаг | Env | Описание |
 |------|-----|----------|
-| `--algorithm` | `FORGE_ALGO` | `pearlhash`, `qhash`, `kawpow`, `cryptix`, `btx`, `xelis` или `cfx`. |
+| `--algorithm` | `FORGE_ALGO` | `pearlhash`, `qhash`, `kawpow`, `cryptix`, `btx`, `xelis`, `cfx` или `noid`. |
 | `--coin` | `FORGE_COIN` | Монета KawPow: `rvn`, `quai` или `xna` (определяется по пулу; для Neurai / Vipor задавать явно). |
 | `--pool` | `FORGE_POOL` | Пул `host:port`. TLS определяется автоматически — префикс `ssl://` нужен только чтобы навязать его. Несколько адресов через запятую для failover. |
 | `--wallet` | `FORGE_WALLET` | Адрес кошелька для выплат. |
 | `--worker` | `FORGE_WORKER` | Имя воркера/рига. |
 | `--password` | `FORGE_PASS` | Пароль пула (обычно `x`). |
-| `--proto` | `FORGE_PROTO` | Диалект Pearl: `stratum` или `alpha` (AlphaPool). |
 | `--gpu` | `FORGE_GPU` | Майнить только эти индексы, напр. `0,1,2,6` (порядок `nvidia-smi`). |
 | `--temp-limit` | `FORGE_TEMP_LIMIT` | Автопауза карты при достижении этой температуры (°C). |
 | `--temp-resume` | `FORGE_TEMP_RESUME` | Возобновить карту после остывания до этой температуры (°C). |
@@ -260,7 +265,7 @@ CMP 40HX, 50HX, 70HX и 90HX с завода задушены аппаратно
 | **Pascal** | GTX 10-й серии · P104-100 · P106 · P108 (8 ГБ майнинг-карты) |
 | **CMP** | 170HX · 90HX · 70HX · 50HX · 40HX · 30HX *(драйвер 545+)*. 40HX/50HX/70HX/90HX получают встроенный [аппаратный разлок](#аппаратный-разлок-cmp-linux) на Linux; 30HX — постоянное аппаратное ограничение, никогда не будет поддержана; 170HX нужен отдельный инструмент. |
 
-*Все монеты работают на каждом из перечисленных поколений, кроме **BTX** и **Conflux**: этим двум нужен Turing (RTX 20 / CMP 40HX-70HX) или новее, на Pascal, Volta и CMP 170HX они не идут.*
+*Все монеты работают на каждом из перечисленных поколений, кроме трёх: **BTX** и **Conflux** нужен Turing (RTX 20 / CMP 40HX-70HX) или новее, на Pascal, Volta и CMP 170HX они не идут; **NOID** нужен Ampere (RTX 30 / CMP 90HX) или новее.*
 
 ---
 
