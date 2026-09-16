@@ -7,7 +7,7 @@
 <p align="center"><b>Быстрый нативный NVIDIA GPU-майнер — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX) и NOID (Parano1d)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.7.1"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.8.0"></a>
   <a href="#загрузка"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#поддерживаемые-карты"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -132,6 +132,7 @@ FORGE_COIN=xna              # только для KawPow: rvn | quai | xna
 | Pearl (PRL) | `pearlhash` | Kryptex · BaikalMine · HeroMiners · LuckyPool · 2Miners · AlphaPool | 2% |
 | Cryptix (CYTX) | `cryptix` | BaikalMine · CryptixNetwork | 2% |
 | BTX (btx.dev) | `btx` | LuckyPool (lproute) | 2% |
+| Quantus (QTC) | `quantus` | Kryptex · LuckyPool | 2% |
 | Conflux (CFX) | `cfx` | Kryptex · HeroMiners | 1.5% |
 | QubitCoin (QTC) | `qhash` | LuckyPool · k1pool | 1% |
 | Xelis (XEL) | `xelis` | Kryptex · HeroMiners | 1% |
@@ -152,7 +153,7 @@ NOID работает на RTX 30-й серии и новее, включая CM
 
 ## Возможности
 
-- **Много монет, один бинарь** — Pearl, QubitCoin, KawPow (RVN / QUAI / XNA), Cryptix, BTX, Xelis, Conflux или NOID; выбор через `--algorithm`.
+- **Много монет, один бинарь** — Pearl, QubitCoin, KawPow (RVN / QUAI / XNA), Cryptix, BTX, Xelis, Conflux, NOID или Quantus; выбор через `--algorithm`.
 - **Ядра под архитектуру** — отдельное ядро под каждое поколение (Pascal / Volta / Turing / Ampere / Ada / Blackwell), выбирается при старте.
 - **Аппаратный разлок CMP 40HX / 50HX / 70HX / 90HX (Linux)** — одна встроенная команда разлочивает любую из этих карт со стокового задушенного хешрейта до полной скорости; никаких сторонних скриптов и точного совпадения ядра (драйвер 610.43.03 по-прежнему нужен).
 - **Нативно и легко** — напрямую через CUDA Driver API, почти нулевая нагрузка на CPU; без Python, WSL и рантаймов. Стартует за секунду, идёт на слабых хостах и многокарточных ригах.

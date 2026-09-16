@@ -7,7 +7,7 @@
 <p align="center"><b>A fast, native NVIDIA GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX) and NOID (Parano1d)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.7.1"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.8.0"></a>
   <a href="#download"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#supported-gpus"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -132,6 +132,7 @@ Ready-made flight sheets: **[forgeminer.org/#flightsheets](https://forgeminer.or
 | Pearl (PRL) | `pearlhash` | Kryptex · BaikalMine · HeroMiners · LuckyPool · 2Miners · AlphaPool | 2% |
 | Cryptix (CYTX) | `cryptix` | BaikalMine · CryptixNetwork | 2% |
 | BTX (btx.dev) | `btx` | LuckyPool (lproute) | 2% |
+| Quantus (QTC) | `quantus` | Kryptex · LuckyPool | 2% |
 | Conflux (CFX) | `cfx` | Kryptex · HeroMiners | 1.5% |
 | QubitCoin (QTC) | `qhash` | LuckyPool · k1pool | 1% |
 | Xelis (XEL) | `xelis` | Kryptex · HeroMiners | 1% |
@@ -152,7 +153,7 @@ The dev fee is interleaved (no graph dips) and verifiable on your pool. No hidde
 
 ## Features
 
-- **Multiple coins, one binary** — Pearl, QubitCoin, KawPow (RVN / QUAI / XNA), Cryptix, BTX, Xelis, Conflux or NOID; select with `--algorithm`.
+- **Multiple coins, one binary** — Pearl, QubitCoin, KawPow (RVN / QUAI / XNA), Cryptix, BTX, Xelis, Conflux, NOID or Quantus; select with `--algorithm`.
 - **Architecture-tuned kernels** — a dedicated kernel per GPU generation (Pascal / Volta / Turing / Ampere / Ada / Blackwell), auto-selected at launch.
 - **CMP 40HX / 50HX / 70HX / 90HX hardware unlock (Linux)** — one embedded command unlocks any of these cards from the stock throttled hashrate to full speed; no external scripts, no exact kernel requirement (driver 610.43.03 still required).
 - **Native and lightweight** — direct CUDA Driver API, near-zero CPU load; no Python, WSL or extra runtimes. Starts in a second, runs on weak hosts and many-GPU boxes.
