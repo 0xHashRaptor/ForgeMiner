@@ -193,7 +193,7 @@ Anything you pass on the command line has a `FORGE_*` environment-variable twin 
 <details>
 <summary><b>Overclocking &amp; fan control</b></summary>
 
-> ForgeMiner is core-clock bound and memory-light — push the core high, leave memory low. Overclocking needs root (Linux/HiveOS) or Administrator (Windows). Each flag takes one value, or a comma list mapped to `--gpu`.
+> ForgeMiner is core-clock bound and memory-light — push the core high, leave memory low. Overclocking needs root (Linux/HiveOS) or Administrator (Windows). Each flag takes one value, or a comma list mapped to `--gpu`. Put `*` in a list to leave that card untouched.
 
 | Flag | Env | Description |
 |------|-----|-------------|
@@ -208,6 +208,9 @@ Anything you pass on the command line has a `FORGE_*` environment-variable twin 
 ```text
 # per-GPU (values map to --gpu order)
 --gpu 0,1,2,6 --coff 300,250,300,200 --plimit 280,280,300,260
+
+# * = leave that card alone: GPU 2 keeps its current clocks and automatic fan
+--gpu 0,1,2,6 --cclk 1500,1500,*,1500 --fan 70,70,*,70
 ```
 GeForce cards have a ~30% hardware fan floor; the driver's automatic control is restored on exit.
 </details>
