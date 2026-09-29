@@ -55,7 +55,7 @@ ForgeMiner — высокопроизводительный, полностью 
 |---|---|
 | Windows | `ForgeMiner-<версия>-windows.zip` |
 | Linux | `ForgeMiner-<версия>-linux.tar.gz` (glibc 2.17+) |
-| HiveOS | `ForgeMiner-<версия>.tar.gz` · полётники ставят `ForgeMiner.tar.gz`, его URL никогда не меняется |
+| HiveOS | `ForgeMiner-<версия>.tar.gz` — URL установки в полётнике |
 | Docker | `docker pull hashraptor/forge` (теги `:latest` и версия) |
 
 ---
@@ -104,7 +104,9 @@ docker run --rm --gpus all hashraptor/forge \
 ```
 
 ### HiveOS
-Кастомный майнер — URL установки `.../ForgeMiner.tar.gz`, шаблон кошелька `%WAL%.%WORKER_NAME%`. Этот URL всегда ведёт на текущий релиз, так что при обновлении править ничего не надо; версионный архив `ForgeMiner-<версия>.tar.gz` на странице Releases — тот же пакет, зафиксированный на одной версии.
+Кастомный майнер — URL установки `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<версия>/ForgeMiner-<версия>.tar.gz` (например `v1.8.3/ForgeMiner-1.8.3.tar.gz`), шаблон кошелька `%WAL%.%WORKER_NAME%`.
+
+**Для обновления поменяйте версию в этом URL** (в двух местах) и обновите полётник — все риги на нём переустановятся. HiveOS ставит кастомный майнер один раз на каждый URL: если URL не поменялся, он пишет *Already installed* и оставляет старую версию. Риги, настроенные по старой ссылке `.../releases/latest/download/ForgeMiner.tar.gz`, так и остаются на той версии, что поставилась первой; переведите их на версионный URL или выполните на риге `custom-get https://github.com/0xHashRaptor/ForgeMiner/releases/latest/download/ForgeMiner.tar.gz -f` и перезапустите майнер.
 
 *Extra config* принимает **обе** формы, по одной в строке, и их можно смешивать:
 

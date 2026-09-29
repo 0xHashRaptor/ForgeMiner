@@ -55,7 +55,7 @@ Grab the latest build from the [**Releases**](https://github.com/0xHashRaptor/Fo
 |---|---|
 | Windows | `ForgeMiner-<version>-windows.zip` |
 | Linux | `ForgeMiner-<version>-linux.tar.gz` (glibc 2.17+) |
-| HiveOS | `ForgeMiner-<version>.tar.gz` · flight sheets install `ForgeMiner.tar.gz`, whose URL never changes |
+| HiveOS | `ForgeMiner-<version>.tar.gz` — the flight sheet's installation URL |
 | Docker | `docker pull hashraptor/forge` (tags `:latest` and the version) |
 
 ---
@@ -104,7 +104,9 @@ docker run --rm --gpus all hashraptor/forge \
 ```
 
 ### HiveOS
-Custom miner flight sheet — installation URL `.../ForgeMiner.tar.gz`, wallet template `%WAL%.%WORKER_NAME%`. That URL always points at the current release, so an upgrade needs no editing; the versioned `ForgeMiner-<version>.tar.gz` on the Releases page is the same package pinned to one version.
+Custom miner flight sheet — installation URL `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<version>/ForgeMiner-<version>.tar.gz` (e.g. `v1.8.3/ForgeMiner-1.8.3.tar.gz`), wallet template `%WAL%.%WORKER_NAME%`.
+
+**To upgrade, change the version in that URL** (both places) and update the flight sheet — every rig on it reinstalls. HiveOS installs a custom miner once per URL: with an unchanged URL it reports *Already installed* and keeps the old version. Rigs set up with the old `.../releases/latest/download/ForgeMiner.tar.gz` link stay on the release they first installed; switch them to the versioned URL, or run `custom-get https://github.com/0xHashRaptor/ForgeMiner/releases/latest/download/ForgeMiner.tar.gz -f` on the rig and restart the miner.
 
 *Extra config* accepts **both** forms, one per line, and you can mix them:
 
