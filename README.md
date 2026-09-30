@@ -7,7 +7,7 @@
 <p align="center"><b>A fast, native NVIDIA GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX) and NOID (Parano1d)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.8.3"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.8.4"></a>
   <a href="#download"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#supported-gpus"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -104,7 +104,7 @@ docker run --rm --gpus all hashraptor/forge \
 ```
 
 ### HiveOS
-Custom miner flight sheet — installation URL `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<version>/ForgeMiner-<version>.tar.gz` (e.g. `v1.8.3/ForgeMiner-1.8.3.tar.gz`), wallet template `%WAL%.%WORKER_NAME%`.
+Custom miner flight sheet — installation URL `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<version>/ForgeMiner-<version>.tar.gz` (e.g. `v1.8.4/ForgeMiner-1.8.4.tar.gz`), wallet template `%WAL%.%WORKER_NAME%`.
 
 **To upgrade, change the version in that URL** (both places) and update the flight sheet — every rig on it reinstalls. HiveOS installs a custom miner once per URL: with an unchanged URL it reports *Already installed* and keeps the old version. Rigs set up with the old `.../releases/latest/download/ForgeMiner.tar.gz` link stay on the release they first installed; switch them to the versioned URL, or run `custom-get https://github.com/0xHashRaptor/ForgeMiner/releases/latest/download/ForgeMiner.tar.gz -f` on the rig and restart the miner.
 
