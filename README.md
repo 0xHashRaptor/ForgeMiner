@@ -4,12 +4,12 @@
 
 <h1 align="center">ForgeMiner</h1>
 
-<p align="center"><b>A fast, native NVIDIA GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX) and NOID (Parano1d)</b></p>
+<p align="center"><b>A fast, native NVIDIA GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d) and Quantus (QTC)</b></p>
 
 <p align="center">
   <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.8.5"></a>
   <a href="#download"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
-  <a href="#supported-gpus"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | RTX 20/30/40/50 + CMP"></a>
+  <a href="#supported-gpus"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | Volta | RTX 20/30/40/50 + CMP"></a>
 </p>
 <p align="center">
   <a href="https://forgeminer.org"><img src="assets/badge_site.svg" alt="site: forgeminer.org"></a>
@@ -36,7 +36,7 @@
 
 ## Overview
 
-ForgeMiner is a high-performance, fully native NVIDIA GPU miner. It talks to the GPU directly through the CUDA Driver API — no Python, no WSL, no extra runtimes — so it starts instantly and runs lean even on low-spec rigs. It mines **Pearl (PRL)**, **QubitCoin (QTC)**, **KawPow** (Ravencoin RVN, Quai QUAI, Neurai XNA), **Cryptix (CYTX)**, **BTX (btx.dev)**, **Xelis (XEL)**, **Conflux (CFX)** and **NOID (Parano1d)** from a single binary — pick the coin with one flag — and more coins are on the way.
+ForgeMiner is a high-performance, fully native NVIDIA GPU miner. It talks to the GPU directly through the CUDA Driver API — no Python, no WSL, no extra runtimes — so it starts instantly and runs lean even on low-spec rigs. It mines **Pearl (PRL)**, **QubitCoin (QTC)**, **KawPow** (Ravencoin RVN, Quai QUAI, Neurai XNA), **Cryptix (CYTX)**, **BTX (btx.dev)**, **Xelis (XEL)**, **Conflux (CFX)**, **NOID (Parano1d)** and **Quantus (QTC)** from a single binary — pick the coin with one flag — and more coins are on the way.
 
 Every algorithm ships a separate per-architecture build for each supported card, auto-selected at launch, so each GPU runs at its peak. Rigs with CMP 40HX, 50HX, 70HX or 90HX get built-in hardware unlock on Linux via one command, on any kernel — see [CMP hardware unlock](#cmp-hardware-unlock-linux).
 
@@ -64,11 +64,11 @@ Grab the latest build from the [**Releases**](https://github.com/0xHashRaptor/Fo
 
 ### Windows
 1. Download and unpack the Windows release.
-2. Open the `.bat` for your coin/pool/region and set your wallet and worker. There is one folder per coin, 102 ready-made launchers in all (`-SSL` = encrypted connection):
+2. Open the `.bat` for your coin/pool/region and set your wallet and worker. There is one folder per coin, 110 ready-made launchers in all (`-SSL` = encrypted connection):
    - `Pearl (PRL)\` — 22: Kryptex, LuckyPool, HeroMiners, BaikalMine, 2Miners, AlphaPool
    - `Ravencoin (RVN)\` — 19 · `Quai (QUAI)\` — 14 · `Neurai (XNA)\` — 12
    - `Conflux (CFX)\` and `Xelis (XEL)\` — 10 each
-   - `QubitCoin (QTC)\` — 6 · `BTX\` — 4 · `NOID (Parano1d)\` — 3 · `Cryptix (CYTX)\` — 2
+   - `Quantus (QTC)\` — 8 · `QubitCoin (QTC)\` — 6 · `BTX\` — 4 · `NOID (Parano1d)\` — 3 · `Cryptix (CYTX)\` — 2
 3. Double-click to start. Run as Administrator to apply the built-in overclock.
 
 ### Linux
@@ -89,6 +89,8 @@ chmod +x forge
 ./forge --algorithm xelis --wallet YOUR_XEL_WALLET --pool xel.kryptex.network:7019 --worker rig01
 # Conflux (needs a 12 GB card; see the note under the table below)
 ./forge --algorithm cfx --wallet YOUR_CFX_WALLET --pool cfx.kryptex.network:7027 --worker rig01
+# Quantus (RTX 20-series and newer; not QubitCoin, which also uses the ticker QTC)
+./forge --algorithm quantus --wallet YOUR_QUANTUS_WALLET --pool qtc.kryptex.network:7049 --worker rig01
 # NOID (RTX 30-series and newer)
 ./forge --algorithm noid --wallet YOUR_NOID_WALLET --pool stratum+ssl://eu2.innovlab.cc:19601 --worker rig01
 ```
@@ -104,14 +106,14 @@ docker run --rm --gpus all hashraptor/forge \
 ```
 
 ### HiveOS
-Custom miner flight sheet — installation URL `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<version>/ForgeMiner-<version>.tar.gz` (e.g. `v1.8.5/ForgeMiner-1.8.5.tar.gz`), wallet template `%WAL%.%WORKER_NAME%`.
+ForgeMiner is also in HiveOS's built-in miner list; new versions appear there once HiveOS packages them. To get every release on day one, use a custom miner flight sheet — installation URL `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<version>/ForgeMiner-<version>.tar.gz` (e.g. `v1.8.5/ForgeMiner-1.8.5.tar.gz`), wallet template `%WAL%.%WORKER_NAME%`.
 
 **To upgrade, change the version in that URL** (both places) and update the flight sheet — every rig on it reinstalls. HiveOS installs a custom miner once per URL: with an unchanged URL it reports *Already installed* and keeps the old version. Rigs set up with the old `.../releases/latest/download/ForgeMiner.tar.gz` link stay on the release they first installed; switch them to the versioned URL, or run `custom-get https://github.com/0xHashRaptor/ForgeMiner/releases/latest/download/ForgeMiner.tar.gz -f` on the rig and restart the miner.
 
 *Extra config* accepts **both** forms, one per line, and you can mix them:
 
 ```
-FORGE_ALGO=xelis            # or pearlhash / qhash / kawpow / cryptix / btx / cfx / noid
+FORGE_ALGO=xelis            # or pearlhash / qhash / kawpow / cryptix / btx / cfx / noid / quantus
 FORGE_COIN=xna              # KawPow only: rvn | quai | xna
 --gpu 0,1,3                 # mine only these cards
 --cclk 1500 --moff 1000     # overclock: also --coff / --mclk / --plimit
@@ -171,11 +173,11 @@ The dev fee is interleaved (no graph dips) and verifiable on your pool. No hidde
 
 ## Options
 
-Anything you pass on the command line has a `FORGE_*` environment-variable twin — handy for HiveOS *Extra config* and `.bat` files.
+Most command-line flags have a `FORGE_*` environment-variable twin — handy for HiveOS *Extra config* and `.bat` files.
 
 | Flag | Env | Description |
 |------|-----|-------------|
-| `--algorithm` | `FORGE_ALGO` | `pearlhash`, `qhash`, `kawpow`, `cryptix`, `btx`, `xelis`, `cfx` or `noid`. |
+| `--algorithm` | `FORGE_ALGO` | `pearlhash`, `qhash`, `kawpow`, `cryptix`, `btx`, `xelis`, `cfx`, `noid` or `quantus` (`qhash` = QubitCoin, `quantus` = Quantus — both use the ticker QTC). |
 | `--coin` | `FORGE_COIN` | KawPow coin: `rvn`, `quai` or `xna` (auto-detected from the pool; set explicitly for Neurai / Vipor). |
 | `--pool` | `FORGE_POOL` | Pool `host:port`. TLS is detected automatically — prefix with `ssl://` only to force it. Comma-separate several for fail-over. |
 | `--wallet` | `FORGE_WALLET` | Payout wallet address. |
@@ -185,6 +187,8 @@ Anything you pass on the command line has a `FORGE_*` environment-variable twin 
 | `--temp-limit` | `FORGE_TEMP_LIMIT` | Pause a card automatically once it hits this temperature (°C). |
 | `--temp-resume` | `FORGE_TEMP_RESUME` | Resume a paused card once it cools to this temperature (°C). |
 | `--oc-delay` | `FORGE_OC_DELAY` | Delay applying overclock by N seconds after startup. |
+| `--tls` | `FORGE_TLS` | Force TLS on (`--tls`) or off (`--tls false`) for every pool. Usually not needed — TLS is detected on its own; an `ssl://` prefix on one address overrides it. |
+| `--no-color` / `--plain` | `FORGE_NO_COLOR` (or `NO_COLOR`) | ASCII-only output without colours; switched on by itself when there is no console (PSEXEC, a pipe, cron). |
 | `--log` | `FORGE_LOG` | Also write the scrolling output to a file (tables included, colours stripped). Off by default; appends. |
 | `--v1-tui` | — | Start in the classic scrolling view instead of the pinned dashboard. `L` switches between them at any time. |
 | `--cmp-install` | — | Linux: install hardware unlock for CMP 40HX / 50HX / 70HX / 90HX (see [below](#cmp-hardware-unlock-linux)). |
@@ -271,7 +275,7 @@ Kernels are tuned per architecture, so a whole generation is covered — desktop
 | **Pascal** | GTX 10-series · P104-100 · P106 · P108 (8 GB mining cards) |
 | **CMP** | 170HX · 90HX · 70HX · 50HX · 40HX · 30HX *(driver 545+)*. 40HX/50HX/70HX/90HX get built-in [hardware unlock](#cmp-hardware-unlock-linux) on Linux; 30HX is a permanent hardware limitation, never supported; 170HX needs a separate tool. |
 
-*Every coin runs on every listed generation except three: **BTX** and **Conflux** need Turing (RTX 20 / CMP 40HX-70HX) or newer and do not run on Pascal, Volta or the CMP 170HX; **NOID** needs Ampere (RTX 30 / CMP 90HX) or newer.*
+*Every coin runs on every listed generation except four: **BTX**, **Conflux** and **Quantus** need Turing (RTX 20 / CMP 40HX-70HX) or newer and do not run on Pascal, Volta or the CMP 170HX; **NOID** needs Ampere (RTX 30 / CMP 90HX) or newer (not the CMP 170HX).*
 
 ---
 

@@ -4,12 +4,12 @@
 
 <h1 align="center">ForgeMiner</h1>
 
-<p align="center"><b>Быстрый нативный NVIDIA GPU-майнер — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX) и NOID (Parano1d)</b></p>
+<p align="center"><b>Быстрый нативный NVIDIA GPU-майнер — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d) и Quantus (QTC)</b></p>
 
 <p align="center">
   <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.8.5"></a>
   <a href="#загрузка"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
-  <a href="#поддерживаемые-карты"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | RTX 20/30/40/50 + CMP"></a>
+  <a href="#поддерживаемые-карты"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | Volta | RTX 20/30/40/50 + CMP"></a>
 </p>
 <p align="center">
   <a href="https://forgeminer.org"><img src="assets/badge_site.svg" alt="site: forgeminer.org"></a>
@@ -36,7 +36,7 @@
 
 ## Обзор
 
-ForgeMiner — высокопроизводительный, полностью нативный NVIDIA GPU-майнер. Он работает с картой напрямую через CUDA Driver API — без Python, WSL и лишних рантаймов — поэтому стартует мгновенно и легко идёт даже на слабых ригах. Майнит **Pearl (PRL)**, **QubitCoin (QTC)**, **KawPow** (Ravencoin RVN, Quai QUAI, Neurai XNA), **Cryptix (CYTX)**, **BTX (btx.dev)**, **Xelis (XEL)**, **Conflux (CFX)** и **NOID (Parano1d)** из одного бинарника — монета выбирается одним флагом — и новые монеты в разработке.
+ForgeMiner — высокопроизводительный, полностью нативный NVIDIA GPU-майнер. Он работает с картой напрямую через CUDA Driver API — без Python, WSL и лишних рантаймов — поэтому стартует мгновенно и легко идёт даже на слабых ригах. Майнит **Pearl (PRL)**, **QubitCoin (QTC)**, **KawPow** (Ravencoin RVN, Quai QUAI, Neurai XNA), **Cryptix (CYTX)**, **BTX (btx.dev)**, **Xelis (XEL)**, **Conflux (CFX)**, **NOID (Parano1d)** и **Quantus (QTC)** из одного бинарника — монета выбирается одним флагом — и новые монеты в разработке.
 
 Для каждого алгоритма есть отдельная сборка под архитектуру каждой карты — она выбирается автоматически при запуске, так каждая GPU работает на пике. Риги с CMP 40HX, 50HX, 70HX или 90HX получают встроенный аппаратный разлок на Linux одной командой, на любом ядре — см. [Аппаратный разлок CMP](#аппаратный-разлок-cmp-linux).
 
@@ -64,11 +64,11 @@ ForgeMiner — высокопроизводительный, полностью 
 
 ### Windows
 1. Скачайте и распакуйте Windows-релиз.
-2. Откройте `.bat` под свою монету/пул/регион и впишите кошелёк и воркер. На каждую монету — своя папка, всего 102 готовых запускатора (`-SSL` = шифрованное соединение):
+2. Откройте `.bat` под свою монету/пул/регион и впишите кошелёк и воркер. На каждую монету — своя папка, всего 110 готовых запускаторов (`-SSL` = шифрованное соединение):
    - `Pearl (PRL)\` — 22: Kryptex, LuckyPool, HeroMiners, BaikalMine, 2Miners, AlphaPool
    - `Ravencoin (RVN)\` — 19 · `Quai (QUAI)\` — 14 · `Neurai (XNA)\` — 12
    - `Conflux (CFX)\` и `Xelis (XEL)\` — по 10
-   - `QubitCoin (QTC)\` — 6 · `BTX\` — 4 · `NOID (Parano1d)\` — 3 · `Cryptix (CYTX)\` — 2
+   - `Quantus (QTC)\` — 8 · `QubitCoin (QTC)\` — 6 · `BTX\` — 4 · `NOID (Parano1d)\` — 3 · `Cryptix (CYTX)\` — 2
 3. Двойной клик — запуск. Для встроенного разгона — «Запуск от имени администратора».
 
 ### Linux
@@ -89,6 +89,8 @@ chmod +x forge
 ./forge --algorithm xelis --wallet YOUR_XEL_WALLET --pool xel.kryptex.network:7019 --worker rig01
 # Conflux (нужна карта от 12 ГБ, см. примечание под таблицей)
 ./forge --algorithm cfx --wallet YOUR_CFX_WALLET --pool cfx.kryptex.network:7027 --worker rig01
+# Quantus (RTX 20-й серии и новее; не путать с QubitCoin — у него тот же тикер QTC)
+./forge --algorithm quantus --wallet YOUR_QUANTUS_WALLET --pool qtc.kryptex.network:7049 --worker rig01
 # NOID (RTX 30-й серии и новее)
 ./forge --algorithm noid --wallet YOUR_NOID_WALLET --pool stratum+ssl://eu2.innovlab.cc:19601 --worker rig01
 ```
@@ -104,14 +106,14 @@ docker run --rm --gpus all hashraptor/forge \
 ```
 
 ### HiveOS
-Кастомный майнер — URL установки `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<версия>/ForgeMiner-<версия>.tar.gz` (например `v1.8.5/ForgeMiner-1.8.5.tar.gz`), шаблон кошелька `%WAL%.%WORKER_NAME%`.
+ForgeMiner есть и во встроенном списке майнеров HiveOS; новые версии появляются там, когда HiveOS их упакует. Чтобы получать каждый релиз в день выхода, используйте кастомный майнер — URL установки `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<версия>/ForgeMiner-<версия>.tar.gz` (например `v1.8.5/ForgeMiner-1.8.5.tar.gz`), шаблон кошелька `%WAL%.%WORKER_NAME%`.
 
 **Для обновления поменяйте версию в этом URL** (в двух местах) и обновите полётник — все риги на нём переустановятся. HiveOS ставит кастомный майнер один раз на каждый URL: если URL не поменялся, он пишет *Already installed* и оставляет старую версию. Риги, настроенные по старой ссылке `.../releases/latest/download/ForgeMiner.tar.gz`, так и остаются на той версии, что поставилась первой; переведите их на версионный URL или выполните на риге `custom-get https://github.com/0xHashRaptor/ForgeMiner/releases/latest/download/ForgeMiner.tar.gz -f` и перезапустите майнер.
 
 *Extra config* принимает **обе** формы, по одной в строке, и их можно смешивать:
 
 ```
-FORGE_ALGO=xelis            # или pearlhash / qhash / kawpow / cryptix / btx / cfx / noid
+FORGE_ALGO=xelis            # или pearlhash / qhash / kawpow / cryptix / btx / cfx / noid / quantus
 FORGE_COIN=xna              # только для KawPow: rvn | quai | xna
 --gpu 0,1,3                 # майнить только эти карты
 --cclk 1500 --moff 1000     # разгон: также --coff / --mclk / --plimit
@@ -164,18 +166,18 @@ NOID работает на RTX 30-й серии и новее, включая CM
 - **Встроенный разгон и кулеры** — фикс частот, оффсеты, лимит мощности и управление кулерами прямо из майнера — свой разгон на каждую карту. Без сторонних утилит.
 - **Термозащита** — `--temp-limit` / `--temp-resume` сами ставят карту на паузу при перегреве и возобновляют майнинг после остывания.
 - **Multi-pool с failover** — обычный Stratum для всех монет. Шифрованный пул определяется сам, поэтому обычного `host:port` достаточно независимо от того, работает пул по TLS или нет; перечислите несколько адресов через запятую, и майнер перейдёт на следующий, когда пул отвалится.
-- **Живой дашборд и API только для чтения** — хешрейт по картам, температуры (в т.ч. VRAM на Windows), частоты, кулеры, мощность и шары — плюс JSON, Prometheus и Claymore-совместимые эндпоинты.
+- **Живой дашборд и API только для чтения** — таблица по картам закреплена сверху, лог прокручивается под ней (клавиша `L` — классический вид). Хешрейт по картам, температуры (в т.ч. VRAM на Windows), частоты, кулеры, мощность и шары, плюс показатель доставки — какую долю хешрейта пул реально засчитывает, — и эндпоинты JSON, Prometheus и Claymore-совместимый.
 - **Готов к HiveOS** — вставляется в слот кастомного майнера.
 
 ---
 
 ## Опции
 
-У любого флага командной строки есть двойник-переменная `FORGE_*` — удобно для *Extra config* в HiveOS и `.bat`.
+У большинства флагов командной строки есть двойник-переменная `FORGE_*` — удобно для *Extra config* в HiveOS и `.bat`.
 
 | Флаг | Env | Описание |
 |------|-----|----------|
-| `--algorithm` | `FORGE_ALGO` | `pearlhash`, `qhash`, `kawpow`, `cryptix`, `btx`, `xelis`, `cfx` или `noid`. |
+| `--algorithm` | `FORGE_ALGO` | `pearlhash`, `qhash`, `kawpow`, `cryptix`, `btx`, `xelis`, `cfx`, `noid` или `quantus` (`qhash` — QubitCoin, `quantus` — Quantus: у обеих тикер QTC). |
 | `--coin` | `FORGE_COIN` | Монета KawPow: `rvn`, `quai` или `xna` (определяется по пулу; для Neurai / Vipor задавать явно). |
 | `--pool` | `FORGE_POOL` | Пул `host:port`. TLS определяется автоматически — префикс `ssl://` нужен только чтобы навязать его. Несколько адресов через запятую для failover. |
 | `--wallet` | `FORGE_WALLET` | Адрес кошелька для выплат. |
@@ -185,6 +187,8 @@ NOID работает на RTX 30-й серии и новее, включая CM
 | `--temp-limit` | `FORGE_TEMP_LIMIT` | Автопауза карты при достижении этой температуры (°C). |
 | `--temp-resume` | `FORGE_TEMP_RESUME` | Возобновить карту после остывания до этой температуры (°C). |
 | `--oc-delay` | `FORGE_OC_DELAY` | Отложить применение разгона на N секунд после старта. |
+| `--tls` | `FORGE_TLS` | Включить (`--tls`) или выключить (`--tls false`) TLS на всех пулах. Обычно не нужно — TLS определяется сам; префикс `ssl://` у отдельного адреса важнее этого флага. |
+| `--no-color` / `--plain` | `FORGE_NO_COLOR` (или `NO_COLOR`) | Вывод только ASCII, без цвета; включается сам, когда консоли нет (PSEXEC, конвейер, cron). |
 | `--log` | `FORGE_LOG` | Сохранять вывод в файл (вместе с таблицами, без цветовых кодов). По умолчанию выключено, пишет в конец. |
 | `--v1-tui` | — | Запуститься в классическом прокручивающемся виде вместо закреплённой панели. Клавиша `L` переключает в любой момент. |
 | `--cmp-install` | — | Linux: поставить аппаратный разлок для CMP 40HX / 50HX / 70HX / 90HX (см. [ниже](#аппаратный-разлок-cmp-linux)). |
@@ -271,7 +275,7 @@ CMP 40HX, 50HX, 70HX и 90HX с завода задушены аппаратно
 | **Pascal** | GTX 10-й серии · P104-100 · P106 · P108 (8 ГБ майнинг-карты) |
 | **CMP** | 170HX · 90HX · 70HX · 50HX · 40HX · 30HX *(драйвер 545+)*. 40HX/50HX/70HX/90HX получают встроенный [аппаратный разлок](#аппаратный-разлок-cmp-linux) на Linux; 30HX — постоянное аппаратное ограничение, никогда не будет поддержана; 170HX нужен отдельный инструмент. |
 
-*Все монеты работают на каждом из перечисленных поколений, кроме трёх: **BTX** и **Conflux** нужен Turing (RTX 20 / CMP 40HX-70HX) или новее, на Pascal, Volta и CMP 170HX они не идут; **NOID** нужен Ampere (RTX 30 / CMP 90HX) или новее.*
+*Все монеты работают на каждом из перечисленных поколений, кроме четырёх: **BTX**, **Conflux** и **Quantus** нужен Turing (RTX 20 / CMP 40HX-70HX) или новее, на Pascal, Volta и CMP 170HX они не идут; **NOID** нужен Ampere (RTX 30 / CMP 90HX) или новее (кроме CMP 170HX).*
 
 ---
 
