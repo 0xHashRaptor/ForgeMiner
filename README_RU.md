@@ -7,7 +7,7 @@
 <p align="center"><b>Быстрый нативный NVIDIA GPU-майнер — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX) и NOID (Parano1d)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.8.4"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.8.5"></a>
   <a href="#загрузка"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#поддерживаемые-карты"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -104,7 +104,7 @@ docker run --rm --gpus all hashraptor/forge \
 ```
 
 ### HiveOS
-Кастомный майнер — URL установки `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<версия>/ForgeMiner-<версия>.tar.gz` (например `v1.8.4/ForgeMiner-1.8.4.tar.gz`), шаблон кошелька `%WAL%.%WORKER_NAME%`.
+Кастомный майнер — URL установки `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<версия>/ForgeMiner-<версия>.tar.gz` (например `v1.8.5/ForgeMiner-1.8.5.tar.gz`), шаблон кошелька `%WAL%.%WORKER_NAME%`.
 
 **Для обновления поменяйте версию в этом URL** (в двух местах) и обновите полётник — все риги на нём переустановятся. HiveOS ставит кастомный майнер один раз на каждый URL: если URL не поменялся, он пишет *Already installed* и оставляет старую версию. Риги, настроенные по старой ссылке `.../releases/latest/download/ForgeMiner.tar.gz`, так и остаются на той версии, что поставилась первой; переведите их на версионный URL или выполните на риге `custom-get https://github.com/0xHashRaptor/ForgeMiner/releases/latest/download/ForgeMiner.tar.gz -f` и перезапустите майнер.
 
