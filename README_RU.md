@@ -7,7 +7,7 @@
 <p align="center"><b>Быстрый нативный NVIDIA GPU-майнер — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d) и Quantus (QTC)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.8.5"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.8.6"></a>
   <a href="#загрузка"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#поддерживаемые-карты"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | Volta | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -82,14 +82,13 @@ chmod +x forge
 ./forge --algorithm kawpow --wallet YOUR_RVN_WALLET --pool rvn.kryptex.network:7031 --worker rig01
 # Cryptix
 ./forge --algorithm cryptix --wallet YOUR_CYTX_WALLET --pool cytx.baikalmine.com:9010 --worker rig01
-# BTX — 8666 это новый протокол LuckyPool. Старый порт ещё работает, но ему нужна схема:
-#       --pool stratum+tls://btx-eu.lproute.com:8665
-./forge --algorithm btx --wallet YOUR_BTX_WALLET --pool btx-eu.lproute.com:8666 --worker rig01
+# BTX — btx-pool.com (LuckyPool больше не обслуживает BTX)
+./forge --algorithm btx --wallet YOUR_BTX_WALLET --pool btx-pool.com:3334 --worker rig01
 # Xelis
 ./forge --algorithm xelis --wallet YOUR_XEL_WALLET --pool xel.kryptex.network:7019 --worker rig01
 # Conflux (нужна карта от 12 ГБ, см. примечание под таблицей)
 ./forge --algorithm cfx --wallet YOUR_CFX_WALLET --pool cfx.kryptex.network:7027 --worker rig01
-# Quantus (RTX 20-й серии и новее; не путать с QubitCoin — у него тот же тикер QTC)
+# Quantus (GTX 10-й серии и новее, кроме Tesla V100 / CMP 170HX; не путать с QubitCoin — у него тот же тикер QTC)
 ./forge --algorithm quantus --wallet YOUR_QUANTUS_WALLET --pool qtc.kryptex.network:7049 --worker rig01
 # NOID (RTX 30-й серии и новее)
 ./forge --algorithm noid --wallet YOUR_NOID_WALLET --pool stratum+ssl://eu2.innovlab.cc:19601 --worker rig01
@@ -275,7 +274,7 @@ CMP 40HX, 50HX, 70HX и 90HX с завода задушены аппаратно
 | **Pascal** | GTX 10-й серии · P104-100 · P106 · P108 (8 ГБ майнинг-карты) |
 | **CMP** | 170HX · 90HX · 70HX · 50HX · 40HX · 30HX *(драйвер 545+)*. 40HX/50HX/70HX/90HX получают встроенный [аппаратный разлок](#аппаратный-разлок-cmp-linux) на Linux; 30HX — постоянное аппаратное ограничение, никогда не будет поддержана; 170HX нужен отдельный инструмент. |
 
-*Все монеты работают на каждом из перечисленных поколений, кроме четырёх: **BTX**, **Conflux** и **Quantus** нужен Turing (RTX 20 / CMP 40HX-70HX) или новее, на Pascal, Volta и CMP 170HX они не идут; **NOID** нужен Ampere (RTX 30 / CMP 90HX) или новее (кроме CMP 170HX).*
+*Все монеты работают на каждом из перечисленных поколений, кроме четырёх: **BTX** и **Conflux** нужен Turing (RTX 20 / CMP 40HX-70HX) или новее, на Pascal, Volta и CMP 170HX они не идут; **Quantus** работает начиная с Pascal (GTX 10), но не на Volta (Tesla V100) и CMP 170HX; **NOID** нужен Ampere (RTX 30 / CMP 90HX) или новее (кроме CMP 170HX).*
 
 ---
 

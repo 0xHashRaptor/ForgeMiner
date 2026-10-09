@@ -7,7 +7,7 @@
 <p align="center"><b>A fast, native NVIDIA GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d) and Quantus (QTC)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.8.5"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.8.6"></a>
   <a href="#download"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#supported-gpus"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | Volta | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -82,14 +82,13 @@ chmod +x forge
 ./forge --algorithm kawpow --wallet YOUR_RVN_WALLET --pool rvn.kryptex.network:7031 --worker rig01
 # Cryptix
 ./forge --algorithm cryptix --wallet YOUR_CYTX_WALLET --pool cytx.baikalmine.com:9010 --worker rig01
-# BTX — 8666 is LuckyPool's new protocol. Its old port is still up and needs the scheme:
-#       --pool stratum+tls://btx-eu.lproute.com:8665
-./forge --algorithm btx --wallet YOUR_BTX_WALLET --pool btx-eu.lproute.com:8666 --worker rig01
+# BTX — btx-pool.com (LuckyPool no longer serves BTX)
+./forge --algorithm btx --wallet YOUR_BTX_WALLET --pool btx-pool.com:3334 --worker rig01
 # Xelis
 ./forge --algorithm xelis --wallet YOUR_XEL_WALLET --pool xel.kryptex.network:7019 --worker rig01
 # Conflux (needs a 12 GB card; see the note under the table below)
 ./forge --algorithm cfx --wallet YOUR_CFX_WALLET --pool cfx.kryptex.network:7027 --worker rig01
-# Quantus (RTX 20-series and newer; not QubitCoin, which also uses the ticker QTC)
+# Quantus (GTX 10-series and newer, not Tesla V100 / CMP 170HX; not QubitCoin, which also uses the ticker QTC)
 ./forge --algorithm quantus --wallet YOUR_QUANTUS_WALLET --pool qtc.kryptex.network:7049 --worker rig01
 # NOID (RTX 30-series and newer)
 ./forge --algorithm noid --wallet YOUR_NOID_WALLET --pool stratum+ssl://eu2.innovlab.cc:19601 --worker rig01
@@ -275,7 +274,7 @@ Kernels are tuned per architecture, so a whole generation is covered — desktop
 | **Pascal** | GTX 10-series · P104-100 · P106 · P108 (8 GB mining cards) |
 | **CMP** | 170HX · 90HX · 70HX · 50HX · 40HX · 30HX *(driver 545+)*. 40HX/50HX/70HX/90HX get built-in [hardware unlock](#cmp-hardware-unlock-linux) on Linux; 30HX is a permanent hardware limitation, never supported; 170HX needs a separate tool. |
 
-*Every coin runs on every listed generation except four: **BTX**, **Conflux** and **Quantus** need Turing (RTX 20 / CMP 40HX-70HX) or newer and do not run on Pascal, Volta or the CMP 170HX; **NOID** needs Ampere (RTX 30 / CMP 90HX) or newer (not the CMP 170HX).*
+*Every coin runs on every listed generation except four: **BTX** and **Conflux** need Turing (RTX 20 / CMP 40HX-70HX) or newer and do not run on Pascal, Volta or the CMP 170HX; **Quantus** runs from Pascal (GTX 10) up but not on Volta (Tesla V100) or the CMP 170HX; **NOID** needs Ampere (RTX 30 / CMP 90HX) or newer (not the CMP 170HX).*
 
 ---
 
