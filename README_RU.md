@@ -7,7 +7,7 @@
 <p align="center"><b>Быстрый нативный NVIDIA GPU-майнер — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d) и Quantus (QTC)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.8.6"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.8.7"></a>
   <a href="#загрузка"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#поддерживаемые-карты"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | Volta | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -86,11 +86,11 @@ chmod +x forge
 ./forge --algorithm btx --wallet YOUR_BTX_WALLET --pool btx-pool.com:3334 --worker rig01
 # Xelis
 ./forge --algorithm xelis --wallet YOUR_XEL_WALLET --pool xel.kryptex.network:7019 --worker rig01
-# Conflux (нужна карта от 12 ГБ, см. примечание под таблицей)
+# Conflux (нужно больше 8 ГБ видеопамяти, см. примечание под таблицей)
 ./forge --algorithm cfx --wallet YOUR_CFX_WALLET --pool cfx.kryptex.network:7027 --worker rig01
-# Quantus (GTX 10-й серии и новее, кроме Tesla V100 / CMP 170HX; не путать с QubitCoin — у него тот же тикер QTC)
+# Quantus (GTX 10-й серии и новее, включая Tesla V100; кроме CMP 170HX. Не путать с QubitCoin — у него тот же тикер QTC)
 ./forge --algorithm quantus --wallet YOUR_QUANTUS_WALLET --pool qtc.kryptex.network:7049 --worker rig01
-# NOID (RTX 30-й серии и новее)
+# NOID (GTX 10-й серии и новее, включая Tesla V100; кроме CMP 170HX)
 ./forge --algorithm noid --wallet YOUR_NOID_WALLET --pool stratum+ssl://eu2.innovlab.cc:19601 --worker rig01
 ```
 
@@ -143,8 +143,8 @@ FORGE_COIN=xna              # только для KawPow: rvn | quai | xna
 | Quai (QUAI) | `kawpow` `--coin quai` | Kryptex · HeroMiners · k1pool | 0.7% |
 | Neurai (XNA) | `kawpow` `--coin xna` | Kryptex · 2Miners · Vipor | 0.7% |
 
-Conflux требует около **8.6 ГБ видеопамяти**, и это требование медленно растёт вместе с сетью:
-карты на 8 ГБ монету не потянут, на 10 ГБ впритык, от 12 ГБ спокойно. Майнер проверяет карту на
+Conflux требует около **9.4 ГБ видеопамяти** (набор данных 8.7 ГиБ), и это требование медленно растёт вместе с сетью:
+карты на 8 ГБ монету не потянут, на 10 ГБ впритык, от 11 ГБ спокойно. Майнер проверяет карту на
 старте и говорит об этом с реальными числами, а не падает посреди подготовки.
 
 NOID работает на RTX 30-й серии и новее, включая CMP 90HX. На смешанном риге старые карты простаивают
@@ -256,7 +256,7 @@ CMP 40HX, 50HX, 70HX и 90HX с завода задушены аппаратно
 | `sudo forge --cmp-verify` | живой статус разлока по CMP-картам |
 | `sudo forge --cmp-rollback` | вернуть прежний драйвер из бэкапа, ребут |
 
-Можно спокойно оставить `--cmp-install` в конце строки запуска полётника навсегда — если разлок уже стоит, форж напечатает одну строку и сразу идёт майнить. Полная инструкция (проверка, FAQ): **[wiki · CMP аппаратный разлок](https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock-RU)**.
+Можно спокойно оставить `--cmp-install` в конце строки запуска полётника навсегда — если разлок уже стоит, форж напечатает одну строку и сразу идёт майнить; на риге без CMP-карт (полётник, общий с другими ригами) он напечатает одну строку и майнит как обычно. Полная инструкция (проверка, FAQ): **[wiki · CMP аппаратный разлок](https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock-RU)**.
 
 ---
 
@@ -274,7 +274,7 @@ CMP 40HX, 50HX, 70HX и 90HX с завода задушены аппаратно
 | **Pascal** | GTX 10-й серии · P104-100 · P106 · P108 (8 ГБ майнинг-карты) |
 | **CMP** | 170HX · 90HX · 70HX · 50HX · 40HX · 30HX *(драйвер 545+)*. 40HX/50HX/70HX/90HX получают встроенный [аппаратный разлок](#аппаратный-разлок-cmp-linux) на Linux; 30HX — постоянное аппаратное ограничение, никогда не будет поддержана; 170HX нужен отдельный инструмент. |
 
-*Все монеты работают на каждом из перечисленных поколений, кроме четырёх: **BTX** и **Conflux** нужен Turing (RTX 20 / CMP 40HX-70HX) или новее, на Pascal, Volta и CMP 170HX они не идут; **Quantus** работает начиная с Pascal (GTX 10), но не на Volta (Tesla V100) и CMP 170HX; **NOID** нужен Ampere (RTX 30 / CMP 90HX) или новее (кроме CMP 170HX).*
+*Все монеты работают на каждом из перечисленных поколений, с такими исключениями: **BTX** нужен Volta (Tesla V100) или Turing (RTX 20 / CMP 40HX-70HX) и новее, на Pascal и CMP 170HX он не идёт; **Conflux** работает начиная с Pascal на картах с памятью больше 8 ГБ (GTX 1080 Ti, Tesla V100, RTX 20 и новее), кроме CMP 170HX; **Quantus**, **NOID** и **QubitCoin** работают начиная с Pascal (GTX 10), включая Tesla V100, но не на CMP 170HX. Карта, для которой у выбранной монеты нет ядра, скажет об этом одной строкой, остальные карты продолжат майнить.*
 
 ---
 

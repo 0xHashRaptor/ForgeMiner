@@ -7,7 +7,7 @@
 <p align="center"><b>A fast, native NVIDIA GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d) and Quantus (QTC)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.8.6"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.8.7"></a>
   <a href="#download"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#supported-gpus"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | Volta | RTX 20/30/40/50 + CMP"></a>
 </p>
@@ -86,11 +86,11 @@ chmod +x forge
 ./forge --algorithm btx --wallet YOUR_BTX_WALLET --pool btx-pool.com:3334 --worker rig01
 # Xelis
 ./forge --algorithm xelis --wallet YOUR_XEL_WALLET --pool xel.kryptex.network:7019 --worker rig01
-# Conflux (needs a 12 GB card; see the note under the table below)
+# Conflux (needs more than 8 GB of VRAM; see the note under the table below)
 ./forge --algorithm cfx --wallet YOUR_CFX_WALLET --pool cfx.kryptex.network:7027 --worker rig01
-# Quantus (GTX 10-series and newer, not Tesla V100 / CMP 170HX; not QubitCoin, which also uses the ticker QTC)
+# Quantus (GTX 10-series and newer, Tesla V100 included; not the CMP 170HX. Not QubitCoin, which also uses the ticker QTC)
 ./forge --algorithm quantus --wallet YOUR_QUANTUS_WALLET --pool qtc.kryptex.network:7049 --worker rig01
-# NOID (RTX 30-series and newer)
+# NOID (GTX 10-series and newer, Tesla V100 included; not the CMP 170HX)
 ./forge --algorithm noid --wallet YOUR_NOID_WALLET --pool stratum+ssl://eu2.innovlab.cc:19601 --worker rig01
 ```
 
@@ -143,8 +143,8 @@ Ready-made flight sheets: **[forgeminer.org/#flightsheets](https://forgeminer.or
 | Quai (QUAI) | `kawpow` `--coin quai` | Kryptex · HeroMiners · k1pool | 0.7% |
 | Neurai (XNA) | `kawpow` `--coin xna` | Kryptex · 2Miners · Vipor | 0.7% |
 
-Conflux needs about **8.6 GB of video memory**, and that requirement grows slowly as the chain
-advances: 8 GB cards cannot mine it, 10 GB is tight, 12 GB and up is comfortable. The miner checks
+Conflux needs about **9.4 GB of video memory** (an 8.7 GiB dataset), and that requirement grows slowly as the chain
+advances: 8 GB cards cannot mine it, 10 GB is tight, 11 GB and up is fine. The miner checks
 your card at startup and says so with the actual numbers rather than failing partway through.
 
 NOID runs on the RTX 30-series and newer, CMP 90HX included. On a mixed rig the older cards stay idle
@@ -256,7 +256,7 @@ Builds from source for whatever kernel the rig is actually running — no exact 
 | `sudo forge --cmp-verify` | print live unlock status per CMP card |
 | `sudo forge --cmp-rollback` | restore the previous driver from backup, reboot |
 
-Safe to leave `--cmp-install` at the end of the flight-sheet command line permanently — if the unlock is already active, forge prints one line and drops straight into mining. Full guide (verification, FAQ): **[wiki · CMP hardware unlock](https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock)**.
+Safe to leave `--cmp-install` at the end of the flight-sheet command line permanently — if the unlock is already active, forge prints one line and drops straight into mining; on a rig without CMP cards (a flight sheet shared with other rigs) it prints one line and mines as usual. Full guide (verification, FAQ): **[wiki · CMP hardware unlock](https://github.com/0xHashRaptor/ForgeMiner/wiki/CMP-unlock)**.
 
 ---
 
@@ -274,7 +274,7 @@ Kernels are tuned per architecture, so a whole generation is covered — desktop
 | **Pascal** | GTX 10-series · P104-100 · P106 · P108 (8 GB mining cards) |
 | **CMP** | 170HX · 90HX · 70HX · 50HX · 40HX · 30HX *(driver 545+)*. 40HX/50HX/70HX/90HX get built-in [hardware unlock](#cmp-hardware-unlock-linux) on Linux; 30HX is a permanent hardware limitation, never supported; 170HX needs a separate tool. |
 
-*Every coin runs on every listed generation except four: **BTX** and **Conflux** need Turing (RTX 20 / CMP 40HX-70HX) or newer and do not run on Pascal, Volta or the CMP 170HX; **Quantus** runs from Pascal (GTX 10) up but not on Volta (Tesla V100) or the CMP 170HX; **NOID** needs Ampere (RTX 30 / CMP 90HX) or newer (not the CMP 170HX).*
+*Every coin runs on every listed generation, with these exceptions: **BTX** needs Volta (Tesla V100) or Turing (RTX 20 / CMP 40HX-70HX) and newer, not Pascal or the CMP 170HX; **Conflux** runs from Pascal up on cards with more than 8 GB (GTX 1080 Ti, Tesla V100, RTX 20 and newer), not on the CMP 170HX; **Quantus**, **NOID** and **QubitCoin** run from Pascal (GTX 10) up, Tesla V100 included, but not on the CMP 170HX. A card without a kernel for the chosen coin says so in one line and the other cards keep mining.*
 
 ---
 
