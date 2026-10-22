@@ -4,12 +4,12 @@
 
 <h1 align="center">ForgeMiner</h1>
 
-<p align="center"><b>Быстрый нативный NVIDIA GPU-майнер — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d) и Quantus (QTC)</b></p>
+<p align="center"><b>Быстрый нативный GPU-майнер для NVIDIA и AMD — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d) и Quantus (QTC)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.8.8"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.8.9"></a>
   <a href="#загрузка"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
-  <a href="#поддерживаемые-карты"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | Volta | RTX 20/30/40/50 + CMP"></a>
+  <a href="#поддерживаемые-карты"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal–RTX 50 + CMP | AMD RX 5000–9000"></a>
 </p>
 <p align="center">
   <a href="https://forgeminer.org"><img src="assets/badge_site.svg" alt="site: forgeminer.org"></a>
@@ -36,7 +36,7 @@
 
 ## Обзор
 
-ForgeMiner — высокопроизводительный, полностью нативный NVIDIA GPU-майнер. Он работает с картой напрямую через CUDA Driver API — без Python, WSL и лишних рантаймов — поэтому стартует мгновенно и легко идёт даже на слабых ригах. Майнит **Pearl (PRL)**, **QubitCoin (QTC)**, **KawPow** (Ravencoin RVN, Quai QUAI, Neurai XNA), **Cryptix (CYTX)**, **BTX (btx.dev)**, **Xelis (XEL)**, **Conflux (CFX)**, **NOID (Parano1d)** и **Quantus (QTC)** из одного бинарника — монета выбирается одним флагом — и новые монеты в разработке.
+ForgeMiner — высокопроизводительный, полностью нативный GPU-майнер для NVIDIA и AMD. С картами NVIDIA он работает напрямую через CUDA Driver API, с AMD Radeon — через OpenCL, без Python, WSL и лишних рантаймов, поэтому стартует мгновенно и легко идёт даже на слабых ригах. Майнит **Pearl (PRL)**, **QubitCoin (QTC)**, **KawPow** (Ravencoin RVN, Quai QUAI, Neurai XNA), **Cryptix (CYTX)**, **BTX (btx.dev)**, **Xelis (XEL)**, **Conflux (CFX)**, **NOID (Parano1d)** и **Quantus (QTC)** из одного бинарника — монета выбирается одним флагом — и новые монеты в разработке. Карты NVIDIA и AMD майнят вместе в одном риге.
 
 Для каждого алгоритма есть отдельная сборка под архитектуру каждой карты — она выбирается автоматически при запуске, так каждая GPU работает на пике. Риги с CMP 40HX, 50HX, 70HX или 90HX получают встроенный аппаратный разлок на Linux одной командой, на любом ядре — см. [Аппаратный разлок CMP](#аппаратный-разлок-cmp-linux).
 
@@ -56,7 +56,7 @@ ForgeMiner — высокопроизводительный, полностью 
 | Windows | `ForgeMiner-<версия>-windows.zip` |
 | Linux | `ForgeMiner-<версия>-linux.tar.gz` (glibc 2.17+) |
 | HiveOS | `ForgeMiner-<версия>.tar.gz` — URL установки в полётнике |
-| Docker | `docker pull hashraptor/forge` (теги `:latest` и версия) |
+| Docker | `docker pull hashraptor/forge` (теги `:latest` и версия; только NVIDIA) |
 
 ---
 
@@ -68,8 +68,8 @@ ForgeMiner — высокопроизводительный, полностью 
    - `Pearl (PRL)\` — 22: Kryptex, LuckyPool, HeroMiners, BaikalMine, 2Miners, AlphaPool
    - `Ravencoin (RVN)\` — 19 · `Quai (QUAI)\` — 14 · `Neurai (XNA)\` — 12
    - `Conflux (CFX)\` и `Xelis (XEL)\` — по 10
-   - `Quantus (QTC)\` — 8 · `QubitCoin (QTC)\` — 6 · `BTX\` — 4 · `NOID (Parano1d)\` — 3 · `Cryptix (CYTX)\` — 2
-3. Двойной клик — запуск. Для встроенного разгона — «Запуск от имени администратора».
+   - `Quantus (QTC)\` — 9 · `QubitCoin (QTC)\` — 6 · `NOID (Parano1d)\` — 5 · `Cryptix (CYTX)\` — 2 · `BTX\` — 1
+3. Двойной клик — запуск. Для встроенного разгона — «Запуск от имени администратора». Для карт AMD — те же `.bat`.
 
 ### Linux
 ```bash
@@ -88,13 +88,13 @@ chmod +x forge
 ./forge --algorithm xelis --wallet YOUR_XEL_WALLET --pool xel.kryptex.network:7019 --worker rig01
 # Conflux (нужно больше 8 ГБ видеопамяти, см. примечание под таблицей)
 ./forge --algorithm cfx --wallet YOUR_CFX_WALLET --pool cfx.kryptex.network:7027 --worker rig01
-# Quantus (GTX 10-й серии и новее, включая Tesla V100; кроме CMP 170HX. Не путать с QubitCoin — у него тот же тикер QTC)
+# Quantus (GTX 10-й серии и новее, включая Tesla V100, AMD RX 5000 и новее; кроме CMP 170HX. Не путать с QubitCoin — у него тот же тикер QTC)
 ./forge --algorithm quantus --wallet YOUR_QUANTUS_WALLET --pool qtc.kryptex.network:7049 --worker rig01
-# NOID (GTX 10-й серии и новее, включая Tesla V100; кроме CMP 170HX)
+# NOID (GTX 10-й серии и новее, включая Tesla V100, AMD RX 5000 и новее; кроме CMP 170HX)
 ./forge --algorithm noid --wallet YOUR_NOID_WALLET --pool stratum+ssl://eu2.innovlab.cc:19601 --worker rig01
 ```
 
-Linux-сборка собрана под **glibc 2.17**, поэтому работает начиная с CentOS 7 / Ubuntu 14.04 — не нужен ни CUDA toolkit, ни дополнительные библиотеки, только драйвер NVIDIA. Добавьте `--api-bind 0.0.0.0:7777` к любой команде выше и откройте `http://<rig>:7777` — это встроенный дашборд.
+Linux-сборка собрана под **glibc 2.17**, поэтому работает начиная с CentOS 7 / Ubuntu 14.04 — не нужен ни CUDA toolkit, ни дополнительные библиотеки, только драйвер NVIDIA. Картам AMD нужны драйвер amdgpu и OpenCL от AMD (ROCm; в HiveOS есть оба), а майнер запускается от root или пользователем из группы `render`. Добавьте `--api-bind 0.0.0.0:7777` к любой команде выше и откройте `http://<rig>:7777` — это встроенный дашборд.
 
 ### Docker
 ```bash
@@ -103,6 +103,7 @@ docker run --rm --gpus all hashraptor/forge \
   --algorithm pearlhash --wallet YOUR_PRL_WALLET --worker rig01 --pool prl.kryptex.network:7048
 # дашборд: добавьте -p 7777:7777 и --api-bind 0.0.0.0:7777
 ```
+Образ Docker — для карт NVIDIA.
 
 ### HiveOS
 ForgeMiner есть и во встроенном списке майнеров HiveOS; новые версии появляются там, когда HiveOS их упакует. Чтобы получать каждый релиз в день выхода, используйте кастомный майнер — URL установки `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<версия>/ForgeMiner-<версия>.tar.gz` (например `v1.8.5/ForgeMiner-1.8.5.tar.gz`), шаблон кошелька `%WAL%.%WORKER_NAME%`.
@@ -115,8 +116,11 @@ ForgeMiner есть и во встроенном списке майнеров H
 FORGE_ALGO=xelis            # или pearlhash / qhash / kawpow / cryptix / btx / cfx / noid / quantus
 FORGE_COIN=xna              # только для KawPow: rvn | quai | xna
 --gpu 0,1,3                 # майнить только эти карты
+FORGE_AMD=1                 # только карты AMD (FORGE_AMD=0: только NVIDIA)
 --cclk 1500 --moff 1000     # разгон: также --coff / --mclk / --plimit
+--vddoff -50                # смещение напряжения ядра AMD, мВ (также --vddc)
 --fan 70                    # или --fan-curve 45:30,60:55,70:75,80:100
+--proxy socks5://host:port  # все соединения с пулами через прокси
 --cmp-install               # разлочить CMP 40HX/50HX/70HX/90HX на риге (безопасно оставлять навсегда)
 --temp-limit 80 --temp-resume 70   # пауза карты при перегреве, возобновление после остывания
 ```
@@ -131,7 +135,7 @@ FORGE_COIN=xna              # только для KawPow: rvn | quai | xna
 
 | Монета | `--algorithm` | Пулы (готовые `.bat` в релизе) | Комиссия |
 |--------|---------------|--------------------------------|:------:|
-| NOID (Parano1d) | `noid` | InnovLab · Suprnova | 2.5% |
+| NOID (Parano1d) | `noid` | InnovLab · LuckyPool · Suprnova | 2.5% |
 | Pearl (PRL) | `pearlhash` | Kryptex · BaikalMine · HeroMiners · LuckyPool · 2Miners · AlphaPool | 2% |
 | Cryptix (CYTX) | `cryptix` | BaikalMine · CryptixNetwork | 2% |
 | BTX (btx.dev) | `btx` | LuckyPool (lproute) | 2% |
@@ -147,8 +151,8 @@ Conflux требует около **9.4 ГБ видеопамяти** (набо�
 карты на 8 ГБ монету не потянут, на 10 ГБ впритык, от 11 ГБ спокойно. Майнер проверяет карту на
 старте и говорит об этом с реальными числами, а не падает посреди подготовки.
 
-NOID работает на RTX 30-й серии и новее, включая CMP 90HX. На смешанном риге старые карты простаивают
-и один раз об этом пишут, остальные карты рига майнят.
+NOID работает начиная с GTX 10-й серии (Pascal), включая Tesla V100, и на AMD RX 5000 и новее. CMP 170HX
+простаивает и один раз об этом пишет, остальные карты рига майнят.
 
 Комиссия чередуется в потоке (без провалов на графике) и проверяется на пуле. Скрытой второй комиссии нет. *Больше алгоритмов в разработке.*
 
@@ -157,14 +161,15 @@ NOID работает на RTX 30-й серии и новее, включая CM
 ## Возможности
 
 - **Много монет, один бинарь** — Pearl, QubitCoin, KawPow (RVN / QUAI / XNA), Cryptix, BTX, Xelis, Conflux, NOID или Quantus; выбор через `--algorithm`.
-- **Ядра под архитектуру** — отдельное ядро под каждое поколение (Pascal / Volta / Turing / Ampere / Ada / Blackwell), выбирается при старте.
+- **Ядра под архитектуру** — отдельное ядро под каждое поколение (Pascal / Volta / Turing / Ampere / Ada / Blackwell, AMD RDNA 1–4), выбирается при старте.
+- **NVIDIA и AMD в одном риге** — Radeon RX 5000 / 6000 / 7000 / 9000 майнят все монеты, кроме BTX, с теми же командными строками, на Linux / HiveOS и Windows. Смешанный риг работает в одном ForgeMiner: сначала нумеруются карты NVIDIA, потом AMD.
 - **Аппаратный разлок CMP 40HX / 50HX / 70HX / 90HX (Linux)** — одна встроенная команда разлочивает любую из этих карт со стокового задушенного хешрейта до полной скорости; никаких сторонних скриптов и точного совпадения ядра (драйвер 610.43.03 по-прежнему нужен).
-- **Нативно и легко** — напрямую через CUDA Driver API, почти нулевая нагрузка на CPU; без Python, WSL и рантаймов. Стартует за секунду, идёт на слабых хостах и многокарточных ригах.
+- **Нативно и легко** — напрямую через CUDA Driver API на NVIDIA и OpenCL на AMD, почти нулевая нагрузка на CPU; без Python, WSL и рантаймов. Стартует за секунду, идёт на слабых хостах и многокарточных ригах.
 - **Эффективно на забитых ригах** — держит карты загруженными даже при слабом CPU, нескольких инстансах или медленных x1-райзерах.
 - **Один самодостаточный бинарь** — всё внутри; без CUDA runtime и разбросанных файлов ядер. Даже KawPow — один исполняемый файл.
-- **Встроенный разгон и кулеры** — фикс частот, оффсеты, лимит мощности и управление кулерами прямо из майнера — свой разгон на каждую карту. Без сторонних утилит.
+- **Встроенный разгон и кулеры** — фикс частот, оффсеты, лимит мощности и управление кулерами прямо из майнера — свой разгон на каждую карту, а на AMD ещё и напряжение ядра. Без сторонних утилит.
 - **Термозащита** — `--temp-limit` / `--temp-resume` сами ставят карту на паузу при перегреве и возобновляют майнинг после остывания.
-- **Multi-pool с failover** — обычный Stratum для всех монет. Шифрованный пул определяется сам, поэтому обычного `host:port` достаточно независимо от того, работает пул по TLS или нет; перечислите несколько адресов через запятую, и майнер перейдёт на следующий, когда пул отвалится.
+- **Multi-pool с failover** — обычный Stratum для всех монет. Шифрованный пул определяется сам, поэтому обычного `host:port` достаточно независимо от того, работает пул по TLS или нет; перечислите несколько адресов через запятую, и майнер перейдёт на следующий, когда пул отвалится. `--proxy` пускает все соединения через SOCKS5 или HTTP.
 - **Живой дашборд и API только для чтения** — таблица по картам закреплена сверху, лог прокручивается под ней (клавиша `L` — классический вид). Хешрейт по картам, температуры (в т.ч. VRAM на Windows), частоты, кулеры, мощность и шары, плюс показатель доставки — какую долю хешрейта пул реально засчитывает, — и эндпоинты JSON, Prometheus и Claymore-совместимый.
 - **Готов к HiveOS** — вставляется в слот кастомного майнера.
 
@@ -182,7 +187,9 @@ NOID работает на RTX 30-й серии и новее, включая CM
 | `--wallet` | `FORGE_WALLET` | Адрес кошелька для выплат. |
 | `--worker` | `FORGE_WORKER` | Имя воркера/рига. |
 | `--password` | `FORGE_PASS` | Пароль пула (обычно `x`). |
-| `--gpu` | `FORGE_GPU` | Майнить только эти индексы, напр. `0,1,2,6` (порядок `nvidia-smi`). |
+| `--gpu` | `FORGE_GPU` | Майнить только эти индексы, напр. `0,1,2,6` (сначала NVIDIA в порядке `nvidia-smi`, потом AMD по порядку шины PCI). |
+| — | `FORGE_AMD` | `1` — майнить только на картах AMD, `0` — только на NVIDIA. По умолчанию на всех. |
+| `--proxy` | `FORGE_PROXY` | Все соединения с пулами — включая резервные и комиссию — через прокси: `socks5://[user:pass@]host:port` (имена пулов разрешает прокси) или `http://[user:pass@]host:port` (CONNECT). |
 | `--temp-limit` | `FORGE_TEMP_LIMIT` | Автопауза карты при достижении этой температуры (°C). |
 | `--temp-resume` | `FORGE_TEMP_RESUME` | Возобновить карту после остывания до этой температуры (°C). |
 | `--oc-delay` | `FORGE_OC_DELAY` | Отложить применение разгона на N секунд после старта. |
@@ -204,9 +211,11 @@ NOID работает на RTX 30-й серии и новее, включая CM
 |------|-----|----------|
 | `--cclk` | `FORGE_CCLK` | Зафиксировать частоту ядра (МГц). |
 | `--coff` | `FORGE_COFF` | Оффсет ядра (МГц, +/−). |
-| `--mclk` | `FORGE_MCLK` | Зафиксировать частоту памяти (МГц). |
+| `--mclk` | `FORGE_MCLK` | Зафиксировать частоту памяти (МГц). На GTX 10 / RTX 20 `810` держит память на 810 МГц — Quantus и NOID сохраняют хешрейт при меньшей мощности. |
 | `--moff` | `FORGE_MOFF` | Оффсет памяти (МГц, +/−). |
-| `--plimit` | `FORGE_PLIMIT` | Лимит мощности (Вт). |
+| `--plimit` | `FORGE_PLIMIT` | Лимит мощности (Вт; на Windows с AMD — процент от лимита карты). |
+| `--vddoff` | — | AMD: смещение напряжения ядра (мВ; RX 6000 / 7000 / 9000). |
+| `--vddc` | — | AMD: напряжение ядра (мВ; RX 5000 / 6000). |
 | `--fan` | `FORGE_FAN` | Фиксированная скорость кулера (%). |
 | `--fan-curve` | `FORGE_FANCURVE` | Кривая температура→скорость, напр. `45:30,60:55,70:75,80:100`. |
 
@@ -217,7 +226,7 @@ NOID работает на RTX 30-й серии и новее, включая CM
 # * = не трогать карту: GPU 2 остаётся на своих частотах и авто-кулере
 --gpu 0,1,2,6 --cclk 1500,1500,*,1500 --fan 70,70,*,70
 ```
-У GeForce есть аппаратный порог кулера ~30%; при выходе возвращается авто-режим драйвера.
+У GeForce есть аппаратный порог кулера ~30%; при выходе возвращается авто-режим драйвера. Частоты, напряжение, лимит мощности и кулеры AMD при выходе тоже возвращаются.
 </details>
 
 ---
@@ -273,8 +282,12 @@ CMP 40HX, 50HX, 70HX и 90HX с завода задушены аппаратно
 | **Volta** | Tesla V100 |
 | **Pascal** | GTX 10-й серии · P104-100 · P106 · P108 (8 ГБ майнинг-карты) |
 | **CMP** | 170HX · 90HX · 70HX · 50HX · 40HX · 30HX *(драйвер 545+)*. 40HX/50HX/70HX/90HX получают встроенный [аппаратный разлок](#аппаратный-разлок-cmp-linux) на Linux; 30HX — постоянное аппаратное ограничение, никогда не будет поддержана; 170HX нужен отдельный инструмент. |
+| **AMD RDNA 4** (RX 9000) | 9070 XT · 9070 · 9060 XT *(свежий драйвер; на HiveOS свежий образ)* |
+| **AMD RDNA 3** (RX 7000) | 7900 XTX · 7900 XT · 7900 GRE · 7800 XT · 7700 XT · 7600 XT · 7600 |
+| **AMD RDNA 2** (RX 6000) | 6950 XT · 6900 XT · 6800 XT · 6800 · 6750 XT · 6700 XT · 6700 · 6650 XT · 6600 XT · 6600 |
+| **AMD RDNA 1** (RX 5000) | 5700 XT · 5700 · 5600 XT · 5500 XT |
 
-*Все монеты работают на каждом из перечисленных поколений, с такими исключениями: **BTX** нужен Volta (Tesla V100) или Turing (RTX 20 / CMP 40HX-70HX) и новее, на Pascal и CMP 170HX он не идёт; **Conflux** работает начиная с Pascal на картах с памятью больше 8 ГБ (GTX 1080 Ti, Tesla V100, RTX 20 и новее), кроме CMP 170HX; **Quantus**, **NOID** и **QubitCoin** работают начиная с Pascal (GTX 10), включая Tesla V100, но не на CMP 170HX. Карта, для которой у выбранной монеты нет ядра, скажет об этом одной строкой, остальные карты продолжат майнить.*
+*Все монеты работают на каждом из перечисленных поколений, с такими исключениями: **BTX** нужен Volta (Tesla V100) или Turing (RTX 20 / CMP 40HX-70HX) и новее, на Pascal и CMP 170HX он не идёт; **Conflux** работает начиная с Pascal на картах с памятью больше 8 ГБ (GTX 1080 Ti, Tesla V100, RTX 20 и новее), кроме CMP 170HX; **Quantus**, **NOID** и **QubitCoin** работают начиная с Pascal (GTX 10), включая Tesla V100, но не на CMP 170HX. На **AMD** идут все монеты, кроме **BTX**; Conflux и там требует больше 8 ГБ; RX 6500 XT / 6400 и встроенная графика Radeon не поддерживаются. Карта, для которой у выбранной монеты нет ядра, скажет об этом одной строкой, остальные карты продолжат майнить.*
 
 ---
 
@@ -288,4 +301,4 @@ CMP 40HX, 50HX, 70HX и 90HX с завода задушены аппаратно
 
 ---
 
-<p align="center"><sub>© 2026 ForgeMiner. Не связан с NVIDIA. Майньте ответственно.</sub></p>
+<p align="center"><sub>© 2026 ForgeMiner. Не связан с NVIDIA и AMD. Майньте ответственно.</sub></p>

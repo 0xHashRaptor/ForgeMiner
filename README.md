@@ -4,12 +4,12 @@
 
 <h1 align="center">ForgeMiner</h1>
 
-<p align="center"><b>A fast, native NVIDIA GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d) and Quantus (QTC)</b></p>
+<p align="center"><b>A fast, native NVIDIA and AMD GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d) and Quantus (QTC)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.8.8"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.8.9"></a>
   <a href="#download"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
-  <a href="#supported-gpus"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal | Volta | RTX 20/30/40/50 + CMP"></a>
+  <a href="#supported-gpus"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal–RTX 50 + CMP | AMD RX 5000–9000"></a>
 </p>
 <p align="center">
   <a href="https://forgeminer.org"><img src="assets/badge_site.svg" alt="site: forgeminer.org"></a>
@@ -36,7 +36,7 @@
 
 ## Overview
 
-ForgeMiner is a high-performance, fully native NVIDIA GPU miner. It talks to the GPU directly through the CUDA Driver API — no Python, no WSL, no extra runtimes — so it starts instantly and runs lean even on low-spec rigs. It mines **Pearl (PRL)**, **QubitCoin (QTC)**, **KawPow** (Ravencoin RVN, Quai QUAI, Neurai XNA), **Cryptix (CYTX)**, **BTX (btx.dev)**, **Xelis (XEL)**, **Conflux (CFX)**, **NOID (Parano1d)** and **Quantus (QTC)** from a single binary — pick the coin with one flag — and more coins are on the way.
+ForgeMiner is a high-performance, fully native NVIDIA and AMD GPU miner. It talks to NVIDIA cards directly through the CUDA Driver API and to AMD Radeon through OpenCL — no Python, no WSL, no extra runtimes — so it starts instantly and runs lean even on low-spec rigs. It mines **Pearl (PRL)**, **QubitCoin (QTC)**, **KawPow** (Ravencoin RVN, Quai QUAI, Neurai XNA), **Cryptix (CYTX)**, **BTX (btx.dev)**, **Xelis (XEL)**, **Conflux (CFX)**, **NOID (Parano1d)** and **Quantus (QTC)** from a single binary — pick the coin with one flag — and more coins are on the way. NVIDIA and AMD cards mine side by side in one rig.
 
 Every algorithm ships a separate per-architecture build for each supported card, auto-selected at launch, so each GPU runs at its peak. Rigs with CMP 40HX, 50HX, 70HX or 90HX get built-in hardware unlock on Linux via one command, on any kernel — see [CMP hardware unlock](#cmp-hardware-unlock-linux).
 
@@ -56,7 +56,7 @@ Grab the latest build from the [**Releases**](https://github.com/0xHashRaptor/Fo
 | Windows | `ForgeMiner-<version>-windows.zip` |
 | Linux | `ForgeMiner-<version>-linux.tar.gz` (glibc 2.17+) |
 | HiveOS | `ForgeMiner-<version>.tar.gz` — the flight sheet's installation URL |
-| Docker | `docker pull hashraptor/forge` (tags `:latest` and the version) |
+| Docker | `docker pull hashraptor/forge` (tags `:latest` and the version; NVIDIA only) |
 
 ---
 
@@ -68,8 +68,8 @@ Grab the latest build from the [**Releases**](https://github.com/0xHashRaptor/Fo
    - `Pearl (PRL)\` — 22: Kryptex, LuckyPool, HeroMiners, BaikalMine, 2Miners, AlphaPool
    - `Ravencoin (RVN)\` — 19 · `Quai (QUAI)\` — 14 · `Neurai (XNA)\` — 12
    - `Conflux (CFX)\` and `Xelis (XEL)\` — 10 each
-   - `Quantus (QTC)\` — 8 · `QubitCoin (QTC)\` — 6 · `BTX\` — 4 · `NOID (Parano1d)\` — 3 · `Cryptix (CYTX)\` — 2
-3. Double-click to start. Run as Administrator to apply the built-in overclock.
+   - `Quantus (QTC)\` — 9 · `QubitCoin (QTC)\` — 6 · `NOID (Parano1d)\` — 5 · `Cryptix (CYTX)\` — 2 · `BTX\` — 1
+3. Double-click to start. Run as Administrator to apply the built-in overclock. AMD cards use the same `.bat` files.
 
 ### Linux
 ```bash
@@ -88,13 +88,13 @@ chmod +x forge
 ./forge --algorithm xelis --wallet YOUR_XEL_WALLET --pool xel.kryptex.network:7019 --worker rig01
 # Conflux (needs more than 8 GB of VRAM; see the note under the table below)
 ./forge --algorithm cfx --wallet YOUR_CFX_WALLET --pool cfx.kryptex.network:7027 --worker rig01
-# Quantus (GTX 10-series and newer, Tesla V100 included; not the CMP 170HX. Not QubitCoin, which also uses the ticker QTC)
+# Quantus (GTX 10-series and newer, Tesla V100 included, AMD RX 5000 and newer; not the CMP 170HX. Not QubitCoin, which also uses the ticker QTC)
 ./forge --algorithm quantus --wallet YOUR_QUANTUS_WALLET --pool qtc.kryptex.network:7049 --worker rig01
-# NOID (GTX 10-series and newer, Tesla V100 included; not the CMP 170HX)
+# NOID (GTX 10-series and newer, Tesla V100 included, AMD RX 5000 and newer; not the CMP 170HX)
 ./forge --algorithm noid --wallet YOUR_NOID_WALLET --pool stratum+ssl://eu2.innovlab.cc:19601 --worker rig01
 ```
 
-The Linux binary is built against **glibc 2.17**, so it runs on anything from CentOS 7 / Ubuntu 14.04 upwards — no CUDA toolkit, no extra libraries, just the NVIDIA driver. Add `--api-bind 0.0.0.0:7777` to any of the commands above and open `http://<rig>:7777` for the built-in dashboard.
+The Linux binary is built against **glibc 2.17**, so it runs on anything from CentOS 7 / Ubuntu 14.04 upwards — no CUDA toolkit, no extra libraries, just the NVIDIA driver. AMD cards need the amdgpu driver and AMD's OpenCL runtime (ROCm; HiveOS has both), and the miner run as root or by a user in the `render` group. Add `--api-bind 0.0.0.0:7777` to any of the commands above and open `http://<rig>:7777` for the built-in dashboard.
 
 ### Docker
 ```bash
@@ -103,6 +103,7 @@ docker run --rm --gpus all hashraptor/forge \
   --algorithm pearlhash --wallet YOUR_PRL_WALLET --worker rig01 --pool prl.kryptex.network:7048
 # dashboard: add -p 7777:7777 and --api-bind 0.0.0.0:7777
 ```
+The Docker image is for NVIDIA cards.
 
 ### HiveOS
 ForgeMiner is also in HiveOS's built-in miner list; new versions appear there once HiveOS packages them. To get every release on day one, use a custom miner flight sheet — installation URL `https://github.com/0xHashRaptor/ForgeMiner/releases/download/v<version>/ForgeMiner-<version>.tar.gz` (e.g. `v1.8.5/ForgeMiner-1.8.5.tar.gz`), wallet template `%WAL%.%WORKER_NAME%`.
@@ -115,8 +116,11 @@ ForgeMiner is also in HiveOS's built-in miner list; new versions appear there on
 FORGE_ALGO=xelis            # or pearlhash / qhash / kawpow / cryptix / btx / cfx / noid / quantus
 FORGE_COIN=xna              # KawPow only: rvn | quai | xna
 --gpu 0,1,3                 # mine only these cards
+FORGE_AMD=1                 # AMD cards only (FORGE_AMD=0: NVIDIA cards only)
 --cclk 1500 --moff 1000     # overclock: also --coff / --mclk / --plimit
+--vddoff -50                # AMD core voltage offset, mV (also --vddc)
 --fan 70                    # or --fan-curve 45:30,60:55,70:75,80:100
+--proxy socks5://host:port  # every pool connection through a proxy
 --cmp-install               # unlock any CMP 40HX/50HX/70HX/90HX on the rig (safe to leave in permanently)
 --temp-limit 80 --temp-resume 70   # pause a card on overheat, resume once it cools
 ```
@@ -131,7 +135,7 @@ Ready-made flight sheets: **[forgeminer.org/#flightsheets](https://forgeminer.or
 
 | Coin | `--algorithm` | Pools (ready-made `.bat` in the release) | Dev fee |
 |------|---------------|-------------------------------------------|:------:|
-| NOID (Parano1d) | `noid` | InnovLab · Suprnova | 2.5% |
+| NOID (Parano1d) | `noid` | InnovLab · LuckyPool · Suprnova | 2.5% |
 | Pearl (PRL) | `pearlhash` | Kryptex · BaikalMine · HeroMiners · LuckyPool · 2Miners · AlphaPool | 2% |
 | Cryptix (CYTX) | `cryptix` | BaikalMine · CryptixNetwork | 2% |
 | BTX (btx.dev) | `btx` | LuckyPool (lproute) | 2% |
@@ -147,8 +151,8 @@ Conflux needs about **9.4 GB of video memory** (an 8.7 GiB dataset), and that re
 advances: 8 GB cards cannot mine it, 10 GB is tight, 11 GB and up is fine. The miner checks
 your card at startup and says so with the actual numbers rather than failing partway through.
 
-NOID runs on the RTX 30-series and newer, CMP 90HX included. On a mixed rig the older cards stay idle
-and say so once, while the rest of the rig mines it.
+NOID runs from the GTX 10-series (Pascal) up, Tesla V100 included, and on AMD RX 5000 and newer. The CMP 170HX
+stays idle and says so once, while the rest of the rig mines it.
 
 The dev fee is interleaved (no graph dips) and verifiable on your pool. No hidden second fee. *More algorithms are on the way.*
 
@@ -157,14 +161,15 @@ The dev fee is interleaved (no graph dips) and verifiable on your pool. No hidde
 ## Features
 
 - **Multiple coins, one binary** — Pearl, QubitCoin, KawPow (RVN / QUAI / XNA), Cryptix, BTX, Xelis, Conflux, NOID or Quantus; select with `--algorithm`.
-- **Architecture-tuned kernels** — a dedicated kernel per GPU generation (Pascal / Volta / Turing / Ampere / Ada / Blackwell), auto-selected at launch.
+- **Architecture-tuned kernels** — a dedicated kernel per GPU generation (Pascal / Volta / Turing / Ampere / Ada / Blackwell, AMD RDNA 1–4), auto-selected at launch.
+- **NVIDIA and AMD in one rig** — Radeon RX 5000 / 6000 / 7000 / 9000 mine every coin except BTX with the same command lines, on Linux / HiveOS and Windows. A mixed rig runs in one ForgeMiner: NVIDIA cards are numbered first, then AMD.
 - **CMP 40HX / 50HX / 70HX / 90HX hardware unlock (Linux)** — one embedded command unlocks any of these cards from the stock throttled hashrate to full speed; no external scripts, no exact kernel requirement (driver 610.43.03 still required).
-- **Native and lightweight** — direct CUDA Driver API, near-zero CPU load; no Python, WSL or extra runtimes. Starts in a second, runs on weak hosts and many-GPU boxes.
+- **Native and lightweight** — direct CUDA Driver API on NVIDIA, OpenCL on AMD, near-zero CPU load; no Python, WSL or extra runtimes. Starts in a second, runs on weak hosts and many-GPU boxes.
 - **Efficient on crowded rigs** — keeps the GPUs fed even with many cards on a weak CPU, several miner instances or slow x1 risers.
 - **One self-contained binary** — everything embedded; no CUDA runtime or loose kernel files to manage. Even KawPow ships as a single executable.
-- **Built-in overclocking & fan control** — lock clocks, apply offsets, set a power limit and drive fans straight from the miner — a different OC per card on mixed rigs. No third-party tool.
+- **Built-in overclocking & fan control** — lock clocks, apply offsets, set a power limit and drive fans straight from the miner — a different OC per card on mixed rigs, and the core voltage on AMD. No third-party tool.
 - **Temperature protection** — `--temp-limit` / `--temp-resume` pause a card automatically if it overheats, and resume once it cools back down.
-- **Multi-pool with fail-over** — standard Stratum for every coin. An encrypted pool is detected on its own, so a bare `host:port` works whether the pool speaks TLS or not; list several addresses through a comma and the miner moves to the next one when a pool drops.
+- **Multi-pool with fail-over** — standard Stratum for every coin. An encrypted pool is detected on its own, so a bare `host:port` works whether the pool speaks TLS or not; list several addresses through a comma and the miner moves to the next one when a pool drops. `--proxy` sends every connection through SOCKS5 or HTTP.
 - **Live dashboard & read-only API** — the per-card table stays pinned at the top with the log scrolling underneath (press `L` for the classic view). Per-GPU hashrate, temps (incl. VRAM on Windows), clocks, fans, power and shares, plus a delivery figure showing how much of the hashrate the pool actually credits — and JSON, Prometheus and Claymore-compatible endpoints.
 - **HiveOS ready** — drops straight into a custom-miner slot.
 
@@ -182,7 +187,9 @@ Most command-line flags have a `FORGE_*` environment-variable twin — handy for
 | `--wallet` | `FORGE_WALLET` | Payout wallet address. |
 | `--worker` | `FORGE_WORKER` | Worker / rig name. |
 | `--password` | `FORGE_PASS` | Pool password (usually `x`). |
-| `--gpu` | `FORGE_GPU` | Mine only these indices, e.g. `0,1,2,6` (`nvidia-smi` order). |
+| `--gpu` | `FORGE_GPU` | Mine only these indices, e.g. `0,1,2,6` (NVIDIA first in `nvidia-smi` order, then AMD in PCI bus order). |
+| — | `FORGE_AMD` | `1` = mine on the AMD cards only, `0` = on the NVIDIA cards only. Both by default. |
+| `--proxy` | `FORGE_PROXY` | Every pool connection — backups and dev fee included — through a proxy: `socks5://[user:pass@]host:port` (the proxy resolves pool names) or `http://[user:pass@]host:port` (CONNECT). |
 | `--temp-limit` | `FORGE_TEMP_LIMIT` | Pause a card automatically once it hits this temperature (°C). |
 | `--temp-resume` | `FORGE_TEMP_RESUME` | Resume a paused card once it cools to this temperature (°C). |
 | `--oc-delay` | `FORGE_OC_DELAY` | Delay applying overclock by N seconds after startup. |
@@ -204,9 +211,11 @@ Most command-line flags have a `FORGE_*` environment-variable twin — handy for
 |------|-----|-------------|
 | `--cclk` | `FORGE_CCLK` | Lock core clock (MHz). |
 | `--coff` | `FORGE_COFF` | Core clock offset (MHz, +/−). |
-| `--mclk` | `FORGE_MCLK` | Lock memory clock (MHz). |
+| `--mclk` | `FORGE_MCLK` | Lock memory clock (MHz). On GTX 10 / RTX 20, `810` holds the memory at 810 MHz — Quantus and NOID keep their hashrate at less power. |
 | `--moff` | `FORGE_MOFF` | Memory clock offset (MHz, +/−). |
-| `--plimit` | `FORGE_PLIMIT` | Power limit (Watts). |
+| `--plimit` | `FORGE_PLIMIT` | Power limit (Watts; on Windows with AMD, percent of the card's limit). |
+| `--vddoff` | — | AMD: core voltage offset (mV; RX 6000 / 7000 / 9000). |
+| `--vddc` | — | AMD: core voltage (mV; RX 5000 / 6000). |
 | `--fan` | `FORGE_FAN` | Fixed fan speed (%). |
 | `--fan-curve` | `FORGE_FANCURVE` | Temperature→speed curve, e.g. `45:30,60:55,70:75,80:100`. |
 
@@ -217,7 +226,7 @@ Most command-line flags have a `FORGE_*` environment-variable twin — handy for
 # * = leave that card alone: GPU 2 keeps its current clocks and automatic fan
 --gpu 0,1,2,6 --cclk 1500,1500,*,1500 --fan 70,70,*,70
 ```
-GeForce cards have a ~30% hardware fan floor; the driver's automatic control is restored on exit.
+GeForce cards have a ~30% hardware fan floor; the driver's automatic control is restored on exit. AMD clocks, voltage, power limit and fans are put back on exit too.
 </details>
 
 ---
@@ -273,8 +282,12 @@ Kernels are tuned per architecture, so a whole generation is covered — desktop
 | **Volta** | Tesla V100 |
 | **Pascal** | GTX 10-series · P104-100 · P106 · P108 (8 GB mining cards) |
 | **CMP** | 170HX · 90HX · 70HX · 50HX · 40HX · 30HX *(driver 545+)*. 40HX/50HX/70HX/90HX get built-in [hardware unlock](#cmp-hardware-unlock-linux) on Linux; 30HX is a permanent hardware limitation, never supported; 170HX needs a separate tool. |
+| **AMD RDNA 4** (RX 9000) | 9070 XT · 9070 · 9060 XT *(recent driver; on HiveOS a current image)* |
+| **AMD RDNA 3** (RX 7000) | 7900 XTX · 7900 XT · 7900 GRE · 7800 XT · 7700 XT · 7600 XT · 7600 |
+| **AMD RDNA 2** (RX 6000) | 6950 XT · 6900 XT · 6800 XT · 6800 · 6750 XT · 6700 XT · 6700 · 6650 XT · 6600 XT · 6600 |
+| **AMD RDNA 1** (RX 5000) | 5700 XT · 5700 · 5600 XT · 5500 XT |
 
-*Every coin runs on every listed generation, with these exceptions: **BTX** needs Volta (Tesla V100) or Turing (RTX 20 / CMP 40HX-70HX) and newer, not Pascal or the CMP 170HX; **Conflux** runs from Pascal up on cards with more than 8 GB (GTX 1080 Ti, Tesla V100, RTX 20 and newer), not on the CMP 170HX; **Quantus**, **NOID** and **QubitCoin** run from Pascal (GTX 10) up, Tesla V100 included, but not on the CMP 170HX. A card without a kernel for the chosen coin says so in one line and the other cards keep mining.*
+*Every coin runs on every listed generation, with these exceptions: **BTX** needs Volta (Tesla V100) or Turing (RTX 20 / CMP 40HX-70HX) and newer, not Pascal or the CMP 170HX; **Conflux** runs from Pascal up on cards with more than 8 GB (GTX 1080 Ti, Tesla V100, RTX 20 and newer), not on the CMP 170HX; **Quantus**, **NOID** and **QubitCoin** run from Pascal (GTX 10) up, Tesla V100 included, but not on the CMP 170HX. On **AMD** every coin runs except **BTX**; Conflux needs more than 8 GB there too; the RX 6500 XT / 6400 and integrated Radeon graphics are not supported. A card without a kernel for the chosen coin says so in one line and the other cards keep mining.*
 
 ---
 
@@ -288,4 +301,4 @@ Kernels are tuned per architecture, so a whole generation is covered — desktop
 
 ---
 
-<p align="center"><sub>© 2026 ForgeMiner. Not affiliated with NVIDIA. Mine responsibly.</sub></p>
+<p align="center"><sub>© 2026 ForgeMiner. Not affiliated with NVIDIA or AMD. Mine responsibly.</sub></p>
