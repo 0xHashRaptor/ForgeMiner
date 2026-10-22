@@ -214,10 +214,12 @@ Most command-line flags have a `FORGE_*` environment-variable twin — handy for
 | `--mclk` | `FORGE_MCLK` | Lock memory clock (MHz). On GTX 10 / RTX 20, `810` holds the memory at 810 MHz — Quantus and NOID keep their hashrate at less power. |
 | `--moff` | `FORGE_MOFF` | Memory clock offset (MHz, +/−). |
 | `--plimit` | `FORGE_PLIMIT` | Power limit (Watts; on Windows with AMD, percent of the card's limit). |
-| `--vddoff` | — | AMD: core voltage offset (mV; RX 6000 / 7000 / 9000). |
-| `--vddc` | — | AMD: core voltage (mV; RX 5000 / 6000). |
+| `--vddoff` | — | AMD: core voltage offset (mV, signed; RX 6000 / 7000 / 9000; alias `--vo`). |
+| `--vddc` | — | AMD: core voltage (mV; RX 5000 / 6000; alias `--vcore`). RX 7000 / 9000 take only the offset. |
 | `--fan` | `FORGE_FAN` | Fixed fan speed (%). |
-| `--fan-curve` | `FORGE_FANCURVE` | Temperature→speed curve, e.g. `45:30,60:55,70:75,80:100`. |
+| `--fan-curve` | `FORGE_FANCURVE` | Temperature→speed curve, e.g. `45:30,60:55,70:75,80:100` (NVIDIA; on AMD use `--fan`). |
+| `--oc-keep` | `FORGE_OC_KEEP=1` | Leave the overclock on the cards when the miner exits. |
+| `--oc-reset` | — | Put the cards back to stock (default power limit, clock locks released, offsets 0) and exit — after a crash or a hard kill. With `--gpu` only those cards. |
 
 ```text
 # per-GPU (values map to --gpu order)
@@ -226,7 +228,7 @@ Most command-line flags have a `FORGE_*` environment-variable twin — handy for
 # * = leave that card alone: GPU 2 keeps its current clocks and automatic fan
 --gpu 0,1,2,6 --cclk 1500,1500,*,1500 --fan 70,70,*,70
 ```
-GeForce cards have a ~30% hardware fan floor; the driver's automatic control is restored on exit. AMD clocks, voltage, power limit and fans are put back on exit too.
+GeForce cards have a ~30% hardware fan floor; the driver's automatic control is restored on exit. AMD clocks, voltage, power limit and fans are put back on exit too (`--oc-keep` leaves the overclock on).
 </details>
 
 ---
