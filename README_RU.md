@@ -65,7 +65,7 @@ ForgeMiner — высокопроизводительный, полностью 
 ### Windows
 1. Скачайте и распакуйте Windows-релиз.
 2. Откройте `.bat` под свою монету/пул/регион и впишите кошелёк и воркер. На каждую монету — своя папка, всего 110 готовых запускаторов (`-SSL` = шифрованное соединение):
-   - `Pearl (PRL)\` — 22: Kryptex, LuckyPool, HeroMiners, BaikalMine, 2Miners, AlphaPool
+   - `Pearl (PRL)\` — 22: HeroMiners, Kryptex, LuckyPool, BaikalMine, 2Miners, AlphaPool
    - `Ravencoin (RVN)\` — 19 · `Quai (QUAI)\` — 14 · `Neurai (XNA)\` — 12
    - `Conflux (CFX)\` и `Xelis (XEL)\` — по 10
    - `Quantus (QTC)\` — 9 · `QubitCoin (QTC)\` — 6 · `NOID (Parano1d)\` — 5 · `Cryptix (CYTX)\` — 2 · `BTX\` — 1
@@ -75,7 +75,7 @@ ForgeMiner — высокопроизводительный, полностью 
 ```bash
 chmod +x forge
 # Pearl
-./forge --algorithm pearlhash --wallet YOUR_PRL_WALLET --pool prl.kryptex.network:7048 --worker rig01
+./forge --algorithm pearlhash --wallet YOUR_PRL_WALLET --pool de.pearl.herominers.com:1200 --worker rig01
 # QubitCoin
 ./forge --algorithm qhash --wallet YOUR_QTC_WALLET --pool ru.luckypool.io:8610 --worker rig01
 # KawPow — RVN / QUAI (монета определяется по пулу) или XNA (задать --coin xna)
@@ -87,9 +87,9 @@ chmod +x forge
 # Xelis
 ./forge --algorithm xelis --wallet YOUR_XEL_WALLET --pool xel.kryptex.network:7019 --worker rig01
 # Conflux (нужно больше 8 ГБ видеопамяти, см. примечание под таблицей)
-./forge --algorithm cfx --wallet YOUR_CFX_WALLET --pool cfx.kryptex.network:7027 --worker rig01
+./forge --algorithm cfx --wallet YOUR_CFX_WALLET --pool de.conflux.herominers.com:1170 --worker rig01
 # Quantus (GTX 10-й серии и новее, включая Tesla V100, AMD RX 400 и новее; кроме CMP 170HX. Не путать с QubitCoin — у него тот же тикер QTC)
-./forge --algorithm quantus --wallet YOUR_QUANTUS_WALLET --pool qtc.kryptex.network:7049 --worker rig01
+./forge --algorithm quantus --wallet YOUR_QUANTUS_WALLET --pool de.quantus.herominers.com:1155 --worker rig01
 # NOID (GTX 10-й серии и новее, включая Tesla V100, AMD RX 400 и новее; кроме CMP 170HX)
 ./forge --algorithm noid --wallet YOUR_NOID_WALLET --pool stratum+ssl://eu2.innovlab.cc:19601 --worker rig01
 # Iron Fish (GTX 10-й серии и новее, AMD RX 400 и новее; карта от 6 ГБ)
@@ -102,7 +102,7 @@ Linux-сборка собрана под **glibc 2.17**, поэтому рабо
 ```bash
 docker pull hashraptor/forge
 docker run --rm --gpus all hashraptor/forge \
-  --algorithm pearlhash --wallet YOUR_PRL_WALLET --worker rig01 --pool prl.kryptex.network:7048
+  --algorithm pearlhash --wallet YOUR_PRL_WALLET --worker rig01 --pool de.pearl.herominers.com:1200
 # дашборд: добавьте -p 7777:7777 и --api-bind 0.0.0.0:7777
 ```
 Образ Docker — для карт NVIDIA.
@@ -139,15 +139,15 @@ FORGE_AMD=1                 # только карты AMD (FORGE_AMD=0: толь
 | Монета | `--algorithm` | Пулы (готовые `.bat` в релизе) | Комиссия |
 |--------|---------------|--------------------------------|:------:|
 | NOID (Parano1d) | `noid` | InnovLab · LuckyPool · Suprnova | 2.5% |
-| Pearl (PRL) | `pearlhash` | Kryptex · BaikalMine · HeroMiners · LuckyPool · 2Miners · AlphaPool | 2% |
+| Pearl (PRL) | `pearlhash` | HeroMiners · Kryptex · BaikalMine · LuckyPool · 2Miners · AlphaPool | 2% |
 | Cryptix (CYTX) | `cryptix` | BaikalMine · CryptixNetwork | 2% |
-| BTX (btx.dev) | `btx` | LuckyPool (lproute) | 2% |
-| Quantus (QTC) | `quantus` | Kryptex · LuckyPool | 2% |
-| Conflux (CFX) | `cfx` | Kryptex · HeroMiners | 1.5% |
+| BTX (btx.dev) | `btx` | btx-pool.com | 2% |
+| Quantus (QTC) | `quantus` | HeroMiners · Kryptex · LuckyPool · BaikalMine | 2% |
+| Conflux (CFX) | `cfx` | HeroMiners · Kryptex | 1.5% |
 | QubitCoin (QTC) | `qhash` | LuckyPool · k1pool | 1% |
 | Xelis (XEL) | `xelis` | Kryptex · HeroMiners | 1% |
 | Ravencoin (RVN) | `kawpow` | Kryptex · HeroMiners · 2Miners · RavenMiner · k1pool | 0.7% |
-| Quai (QUAI) | `kawpow` `--coin quai` | Kryptex · HeroMiners · k1pool | 0.7% |
+| Quai (QUAI) | `kawpow` `--coin quai` | HeroMiners · Kryptex · k1pool | 0.7% |
 | Neurai (XNA) | `kawpow` `--coin xna` | Kryptex · 2Miners · Vipor | 0.7% |
 | Iron Fish (IRON) | `iron` | Kryptex · HeroMiners | 0.7% |
 
