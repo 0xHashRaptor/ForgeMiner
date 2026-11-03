@@ -4,10 +4,10 @@
 
 <h1 align="center">ForgeMiner</h1>
 
-<p align="center"><b>Быстрый нативный GPU-майнер для NVIDIA и AMD — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d) и Quantus (QTC)</b></p>
+<p align="center"><b>Быстрый нативный GPU-майнер для NVIDIA и AMD — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d), Quantus (QTC) и Iron Fish (IRON)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.9.0"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.9.1"></a>
   <a href="#загрузка"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#поддерживаемые-карты"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal–RTX 50 + CMP | AMD RX 400–9000"></a>
 </p>
@@ -64,11 +64,11 @@ ForgeMiner — высокопроизводительный, полностью 
 
 ### Windows
 1. Скачайте и распакуйте Windows-релиз.
-2. Откройте `.bat` под свою монету/пул/регион и впишите кошелёк и воркер. На каждую монету — своя папка, всего 110 готовых запускаторов (`-SSL` = шифрованное соединение):
+2. Откройте `.bat` под свою монету/пул/регион и впишите кошелёк и воркер. На каждую монету — своя папка, всего 115 готовых запускаторов (`-SSL` = шифрованное соединение):
    - `Pearl (PRL)\` — 22: HeroMiners, Kryptex, LuckyPool, BaikalMine, 2Miners, AlphaPool
    - `Ravencoin (RVN)\` — 19 · `Quai (QUAI)\` — 14 · `Neurai (XNA)\` — 12
    - `Conflux (CFX)\` и `Xelis (XEL)\` — по 10
-   - `Quantus (QTC)\` — 9 · `QubitCoin (QTC)\` — 6 · `NOID (Parano1d)\` — 5 · `Cryptix (CYTX)\` — 2 · `BTX\` — 1
+   - `Quantus (QTC)\` — 10 · `QubitCoin (QTC)\` — 6 · `NOID (Parano1d)\` — 5 · `Iron Fish (IRON)\` — 4 · `Cryptix (CYTX)\` — 2 · `BTX\` — 1
 3. Двойной клик — запуск. Для встроенного разгона — «Запуск от имени администратора». Для карт AMD — те же `.bat`.
 
 ### Linux
@@ -121,7 +121,7 @@ FORGE_COIN=xna              # только для KawPow: rvn | quai | xna
 --kernel 2                  # Pearl, RTX 30 / 40: ядро с максимальным хешрейтом (по умолчанию 1 = примерно на 7% меньше потребление)
 FORGE_AMD=1                 # только карты AMD (FORGE_AMD=0: только NVIDIA)
 --cclk 1500 --moff 1000     # разгон: также --coff / --mclk / --plimit
---vddoff -50                # смещение напряжения ядра, мВ: AMD и NVIDIA RTX 40 на Linux (также --vddc)
+--vddoff -50                # смещение напряжения ядра, мВ: AMD и NVIDIA RTX 20-50 на Linux (также --vddc)
 --fan 70                    # или --fan-curve 45:30,60:55,70:75,80:100
 --proxy socks5://host:port  # все соединения с пулами через прокси
 --cmp-install               # разлочить CMP 40HX/50HX/70HX/90HX на риге (безопасно оставлять навсегда)
@@ -138,7 +138,7 @@ FORGE_AMD=1                 # только карты AMD (FORGE_AMD=0: толь
 
 | Монета | `--algorithm` | Пулы (готовые `.bat` в релизе) | Комиссия |
 |--------|---------------|--------------------------------|:------:|
-| NOID (Parano1d) | `noid` | InnovLab · LuckyPool · Suprnova | 2.5% |
+| NOID (Parano1d) | `noid` | InnovLab · LuckyPool · Suprnova | 2% |
 | Pearl (PRL) | `pearlhash` | HeroMiners · Kryptex · BaikalMine · LuckyPool · 2Miners · AlphaPool | 2% |
 | Cryptix (CYTX) | `cryptix` | BaikalMine · CryptixNetwork | 2% |
 | BTX (btx.dev) | `btx` | btx-pool.com | 2% |
@@ -217,13 +217,13 @@ NOID работает начиная с GTX 10-й серии (Pascal), вклю�
 |------|-----|----------|
 | `--cclk` | `FORGE_CCLK` | Зафиксировать частоту ядра (МГц). |
 | `--coff` | `FORGE_COFF` | Оффсет ядра (МГц, +/−). |
-| `--mclk` | `FORGE_MCLK` | Зафиксировать частоту памяти (МГц). На GTX 10 / RTX 20 `810` держит память на 810 МГц — Quantus и NOID сохраняют хешрейт при меньшей мощности; после падения память возвращается при следующем запуске. |
+| `--mclk` | `FORGE_MCLK` | Зафиксировать частоту памяти (МГц). На GTX 10 / 16, RTX 20 и CMP — любая частота из списка карты (`810` сохраняет хешрейт Quantus и NOID при меньшей мощности); частота не из списка отклоняется с перечнем; после падения память возвращается при следующем запуске. |
 | `--moff` | `FORGE_MOFF` | Оффсет памяти (МГц, +/−). |
 | `--plimit` | `FORGE_PLIMIT` | Лимит мощности (Вт; на Windows с AMD — процент от лимита карты). |
-| `--vddoff` | — | Смещение напряжения ядра (мВ, со знаком; псевдоним `--vo`): AMD RX 6000 / 7000 / 9000 и NVIDIA RTX 40 на Linux. |
-| `--vddc` | — | Напряжение ядра (мВ; псевдоним `--vcore`): AMD RX 5000 / 6000 (RX 7000 / 9000 принимают только смещение) и NVIDIA RTX 20 / 30 / 50 на Linux. `--voltage-info --gpu <список>` покажет, что предлагает карта; `--voltage-recover` вернёт карту после прерванного запуска. |
+| `--vddoff` | — | Смещение напряжения ядра (мВ, со знаком; псевдоним `--vo`): AMD RX 6000 / 7000 / 9000 и NVIDIA RTX 20 / 30 / 40 / 50 на Linux. |
+| `--vddc` | — | Напряжение ядра (мВ; псевдоним `--vcore`): AMD RX 5000 / 6000 (RX 7000 / 9000 принимают только смещение) и NVIDIA RTX 20 / 30 / 40 / 50 на Linux. `--voltage-info --gpu <список>` покажет, что предлагает карта; `--voltage-recover` вернёт карту после прерванного запуска. |
 | `--fan` | `FORGE_FAN` | Фиксированная скорость кулера (%). |
-| `--fan-curve` | `FORGE_FANCURVE` | Кривая температура→скорость, напр. `45:30,60:55,70:75,80:100` (NVIDIA; на AMD — `--fan`). |
+| `--fan-curve` | `FORGE_FANCURVE` | Кривая температура→скорость, напр. `45:30,60:55,70:75,80:100`; своя кривая на каждую карту через `/` в порядке `--gpu`, `*` оставляет карту драйверу (NVIDIA; на AMD — `--fan`). |
 | `--oc-keep` | `FORGE_OC_KEEP=1` | Оставить разгон на картах после выхода майнера. |
 | `--oc-reset` | — | Вернуть карты в сток (штатный лимит мощности, без фиксации частот, оффсеты 0) и выйти — после падения или жёсткого убийства процесса. С `--gpu` — только эти карты. |
 

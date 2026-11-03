@@ -4,10 +4,10 @@
 
 <h1 align="center">ForgeMiner</h1>
 
-<p align="center"><b>A fast, native NVIDIA and AMD GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d) and Quantus (QTC)</b></p>
+<p align="center"><b>A fast, native NVIDIA and AMD GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d), Quantus (QTC) and Iron Fish (IRON)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.9.0"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.9.1"></a>
   <a href="#download"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#supported-gpus"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal–RTX 50 + CMP | AMD RX 400–9000"></a>
 </p>
@@ -64,11 +64,11 @@ Grab the latest build from the [**Releases**](https://github.com/0xHashRaptor/Fo
 
 ### Windows
 1. Download and unpack the Windows release.
-2. Open the `.bat` for your coin/pool/region and set your wallet and worker. There is one folder per coin, 110 ready-made launchers in all (`-SSL` = encrypted connection):
+2. Open the `.bat` for your coin/pool/region and set your wallet and worker. There is one folder per coin, 115 ready-made launchers in all (`-SSL` = encrypted connection):
    - `Pearl (PRL)\` — 22: HeroMiners, Kryptex, LuckyPool, BaikalMine, 2Miners, AlphaPool
    - `Ravencoin (RVN)\` — 19 · `Quai (QUAI)\` — 14 · `Neurai (XNA)\` — 12
    - `Conflux (CFX)\` and `Xelis (XEL)\` — 10 each
-   - `Quantus (QTC)\` — 9 · `QubitCoin (QTC)\` — 6 · `NOID (Parano1d)\` — 5 · `Cryptix (CYTX)\` — 2 · `BTX\` — 1
+   - `Quantus (QTC)\` — 10 · `QubitCoin (QTC)\` — 6 · `NOID (Parano1d)\` — 5 · `Iron Fish (IRON)\` — 4 · `Cryptix (CYTX)\` — 2 · `BTX\` — 1
 3. Double-click to start. Run as Administrator to apply the built-in overclock. AMD cards use the same `.bat` files.
 
 ### Linux
@@ -121,7 +121,7 @@ FORGE_COIN=xna              # KawPow only: rvn | quai | xna
 --kernel 2                  # Pearl, RTX 30 / 40: the highest-hashrate kernel (default 1 = about 7% less power)
 FORGE_AMD=1                 # AMD cards only (FORGE_AMD=0: NVIDIA cards only)
 --cclk 1500 --moff 1000     # overclock: also --coff / --mclk / --plimit
---vddoff -50                # core voltage offset, mV: AMD, and NVIDIA RTX 40 on Linux (also --vddc)
+--vddoff -50                # core voltage offset, mV: AMD, and NVIDIA RTX 20-50 on Linux (also --vddc)
 --fan 70                    # or --fan-curve 45:30,60:55,70:75,80:100
 --proxy socks5://host:port  # every pool connection through a proxy
 --cmp-install               # unlock any CMP 40HX/50HX/70HX/90HX on the rig (safe to leave in permanently)
@@ -138,7 +138,7 @@ Ready-made flight sheets: **[forgeminer.org/#flightsheets](https://forgeminer.or
 
 | Coin | `--algorithm` | Pools (ready-made `.bat` in the release) | Dev fee |
 |------|---------------|-------------------------------------------|:------:|
-| NOID (Parano1d) | `noid` | InnovLab · LuckyPool · Suprnova | 2.5% |
+| NOID (Parano1d) | `noid` | InnovLab · LuckyPool · Suprnova | 2% |
 | Pearl (PRL) | `pearlhash` | HeroMiners · Kryptex · BaikalMine · LuckyPool · 2Miners · AlphaPool | 2% |
 | Cryptix (CYTX) | `cryptix` | BaikalMine · CryptixNetwork | 2% |
 | BTX (btx.dev) | `btx` | btx-pool.com | 2% |
@@ -217,13 +217,13 @@ Most command-line flags have a `FORGE_*` environment-variable twin — handy for
 |------|-----|-------------|
 | `--cclk` | `FORGE_CCLK` | Lock core clock (MHz). |
 | `--coff` | `FORGE_COFF` | Core clock offset (MHz, +/−). |
-| `--mclk` | `FORGE_MCLK` | Lock memory clock (MHz). On GTX 10 / RTX 20, `810` holds the memory at 810 MHz — Quantus and NOID keep their hashrate at less power; after a crash it is put back at the next start. |
+| `--mclk` | `FORGE_MCLK` | Lock memory clock (MHz). On GTX 10 / 16, RTX 20 and CMP any clock the card lists (`810` keeps Quantus and NOID at full hashrate for less power); a clock the card does not list is refused with the list; after a crash it is put back at the next start. |
 | `--moff` | `FORGE_MOFF` | Memory clock offset (MHz, +/−). |
 | `--plimit` | `FORGE_PLIMIT` | Power limit (Watts; on Windows with AMD, percent of the card's limit). |
-| `--vddoff` | — | Core voltage offset (mV, signed; alias `--vo`): AMD RX 6000 / 7000 / 9000, and NVIDIA RTX 40 on Linux. |
-| `--vddc` | — | Core voltage (mV; alias `--vcore`): AMD RX 5000 / 6000 (RX 7000 / 9000 take only the offset), and NVIDIA RTX 20 / 30 / 50 on Linux. `--voltage-info --gpu <list>` shows what a card offers; `--voltage-recover` puts a card back after an interrupted run. |
+| `--vddoff` | — | Core voltage offset (mV, signed; alias `--vo`): AMD RX 6000 / 7000 / 9000, and NVIDIA RTX 20 / 30 / 40 / 50 on Linux. |
+| `--vddc` | — | Core voltage (mV; alias `--vcore`): AMD RX 5000 / 6000 (RX 7000 / 9000 take only the offset), and NVIDIA RTX 20 / 30 / 40 / 50 on Linux. `--voltage-info --gpu <list>` shows what a card offers; `--voltage-recover` puts a card back after an interrupted run. |
 | `--fan` | `FORGE_FAN` | Fixed fan speed (%). |
-| `--fan-curve` | `FORGE_FANCURVE` | Temperature→speed curve, e.g. `45:30,60:55,70:75,80:100` (NVIDIA; on AMD use `--fan`). |
+| `--fan-curve` | `FORGE_FANCURVE` | Temperature→speed curve, e.g. `45:30,60:55,70:75,80:100`; one curve per card split by `/` in `--gpu` order, `*` leaves a card to the driver (NVIDIA; on AMD use `--fan`). |
 | `--oc-keep` | `FORGE_OC_KEEP=1` | Leave the overclock on the cards when the miner exits. |
 | `--oc-reset` | — | Put the cards back to stock (default power limit, clock locks released, offsets 0) and exit — after a crash or a hard kill. With `--gpu` only those cards. |
 
