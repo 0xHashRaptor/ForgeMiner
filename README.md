@@ -159,7 +159,7 @@ NOID runs from the GTX 10-series (Pascal) up, Tesla V100 included, and on AMD RX
 stays idle and says so once, while the rest of the rig mines it. Iron Fish needs a card with 6 GB or more; the
 4.6 GB dataset is built on the card in seconds.
 
-The dev fee is interleaved (no graph dips) and verifiable on your pool. No hidden second fee. *More algorithms are on the way.*
+The dev fee is interleaved (no graph dips) and verifiable on your pool. *More algorithms are on the way.*
 
 ---
 
