@@ -7,7 +7,7 @@
 <p align="center"><b>A fast, native NVIDIA and AMD GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d), Quantus (QTC) and Iron Fish (IRON)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.9.1"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.9.2"></a>
   <a href="#download"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#supported-gpus"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal–RTX 50 + CMP | AMD RX 400–9000"></a>
 </p>
@@ -217,11 +217,11 @@ Most command-line flags have a `FORGE_*` environment-variable twin — handy for
 |------|-----|-------------|
 | `--cclk` | `FORGE_CCLK` | Lock core clock (MHz). |
 | `--coff` | `FORGE_COFF` | Core clock offset (MHz, +/−). |
-| `--mclk` | `FORGE_MCLK` | Lock memory clock (MHz). On GTX 10 / 16, RTX 20 and CMP any clock the card lists (`810` keeps Quantus and NOID at full hashrate for less power); a clock the card does not list is refused with the list; after a crash it is put back at the next start. |
+| `--mclk` | `FORGE_MCLK` | Lock memory clock (MHz). On GTX 10 / 16, RTX 20 and CMP any clock the card lists (`810` keeps Quantus and NOID at full hashrate for less power); a clock the card does not list is refused with the list. On Linux with NVIDIA driver 595 or newer `405` also holds on the RTX 20 / 30 / 40 / 50, and `5000` / `810` / `405` on the CMP 90HX and CMP 50HX. On exit the memory goes back to what it was, including a clock set in HiveOS; after a crash it is put back at the next start. Pearl on the RTX 20 and the CMP 50HX needs fast memory. |
 | `--moff` | `FORGE_MOFF` | Memory clock offset (MHz, +/−). |
 | `--plimit` | `FORGE_PLIMIT` | Power limit (Watts; on Windows with AMD, percent of the card's limit). |
-| `--vddoff` | — | Core voltage offset (mV, signed; alias `--vo`): AMD RX 6000 / 7000 / 9000, and NVIDIA RTX 20 / 30 / 40 / 50 on Linux. |
-| `--vddc` | — | Core voltage (mV; alias `--vcore`): AMD RX 5000 / 6000 (RX 7000 / 9000 take only the offset), and NVIDIA RTX 20 / 30 / 40 / 50 on Linux. `--voltage-info --gpu <list>` shows what a card offers; `--voltage-recover` puts a card back after an interrupted run. |
+| `--vddoff` | — | Core voltage offset (mV, signed; alias `--vo`): AMD RX 6000 / 7000 / 9000, and NVIDIA RTX 20 / 30 / 40 / 50 on Linux. A request the card does not apply — for example one smaller than its voltage step — is put back and marked not applied (yellow in `Volt`); the card keeps mining. |
+| `--vddc` | — | Core voltage (mV; alias `--vcore`): AMD RX 5000 / 6000 (RX 7000 / 9000 take only the offset), and NVIDIA RTX 20 / 30 / 40 / 50 on Linux. `--voltage-info --gpu <list>` shows what a card offers; after a hard kill the next start puts the voltage and the memory back by itself (`--voltage-recover` does the same by hand). |
 | `--fan` | `FORGE_FAN` | Fixed fan speed (%). |
 | `--fan-curve` | `FORGE_FANCURVE` | Temperature→speed curve, e.g. `45:30,60:55,70:75,80:100`; one curve per card split by `/` in `--gpu` order, `*` leaves a card to the driver (NVIDIA; on AMD use `--fan`). |
 | `--oc-keep` | `FORGE_OC_KEEP=1` | Leave the overclock on the cards when the miner exits. |
@@ -251,8 +251,8 @@ On HiveOS set `FORGE_API=127.0.0.1:7777` in *Extra config*.
 
 | Endpoint | Format | Use with |
 |---|---|---|
-| `GET /` | HTML | The web dashboard (total + per-GPU hashrate, temps, VRAM temp, clocks, fans, power, shares, live graph; dark/light theme). |
-| `GET /summary` | JSON | Grafana, bots, custom dashboards. |
+| `GET /` | HTML | The web dashboard (total + per-GPU hashrate, temps, VRAM temp, clocks, fans, power, core voltage, shares, live graph; dark/light theme). |
+| `GET /summary` | JSON | Grafana, bots, custom dashboards; per card also `voltage_mv` (NVIDIA, Linux). |
 | `GET /metrics` | Prometheus | Grafana dashboards and alerts. |
 | `miner_getstat1` | Claymore | Awesome Miner and the wider monitoring ecosystem. |
 
