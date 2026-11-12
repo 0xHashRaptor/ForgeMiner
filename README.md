@@ -1,8 +1,9 @@
 <p align="center">
-  <img src="assets/forge_logo.png" width="130" alt="ForgeMiner logo">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/header_dark.png">
+    <img src="assets/header_light.png" alt="ForgeMiner">
+  </picture>
 </p>
-
-<h1 align="center">ForgeMiner</h1>
 
 <p align="center"><b>A fast, native NVIDIA and AMD GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d), Quantus (QTC) and Iron Fish (IRON)</b></p>
 
