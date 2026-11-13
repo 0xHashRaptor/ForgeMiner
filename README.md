@@ -5,10 +5,10 @@
   </picture>
 </p>
 
-<p align="center"><b>A fast, native NVIDIA and AMD GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d), Quantus (QTC) and Iron Fish (IRON)</b></p>
+<p align="center"><b>A fast, native NVIDIA and AMD GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d), Quantus (QTC), Iron Fish (IRON), Compute Substrate (CSD) and Zano (ZANO)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 1.9.2"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 2.0.0"></a>
   <a href="#download"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#supported-gpus"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal–RTX 50 + CMP | AMD RX 400–9000"></a>
 </p>
@@ -37,7 +37,7 @@
 
 ## Overview
 
-ForgeMiner is a high-performance, fully native NVIDIA and AMD GPU miner. It talks to NVIDIA cards directly through the CUDA Driver API and to AMD Radeon through OpenCL — no Python, no WSL, no extra runtimes — so it starts instantly and runs lean even on low-spec rigs. It mines **Pearl (PRL)**, **QubitCoin (QTC)**, **KawPow** (Ravencoin RVN, Quai QUAI, Neurai XNA), **Cryptix (CYTX)**, **BTX (btx.dev)**, **Xelis (XEL)**, **Conflux (CFX)**, **NOID (Parano1d)** and **Quantus (QTC)** from a single binary — pick the coin with one flag — and more coins are on the way. NVIDIA and AMD cards mine side by side in one rig.
+ForgeMiner is a high-performance, fully native NVIDIA and AMD GPU miner. It talks to NVIDIA cards directly through the CUDA Driver API and to AMD Radeon through OpenCL — no Python, no WSL, no extra runtimes — so it starts instantly and runs lean even on low-spec rigs. It mines **Pearl (PRL)**, **QubitCoin (QTC)**, **KawPow** (Ravencoin RVN, Quai QUAI, Neurai XNA), **Cryptix (CYTX)**, **BTX (btx.dev)**, **Xelis (XEL)**, **Conflux (CFX)**, **NOID (Parano1d)**, **Quantus (QTC)**, **Iron Fish (IRON)**, **Compute Substrate (CSD)** and **Zano (ZANO)** from a single binary — pick the coin with one flag — and more coins are on the way. NVIDIA and AMD cards mine side by side in one rig.
 
 Every algorithm ships a separate per-architecture build for each supported card, auto-selected at launch, so each GPU runs at its peak. Rigs with CMP 40HX, 50HX, 70HX or 90HX get built-in hardware unlock on Linux via one command, on any kernel — see [CMP hardware unlock](#cmp-hardware-unlock-linux).
 
@@ -65,11 +65,11 @@ Grab the latest build from the [**Releases**](https://github.com/0xHashRaptor/Fo
 
 ### Windows
 1. Download and unpack the Windows release.
-2. Open the `.bat` for your coin/pool/region and set your wallet and worker. There is one folder per coin, 115 ready-made launchers in all (`-SSL` = encrypted connection):
+2. Open the `.bat` for your coin/pool/region and set your wallet and worker. There is one folder per coin, 120 ready-made launchers in all (`-SSL` = encrypted connection):
    - `Pearl (PRL)\` — 22: HeroMiners, Kryptex, LuckyPool, BaikalMine, 2Miners, AlphaPool
    - `Ravencoin (RVN)\` — 19 · `Quai (QUAI)\` — 14 · `Neurai (XNA)\` — 12
    - `Conflux (CFX)\` and `Xelis (XEL)\` — 10 each
-   - `Quantus (QTC)\` — 10 · `QubitCoin (QTC)\` — 6 · `NOID (Parano1d)\` — 5 · `Iron Fish (IRON)\` — 4 · `Cryptix (CYTX)\` — 2 · `BTX\` — 1
+   - `Quantus (QTC)\` — 10 · `QubitCoin (QTC)\` — 6 · `NOID (Parano1d)\` — 5 · `Iron Fish (IRON)\` — 4 · `Zano (ZANO)\` — 3 · `Compute Substrate (CSD)\` — 2 · `Cryptix (CYTX)\` — 2 · `BTX\` — 1
 3. Double-click to start. Run as Administrator to apply the built-in overclock. AMD cards use the same `.bat` files.
 
 ### Linux
@@ -95,6 +95,10 @@ chmod +x forge
 ./forge --algorithm noid --wallet YOUR_NOID_WALLET --pool stratum+ssl://eu2.innovlab.cc:19601 --worker rig01
 # Iron Fish (GTX 10-series and newer, AMD RX 400 and newer; a card with 6 GB or more)
 ./forge --algorithm iron --wallet YOUR_IRON_WALLET --pool iron.kryptex.network:7017 --worker rig01
+# Compute Substrate
+./forge --algorithm csd --wallet YOUR_CSD_WALLET --pool csd-eu.lproute.com:8760 --worker rig01
+# Zano
+./forge --algorithm zano --wallet YOUR_ZANO_WALLET --pool zano.luckypool.io:8866 --worker rig01
 ```
 
 The Linux binary is built against **glibc 2.17**, so it runs on anything from CentOS 7 / Ubuntu 14.04 upwards — no CUDA toolkit, no extra libraries, just the NVIDIA driver. AMD cards need the amdgpu driver and AMD's OpenCL runtime (ROCm; HiveOS has both), and the miner run as root or by a user in the `render` group. Add `--api-bind 0.0.0.0:7777` to any of the commands above and open `http://<rig>:7777` for the built-in dashboard.
@@ -116,10 +120,10 @@ ForgeMiner is also in HiveOS's built-in miner list; new versions appear there on
 *Extra config* accepts **both** forms, one per line, and you can mix them:
 
 ```
-FORGE_ALGO=xelis            # or pearlhash / qhash / kawpow / cryptix / btx / cfx / noid / quantus / iron
+FORGE_ALGO=xelis            # or pearlhash / qhash / kawpow / cryptix / btx / cfx / noid / quantus / iron / csd / zano
 FORGE_COIN=xna              # KawPow only: rvn | quai | xna
 --gpu 0,1,3                 # mine only these cards
---kernel 2                  # Pearl, RTX 30 / 40: the highest-hashrate kernel (default 1 = about 7% less power)
+--kernel 2                  # Pearl, RTX 50: the lower-power kernel (default 1 = the fastest)
 FORGE_AMD=1                 # AMD cards only (FORGE_AMD=0: NVIDIA cards only)
 --cclk 1500 --moff 1000     # overclock: also --coff / --mclk / --plimit
 --vddoff -50                # core voltage offset, mV: AMD, and NVIDIA RTX 20-50 on Linux (also --vddc)
@@ -139,17 +143,19 @@ Ready-made flight sheets: **[forgeminer.org/#flightsheets](https://forgeminer.or
 
 | Coin | `--algorithm` | Pools (ready-made `.bat` in the release) | Dev fee |
 |------|---------------|-------------------------------------------|:------:|
-| NOID (Parano1d) | `noid` | InnovLab · LuckyPool · Suprnova | 2% |
-| Pearl (PRL) | `pearlhash` | HeroMiners · Kryptex · BaikalMine · LuckyPool · 2Miners · AlphaPool | 2% |
 | Cryptix (CYTX) | `cryptix` | BaikalMine · CryptixNetwork | 2% |
 | BTX (btx.dev) | `btx` | btx-pool.com | 2% |
-| Quantus (QTC) | `quantus` | HeroMiners · Kryptex · LuckyPool · BaikalMine | 2% |
 | Conflux (CFX) | `cfx` | HeroMiners · Kryptex | 1.5% |
+| Pearl (PRL) | `pearlhash` | HeroMiners · Kryptex · BaikalMine · LuckyPool · 2Miners · AlphaPool | 1% |
+| Quantus (QTC) | `quantus` | HeroMiners · Kryptex · LuckyPool · BaikalMine | 1% |
+| NOID (Parano1d) | `noid` | InnovLab · LuckyPool · Suprnova | 1% |
+| Compute Substrate (CSD) | `csd` | LuckyPool | 1% |
 | QubitCoin (QTC) | `qhash` | LuckyPool · k1pool | 1% |
 | Xelis (XEL) | `xelis` | Kryptex · HeroMiners | 1% |
 | Ravencoin (RVN) | `kawpow` | Kryptex · HeroMiners · 2Miners · RavenMiner · k1pool | 0.7% |
 | Quai (QUAI) | `kawpow` `--coin quai` | HeroMiners · Kryptex · k1pool | 0.7% |
 | Neurai (XNA) | `kawpow` `--coin xna` | Kryptex · 2Miners · Vipor | 0.7% |
+| Zano (ZANO) | `zano` | LuckyPool | 0.7% |
 | Iron Fish (IRON) | `iron` | Kryptex · HeroMiners | 0.7% |
 
 Conflux needs about **9.4 GB of video memory** (an 8.7 GiB dataset), and that requirement grows slowly as the chain
@@ -166,7 +172,7 @@ The dev fee is interleaved (no graph dips) and verifiable on your pool. *More al
 
 ## Features
 
-- **Multiple coins, one binary** — Pearl, QubitCoin, KawPow (RVN / QUAI / XNA), Cryptix, BTX, Xelis, Conflux, NOID, Quantus or Iron Fish; select with `--algorithm`.
+- **Multiple coins, one binary** — Pearl, QubitCoin, KawPow (RVN / QUAI / XNA), Cryptix, BTX, Xelis, Conflux, NOID, Quantus, Iron Fish, Compute Substrate or Zano; select with `--algorithm`.
 - **Architecture-tuned kernels** — a dedicated kernel per GPU generation (Pascal / Volta / Turing / Ampere / Ada / Blackwell, AMD RDNA 1–4), auto-selected at launch.
 - **NVIDIA and AMD in one rig** — Radeon RX 400 / 500 and RX 5000 / 6000 / 7000 / 9000 mine every coin except BTX with the same command lines, on Linux / HiveOS and Windows. A mixed rig runs in one ForgeMiner: NVIDIA cards are numbered first, then AMD.
 - **CMP 40HX / 50HX / 70HX / 90HX hardware unlock (Linux)** — one embedded command unlocks any of these cards from the stock throttled hashrate to full speed; no external scripts, no exact kernel requirement (driver 610.43.03 still required).
@@ -174,7 +180,7 @@ The dev fee is interleaved (no graph dips) and verifiable on your pool. *More al
 - **Efficient on crowded rigs** — keeps the GPUs fed even with many cards on a weak CPU, several miner instances or slow x1 risers.
 - **One self-contained binary** — everything embedded; no CUDA runtime or loose kernel files to manage. Even KawPow ships as a single executable.
 - **Built-in overclocking & fan control** — lock clocks, apply offsets, set a power limit and drive fans straight from the miner — a different OC per card on mixed rigs, and the core voltage on AMD. No third-party tool.
-- **Temperature protection** — `--temp-limit` / `--temp-resume` pause a card automatically if it overheats, and resume once it cools back down.
+- **Temperature protection** — `--temp-limit` / `--temp-resume` pause a card automatically if its core overheats, and resume once it cools back down; `--mem-temp-limit` / `--mem-temp-resume` do the same for the memory on cards that report it.
 - **Multi-pool with fail-over** — standard Stratum for every coin. An encrypted pool is detected on its own, so a bare `host:port` works whether the pool speaks TLS or not; list several addresses through a comma and the miner moves to the next one when a pool drops. `--proxy` sends every connection through SOCKS5 or HTTP.
 - **Live dashboard & read-only API** — the per-card table stays pinned at the top with the log scrolling underneath (press `L` for the classic view). Per-GPU hashrate, temps (incl. VRAM on Windows), clocks, fans, power and shares, plus a delivery figure showing how much of the hashrate the pool actually credits — and JSON, Prometheus and Claymore-compatible endpoints.
 - **HiveOS ready** — drops straight into a custom-miner slot.
@@ -187,7 +193,7 @@ Most command-line flags have a `FORGE_*` environment-variable twin — handy for
 
 | Flag | Env | Description |
 |------|-----|-------------|
-| `--algorithm` | `FORGE_ALGO` | `pearlhash`, `qhash`, `kawpow`, `cryptix`, `btx`, `xelis`, `cfx`, `noid`, `quantus` or `iron` (`qhash` = QubitCoin, `quantus` = Quantus — both use the ticker QTC). |
+| `--algorithm` | `FORGE_ALGO` | `pearlhash`, `qhash`, `kawpow`, `cryptix`, `btx`, `xelis`, `cfx`, `noid`, `quantus`, `iron`, `csd` (Compute Substrate) or `zano` (`qhash` = QubitCoin, `quantus` = Quantus — both use the ticker QTC). |
 | `--coin` | `FORGE_COIN` | KawPow coin: `rvn`, `quai` or `xna` (auto-detected from the pool; set explicitly for Neurai / Vipor). |
 | `--pool` | `FORGE_POOL` | Pool `host:port`. TLS is detected automatically — prefix with `ssl://` only to force it. Comma-separate several for fail-over. |
 | `--wallet` | `FORGE_WALLET` | Payout wallet address. |
@@ -195,10 +201,12 @@ Most command-line flags have a `FORGE_*` environment-variable twin — handy for
 | `--password` | `FORGE_PASS` | Pool password (usually `x`). |
 | `--gpu` | `FORGE_GPU` | Mine only these indices, e.g. `0,1,2,6` (NVIDIA first in `nvidia-smi` order, then AMD in PCI bus order). |
 | — | `FORGE_AMD` | `1` = mine on the AMD cards only, `0` = on the NVIDIA cards only. Both by default. |
-| `--kernel` | `FORGE_KERNEL` | Pearl on the RTX 30 / 40 series: `1` (default) draws about 7% less board power for a hashrate loss of under half a percent; `2` is the previous, highest-hashrate kernel. No effect on other cards. |
+| `--kernel` | `FORGE_KERNEL` | Pearl on the RTX 50 series: `1` (default) is the fastest kernel; `2` draws about 2% less board power for about 1% less hashrate. Both need NVIDIA driver 580 or newer. Every other card has one Pearl kernel and ignores the option. |
 | `--proxy` | `FORGE_PROXY` | Every pool connection — backups and dev fee included — through a proxy: `socks5://[user:pass@]host:port` (the proxy resolves pool names) or `http://[user:pass@]host:port` (CONNECT). |
-| `--temp-limit` | `FORGE_TEMP_LIMIT` | Pause a card automatically once it hits this temperature (°C). |
-| `--temp-resume` | `FORGE_TEMP_RESUME` | Resume a paused card once it cools to this temperature (°C). |
+| `--temp-limit` | `FORGE_TEMP_LIMIT` | Pause a card automatically once its core hits this temperature (°C). |
+| `--temp-resume` | `FORGE_TEMP_RESUME` | Resume a paused card once its core cools to this temperature (°C; default: the limit minus 8). |
+| `--mem-temp-limit` | `FORGE_MEM_TEMP_LIMIT` | The same for the memory temperature, on cards that report one (Windows; GDDR6X / GDDR7 boards). |
+| `--mem-temp-resume` | `FORGE_MEM_TEMP_RESUME` | Resume once the memory cools to this temperature (°C; default: the limit minus 8). |
 | `--oc-delay` | `FORGE_OC_DELAY` | Delay applying overclock by N seconds after startup. |
 | `--tls` | `FORGE_TLS` | Force TLS on (`--tls`) or off (`--tls false`) for every pool. Usually not needed — TLS is detected on its own; an `ssl://` prefix on one address overrides it. |
 | `--no-color` / `--plain` | `FORGE_NO_COLOR` (or `NO_COLOR`) | ASCII-only output without colours; switched on by itself when there is no console (PSEXEC, a pipe, cron). |
@@ -253,7 +261,7 @@ On HiveOS set `FORGE_API=127.0.0.1:7777` in *Extra config*.
 | Endpoint | Format | Use with |
 |---|---|---|
 | `GET /` | HTML | The web dashboard (total + per-GPU hashrate, temps, VRAM temp, clocks, fans, power, core voltage, shares, live graph; dark/light theme). |
-| `GET /summary` | JSON | Grafana, bots, custom dashboards; per card also `voltage_mv` (NVIDIA, Linux). |
+| `GET /summary` | JSON | Grafana, bots, custom dashboards; per card also `voltage_mv` (NVIDIA and AMD, Linux). |
 | `GET /metrics` | Prometheus | Grafana dashboards and alerts. |
 | `miner_getstat1` | Claymore | Awesome Miner and the wider monitoring ecosystem. |
 
