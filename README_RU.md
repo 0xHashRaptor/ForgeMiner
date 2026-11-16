@@ -8,7 +8,7 @@
 <p align="center"><b>Быстрый нативный GPU-майнер для NVIDIA и AMD — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d), Quantus (QTC), Iron Fish (IRON), Compute Substrate (CSD) и Zano (ZANO)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 2.0.0"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 2.0.1"></a>
   <a href="#загрузка"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#поддерживаемые-карты"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal–RTX 50 + CMP | AMD RX 400–9000"></a>
 </p>
@@ -65,8 +65,8 @@ ForgeMiner — высокопроизводительный, полностью 
 
 ### Windows
 1. Скачайте и распакуйте Windows-релиз.
-2. Откройте `.bat` под свою монету/пул/регион и впишите кошелёк и воркер. На каждую монету — своя папка, всего 120 готовых запускаторов (`-SSL` = шифрованное соединение):
-   - `Pearl (PRL)\` — 22: HeroMiners, Kryptex, LuckyPool, BaikalMine, 2Miners, AlphaPool
+2. Откройте `.bat` под свою монету/пул/регион и впишите кошелёк и воркер. На каждую монету — своя папка, всего 126 готовых запускаторов (`-SSL` = шифрованное соединение):
+   - `Pearl (PRL)\` — 28: HeroMiners, Kryptex, LuckyPool, Peryn, BaikalMine, 2Miners, AlphaPool
    - `Ravencoin (RVN)\` — 19 · `Quai (QUAI)\` — 14 · `Neurai (XNA)\` — 12
    - `Conflux (CFX)\` и `Xelis (XEL)\` — по 10
    - `Quantus (QTC)\` — 10 · `QubitCoin (QTC)\` — 6 · `NOID (Parano1d)\` — 5 · `Iron Fish (IRON)\` — 4 · `Zano (ZANO)\` — 3 · `Compute Substrate (CSD)\` — 2 · `Cryptix (CYTX)\` — 2 · `BTX\` — 1
@@ -146,7 +146,7 @@ FORGE_AMD=1                 # только карты AMD (FORGE_AMD=0: толь
 | Cryptix (CYTX) | `cryptix` | BaikalMine · CryptixNetwork | 2% |
 | BTX (btx.dev) | `btx` | btx-pool.com | 2% |
 | Conflux (CFX) | `cfx` | HeroMiners · Kryptex | 1.5% |
-| Pearl (PRL) | `pearlhash` | HeroMiners · Kryptex · BaikalMine · LuckyPool · 2Miners · AlphaPool | 1% |
+| Pearl (PRL) | `pearlhash` | HeroMiners · Kryptex · BaikalMine · LuckyPool · Peryn · 2Miners · AlphaPool | 1% |
 | Quantus (QTC) | `quantus` | HeroMiners · Kryptex · LuckyPool · BaikalMine | 1% |
 | NOID (Parano1d) | `noid` | InnovLab · LuckyPool · Suprnova | 1% |
 | Compute Substrate (CSD) | `csd` | LuckyPool | 1% |
@@ -226,7 +226,7 @@ NOID работает начиная с GTX 10-й серии (Pascal), вклю�
 |------|-----|----------|
 | `--cclk` | `FORGE_CCLK` | Зафиксировать частоту ядра (МГц). |
 | `--coff` | `FORGE_COFF` | Оффсет ядра (МГц, +/−). |
-| `--mclk` | `FORGE_MCLK` | Зафиксировать частоту памяти (МГц). На GTX 10 / 16, RTX 20 и CMP — любая частота из списка карты (`810` сохраняет хешрейт Quantus и NOID при меньшей мощности); частота не из списка отклоняется с перечнем. На Linux с драйвером NVIDIA 595 или новее `405` держится и на RTX 20 / 30 / 40 / 50, а `5000` / `810` / `405` — на CMP 90HX и CMP 50HX. При выходе память возвращается такой, какой была, в том числе частота из HiveOS; после падения — при следующем запуске. Pearl на RTX 20 и CMP 50HX нужна быстрая память. |
+| `--mclk` | `FORGE_MCLK` | Зафиксировать частоту памяти (МГц). На GTX 10 / 16, RTX 20 и CMP — любая частота из списка карты (`810` сохраняет хешрейт Quantus и NOID при меньшей мощности); частота не из списка отклоняется с перечнем. На Linux с драйвером NVIDIA 595 или новее `405` держится и на RTX 20 / 30 / 40 / 50, а `5000` / `810` / `405` — на CMP 90HX и CMP 50HX. На Windows `405` и `810` держатся на RTX 40 / 50; мешать может монитор с высокой частотой обновления на майнящей карте (forge об этом скажет и продолжит майнить). При выходе память возвращается такой, какой была, в том числе частота из HiveOS; после падения — при следующем запуске. Pearl на CMP 50HX нужна быстрая память. |
 | `--moff` | `FORGE_MOFF` | Оффсет памяти (МГц, +/−). |
 | `--plimit` | `FORGE_PLIMIT` | Лимит мощности (Вт; на Windows с AMD — процент от лимита карты). |
 | `--vddoff` | — | Смещение напряжения ядра (мВ, со знаком; псевдоним `--vo`): AMD RX 6000 / 7000 / 9000 и NVIDIA RTX 20 / 30 / 40 / 50 на Linux. Запрос, который карта не отработала (например, меньше её шага напряжения), откатывается и помечается как неприменённый (жёлтый `Volt`); карта продолжает майнить. |

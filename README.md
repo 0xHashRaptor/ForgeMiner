@@ -8,7 +8,7 @@
 <p align="center"><b>A fast, native NVIDIA and AMD GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d), Quantus (QTC), Iron Fish (IRON), Compute Substrate (CSD) and Zano (ZANO)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 2.0.0"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 2.0.1"></a>
   <a href="#download"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#supported-gpus"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal–RTX 50 + CMP | AMD RX 400–9000"></a>
 </p>
@@ -65,8 +65,8 @@ Grab the latest build from the [**Releases**](https://github.com/0xHashRaptor/Fo
 
 ### Windows
 1. Download and unpack the Windows release.
-2. Open the `.bat` for your coin/pool/region and set your wallet and worker. There is one folder per coin, 120 ready-made launchers in all (`-SSL` = encrypted connection):
-   - `Pearl (PRL)\` — 22: HeroMiners, Kryptex, LuckyPool, BaikalMine, 2Miners, AlphaPool
+2. Open the `.bat` for your coin/pool/region and set your wallet and worker. There is one folder per coin, 126 ready-made launchers in all (`-SSL` = encrypted connection):
+   - `Pearl (PRL)\` — 28: HeroMiners, Kryptex, LuckyPool, Peryn, BaikalMine, 2Miners, AlphaPool
    - `Ravencoin (RVN)\` — 19 · `Quai (QUAI)\` — 14 · `Neurai (XNA)\` — 12
    - `Conflux (CFX)\` and `Xelis (XEL)\` — 10 each
    - `Quantus (QTC)\` — 10 · `QubitCoin (QTC)\` — 6 · `NOID (Parano1d)\` — 5 · `Iron Fish (IRON)\` — 4 · `Zano (ZANO)\` — 3 · `Compute Substrate (CSD)\` — 2 · `Cryptix (CYTX)\` — 2 · `BTX\` — 1
@@ -146,7 +146,7 @@ Ready-made flight sheets: **[forgeminer.org/#flightsheets](https://forgeminer.or
 | Cryptix (CYTX) | `cryptix` | BaikalMine · CryptixNetwork | 2% |
 | BTX (btx.dev) | `btx` | btx-pool.com | 2% |
 | Conflux (CFX) | `cfx` | HeroMiners · Kryptex | 1.5% |
-| Pearl (PRL) | `pearlhash` | HeroMiners · Kryptex · BaikalMine · LuckyPool · 2Miners · AlphaPool | 1% |
+| Pearl (PRL) | `pearlhash` | HeroMiners · Kryptex · BaikalMine · LuckyPool · Peryn · 2Miners · AlphaPool | 1% |
 | Quantus (QTC) | `quantus` | HeroMiners · Kryptex · LuckyPool · BaikalMine | 1% |
 | NOID (Parano1d) | `noid` | InnovLab · LuckyPool · Suprnova | 1% |
 | Compute Substrate (CSD) | `csd` | LuckyPool | 1% |
@@ -226,7 +226,7 @@ Most command-line flags have a `FORGE_*` environment-variable twin — handy for
 |------|-----|-------------|
 | `--cclk` | `FORGE_CCLK` | Lock core clock (MHz). |
 | `--coff` | `FORGE_COFF` | Core clock offset (MHz, +/−). |
-| `--mclk` | `FORGE_MCLK` | Lock memory clock (MHz). On GTX 10 / 16, RTX 20 and CMP any clock the card lists (`810` keeps Quantus and NOID at full hashrate for less power); a clock the card does not list is refused with the list. On Linux with NVIDIA driver 595 or newer `405` also holds on the RTX 20 / 30 / 40 / 50, and `5000` / `810` / `405` on the CMP 90HX and CMP 50HX. On exit the memory goes back to what it was, including a clock set in HiveOS; after a crash it is put back at the next start. Pearl on the RTX 20 and the CMP 50HX needs fast memory. |
+| `--mclk` | `FORGE_MCLK` | Lock memory clock (MHz). On GTX 10 / 16, RTX 20 and CMP any clock the card lists (`810` keeps Quantus and NOID at full hashrate for less power); a clock the card does not list is refused with the list. On Linux with NVIDIA driver 595 or newer `405` also holds on the RTX 20 / 30 / 40 / 50, and `5000` / `810` / `405` on the CMP 90HX and CMP 50HX. On Windows `405` and `810` hold on the RTX 40 / 50; a high-refresh monitor on the mining card can block it (forge says so and keeps mining). On exit the memory goes back to what it was, including a clock set in HiveOS; after a crash it is put back at the next start. Pearl on the CMP 50HX needs fast memory. |
 | `--moff` | `FORGE_MOFF` | Memory clock offset (MHz, +/−). |
 | `--plimit` | `FORGE_PLIMIT` | Power limit (Watts; on Windows with AMD, percent of the card's limit). |
 | `--vddoff` | — | Core voltage offset (mV, signed; alias `--vo`): AMD RX 6000 / 7000 / 9000, and NVIDIA RTX 20 / 30 / 40 / 50 on Linux. A request the card does not apply — for example one smaller than its voltage step — is put back and marked not applied (yellow in `Volt`); the card keeps mining. |
