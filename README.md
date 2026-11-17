@@ -8,7 +8,7 @@
 <p align="center"><b>A fast, native NVIDIA and AMD GPU miner — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d), Quantus (QTC), Iron Fish (IRON), Compute Substrate (CSD) and Zano (ZANO)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 2.0.1"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 2.0.2"></a>
   <a href="#download"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#supported-gpus"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal–RTX 50 + CMP | AMD RX 400–9000"></a>
 </p>
@@ -126,7 +126,7 @@ FORGE_COIN=xna              # KawPow only: rvn | quai | xna
 --kernel 2                  # Pearl, RTX 50: the lower-power kernel (default 1 = the fastest)
 FORGE_AMD=1                 # AMD cards only (FORGE_AMD=0: NVIDIA cards only)
 --cclk 1500 --moff 1000     # overclock: also --coff / --mclk / --plimit
---vddoff -50                # core voltage offset, mV: AMD, and NVIDIA RTX 20-50 on Linux (also --vddc)
+--vddoff -50                # core voltage offset, mV: AMD, NVIDIA RTX 20-50 on Linux, RTX 50 on Windows (also --vddc)
 --fan 70                    # or --fan-curve 45:30,60:55,70:75,80:100
 --proxy socks5://host:port  # every pool connection through a proxy
 --cmp-install               # unlock any CMP 40HX/50HX/70HX/90HX on the rig (safe to leave in permanently)
@@ -179,7 +179,7 @@ The dev fee is interleaved (no graph dips) and verifiable on your pool. *More al
 - **Native and lightweight** — direct CUDA Driver API on NVIDIA, OpenCL on AMD, near-zero CPU load; no Python, WSL or extra runtimes. Starts in a second, runs on weak hosts and many-GPU boxes.
 - **Efficient on crowded rigs** — keeps the GPUs fed even with many cards on a weak CPU, several miner instances or slow x1 risers.
 - **One self-contained binary** — everything embedded; no CUDA runtime or loose kernel files to manage. Even KawPow ships as a single executable.
-- **Built-in overclocking & fan control** — lock clocks, apply offsets, set a power limit and drive fans straight from the miner — a different OC per card on mixed rigs, and the core voltage on AMD. No third-party tool.
+- **Built-in overclocking & fan control** — lock clocks, apply offsets, set a power limit and drive fans straight from the miner — a different OC per card on mixed rigs, and the core voltage on AMD and NVIDIA. No third-party tool.
 - **Temperature protection** — `--temp-limit` / `--temp-resume` pause a card automatically if its core overheats, and resume once it cools back down; `--mem-temp-limit` / `--mem-temp-resume` do the same for the memory on cards that report it.
 - **Multi-pool with fail-over** — standard Stratum for every coin. An encrypted pool is detected on its own, so a bare `host:port` works whether the pool speaks TLS or not; list several addresses through a comma and the miner moves to the next one when a pool drops. `--proxy` sends every connection through SOCKS5 or HTTP.
 - **Live dashboard & read-only API** — the per-card table stays pinned at the top with the log scrolling underneath (press `L` for the classic view). Per-GPU hashrate, temps (incl. VRAM on Windows), clocks, fans, power and shares, plus a delivery figure showing how much of the hashrate the pool actually credits — and JSON, Prometheus and Claymore-compatible endpoints.
@@ -198,7 +198,7 @@ Most command-line flags have a `FORGE_*` environment-variable twin — handy for
 | `--pool` | `FORGE_POOL` | Pool `host:port`. TLS is detected automatically — prefix with `ssl://` only to force it. Comma-separate several for fail-over. |
 | `--wallet` | `FORGE_WALLET` | Payout wallet address. |
 | `--worker` | `FORGE_WORKER` | Worker / rig name. |
-| `--password` | `FORGE_PASS` | Pool password (usually `x`). |
+| `--password` | `FORGE_PASS` | Pool password (usually `x`); some pools read settings from it, such as the payout mode or difficulty. |
 | `--gpu` | `FORGE_GPU` | Mine only these indices, e.g. `0,1,2,6` (NVIDIA first in `nvidia-smi` order, then AMD in PCI bus order). |
 | — | `FORGE_AMD` | `1` = mine on the AMD cards only, `0` = on the NVIDIA cards only. Both by default. |
 | `--kernel` | `FORGE_KERNEL` | Pearl on the RTX 50 series: `1` (default) is the fastest kernel; `2` draws about 2% less board power for about 1% less hashrate. Both need NVIDIA driver 580 or newer. Every other card has one Pearl kernel and ignores the option. |
@@ -229,8 +229,8 @@ Most command-line flags have a `FORGE_*` environment-variable twin — handy for
 | `--mclk` | `FORGE_MCLK` | Lock memory clock (MHz). On GTX 10 / 16, RTX 20 and CMP any clock the card lists (`810` keeps Quantus and NOID at full hashrate for less power); a clock the card does not list is refused with the list. On Linux with NVIDIA driver 595 or newer `405` also holds on the RTX 20 / 30 / 40 / 50, and `5000` / `810` / `405` on the CMP 90HX and CMP 50HX. On Windows `405` and `810` hold on the RTX 40 / 50; a high-refresh monitor on the mining card can block it (forge says so and keeps mining). On exit the memory goes back to what it was, including a clock set in HiveOS; after a crash it is put back at the next start. Pearl on the CMP 50HX needs fast memory. |
 | `--moff` | `FORGE_MOFF` | Memory clock offset (MHz, +/−). |
 | `--plimit` | `FORGE_PLIMIT` | Power limit (Watts; on Windows with AMD, percent of the card's limit). |
-| `--vddoff` | — | Core voltage offset (mV, signed; alias `--vo`): AMD RX 6000 / 7000 / 9000, and NVIDIA RTX 20 / 30 / 40 / 50 on Linux. A request the card does not apply — for example one smaller than its voltage step — is put back and marked not applied (yellow in `Volt`); the card keeps mining. |
-| `--vddc` | — | Core voltage (mV; alias `--vcore`): AMD RX 5000 / 6000 (RX 7000 / 9000 take only the offset), and NVIDIA RTX 20 / 30 / 40 / 50 on Linux. `--voltage-info --gpu <list>` shows what a card offers; after a hard kill the next start puts the voltage and the memory back by itself (`--voltage-recover` does the same by hand). |
+| `--vddoff` | — | Core voltage offset (mV, signed; alias `--vo`): AMD RX 6000 / 7000 / 9000, NVIDIA RTX 20 / 30 / 40 / 50 on Linux, and the RTX 50 on Windows. A request the card does not apply — for example one smaller than its voltage step — is put back and marked not applied (yellow in `Volt`); the card keeps mining. |
+| `--vddc` | — | Core voltage (mV; alias `--vcore`): AMD RX 5000 / 6000 (RX 7000 / 9000 take only the offset), NVIDIA RTX 20 / 30 / 40 / 50 on Linux, and the RTX 50 on Windows. `--voltage-info --gpu <list>` shows what a card offers; after a hard kill the next start puts the voltage and the memory back by itself (`--voltage-recover` does the same by hand). |
 | `--fan` | `FORGE_FAN` | Fixed fan speed (%). |
 | `--fan-curve` | `FORGE_FANCURVE` | Temperature→speed curve, e.g. `45:30,60:55,70:75,80:100`; one curve per card split by `/` in `--gpu` order, `*` leaves a card to the driver (NVIDIA; on AMD use `--fan`). |
 | `--oc-keep` | `FORGE_OC_KEEP=1` | Leave the overclock on the cards when the miner exits. |
@@ -261,7 +261,7 @@ On HiveOS set `FORGE_API=127.0.0.1:7777` in *Extra config*.
 | Endpoint | Format | Use with |
 |---|---|---|
 | `GET /` | HTML | The web dashboard (total + per-GPU hashrate, temps, VRAM temp, clocks, fans, power, core voltage, shares, live graph; dark/light theme). |
-| `GET /summary` | JSON | Grafana, bots, custom dashboards; per card also `voltage_mv` (NVIDIA and AMD, Linux). |
+| `GET /summary` | JSON | Grafana, bots, custom dashboards; per card also `voltage_mv` (NVIDIA and AMD on Linux; NVIDIA RTX 50 on Windows). |
 | `GET /metrics` | Prometheus | Grafana dashboards and alerts. |
 | `miner_getstat1` | Claymore | Awesome Miner and the wider monitoring ecosystem. |
 
