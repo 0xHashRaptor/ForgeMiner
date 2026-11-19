@@ -8,7 +8,7 @@
 <p align="center"><b>Быстрый нативный GPU-майнер для NVIDIA и AMD — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d), Quantus (QTC), Iron Fish (IRON), Compute Substrate (CSD), Zano (ZANO) и Proxima (PROX)</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 2.1.0"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 2.1.1"></a>
   <a href="#загрузка"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#поддерживаемые-карты"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal–RTX 50 + CMP | AMD RX 400–9000"></a>
 </p>
@@ -65,12 +65,12 @@ ForgeMiner — высокопроизводительный, полностью 
 
 ### Windows
 1. Скачайте и распакуйте Windows-релиз.
-2. Откройте `.bat` под свою монету/пул/регион и впишите кошелёк и воркер. На каждую монету — своя папка, всего 135 готовых запускаторов (`-SSL` = шифрованное соединение):
-   - `Pearl (PRL)\` — 28: HeroMiners, Kryptex, LuckyPool, Peryn, BaikalMine, 2Miners, AlphaPool
-   - `Ravencoin (RVN)\` — 19 · `Quai (QUAI)\` — 14 · `Neurai (XNA)\` — 12
-   - `Conflux (CFX)\` и `Xelis (XEL)\` — по 10
-   - `Quantus (QTC)\` — 10 · `QubitCoin (QTC)\` — 6 · `NOID (Parano1d)\` — 5 · `Iron Fish (IRON)\` — 4 · `Zano (ZANO)\` — 3 · `Compute Substrate (CSD)\` — 2 · `Cryptix (CYTX)\` — 2 · `BTX\` — 1
-   - `Proxima (PROX)\` — 9: InnovLab, K1Pool
+2. Откройте `.bat` под свою монету/пул/регион и впишите кошелёк и воркер. На каждую монету — своя папка, всего 132 готовых запускаторов (`-SSL` = шифрованное соединение):
+   - `Pearl (PRL)\` — 29: HeroMiners, Kryptex, LuckyPool, Peryn, BaikalMine, 2Miners, AlphaPool, K1Pool
+   - `Ravencoin (RVN)\` — 17 · `Quai (QUAI)\` — 14 · `Neurai (XNA)\` — 4
+   - `Conflux (CFX)\` — 10 · `Xelis (XEL)\` — 11
+   - `Quantus (QTC)\` — 11 · `QubitCoin (QTC)\` — 6 · `NOID (Parano1d)\` — 5 · `Iron Fish (IRON)\` — 4 · `Zano (ZANO)\` — 4 · `Compute Substrate (CSD)\` — 2 · `Cryptix (CYTX)\` — 2 · `BTX\` — 1
+   - `Proxima (PROX)\` — 12: InnovLab, K1Pool, HimPool
 3. Двойной клик — запуск. Для встроенного разгона — «Запуск от имени администратора». Для карт AMD — те же `.bat`.
 
 ### Linux
@@ -149,17 +149,17 @@ FORGE_AMD=1                 # только карты AMD (FORGE_AMD=0: толь
 | Cryptix (CYTX) | `cryptix` | BaikalMine · CryptixNetwork | 2% |
 | BTX (btx.dev) | `btx` | btx-pool.com | 2% |
 | Conflux (CFX) | `cfx` | HeroMiners · Kryptex | 1.5% |
-| Pearl (PRL) | `pearlhash` | HeroMiners · Kryptex · BaikalMine · LuckyPool · Peryn · 2Miners · AlphaPool | 1% |
-| Quantus (QTC) | `quantus` | HeroMiners · Kryptex · LuckyPool · BaikalMine | 1% |
+| Pearl (PRL) | `pearlhash` | HeroMiners · Kryptex · BaikalMine · LuckyPool · Peryn · 2Miners · AlphaPool · K1Pool | 1% |
+| Quantus (QTC) | `quantus` | HeroMiners · Kryptex · LuckyPool · BaikalMine · K1Pool | 1% |
 | NOID (Parano1d) | `noid` | InnovLab · LuckyPool · Suprnova | 1% |
 | Compute Substrate (CSD) | `csd` | LuckyPool | 1% |
-| QubitCoin (QTC) | `qhash` | LuckyPool · k1pool | 1% |
-| Xelis (XEL) | `xelis` | Kryptex · HeroMiners | 1% |
-| Proxima (PROX) | `prox` | InnovLab · K1Pool | 1% |
-| Ravencoin (RVN) | `kawpow` | Kryptex · HeroMiners · 2Miners · RavenMiner · k1pool | 0.7% |
-| Quai (QUAI) | `kawpow` `--coin quai` | HeroMiners · Kryptex · k1pool | 0.7% |
-| Neurai (XNA) | `kawpow` `--coin xna` | Kryptex · 2Miners · Vipor | 0.7% |
-| Zano (ZANO) | `zano` | LuckyPool | 0.7% |
+| QubitCoin (QTC) | `qhash` | LuckyPool · K1Pool | 1% |
+| Xelis (XEL) | `xelis` | Kryptex · HeroMiners · K1Pool | 1% |
+| Proxima (PROX) | `prox` | InnovLab · K1Pool · HimPool | 1% |
+| Ravencoin (RVN) | `kawpow` | Kryptex · HeroMiners · 2Miners · RavenMiner · K1Pool | 0.7% |
+| Quai (QUAI) | `kawpow` `--coin quai` | HeroMiners · Kryptex · K1Pool | 0.7% |
+| Neurai (XNA) | `kawpow` `--coin xna` | 2Miners · Vipor | 0.7% |
+| Zano (ZANO) | `zano` | LuckyPool · K1Pool | 0.7% |
 | Iron Fish (IRON) | `iron` | Kryptex · HeroMiners | 0.7% |
 
 Conflux требует около **9.4 ГБ видеопамяти** (набор данных 8.7 ГиБ), и это требование медленно растёт вместе с сетью:
@@ -169,7 +169,8 @@ Conflux требует около **9.4 ГБ видеопамяти** (набо�
 NOID работает начиная с GTX 10-й серии (Pascal), включая Tesla V100, и на AMD RX 400 и новее. CMP 170HX
 простаивает и один раз об этом пишет, остальные карты рига майнят. Iron Fish нужна карта от 6 ГБ; датасет
 4.6 ГБ строится на карте за секунды. Proxima работает начиная с GTX 10-й серии и на AMD RX 5000 и новее; на
-InnovLab кошелёк — ваш PROX-адрес из 64 символов, на K1Pool — аккаунт K1Pool (Kr...) или PROX-адрес.
+InnovLab и HimPool кошелёк — ваш PROX-адрес из 64 символов, на K1Pool — аккаунт K1Pool (Kr...) или PROX-адрес.
+K1Pool на всех своих монетах пускает по аккаунту K1Pool (Kr...).
 
 Комиссия чередуется в потоке (без провалов на графике) и проверяется на пуле. *Больше алгоритмов в разработке.*
 
