@@ -5,10 +5,10 @@
   </picture>
 </p>
 
-<p align="center"><b>Быстрый нативный GPU-майнер для NVIDIA и AMD — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d), Quantus (QTC), Iron Fish (IRON), Compute Substrate (CSD), Zano (ZANO) и Proxima (PROX)</b></p>
+<p align="center"><b>Быстрый нативный GPU-майнер для NVIDIA и AMD — Pearl (PRL), QubitCoin (QTC), KawPow (Ravencoin, Quai, Neurai), Cryptix (CYTX), BTX (btx.dev), Xelis (XEL), Conflux (CFX), NOID (Parano1d), Quantus (QTC), Compute Substrate (CSD), Zano (ZANO), Proxima (PROX) и NEB</b></p>
 
 <p align="center">
-  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 2.1.1"></a>
+  <a href="https://github.com/0xHashRaptor/ForgeMiner/releases"><img src="assets/badge_version.svg" alt="version 2.1.2"></a>
   <a href="#загрузка"><img src="assets/badge_platform.svg" alt="platform: Windows | Linux | HiveOS | Docker"></a>
   <a href="#поддерживаемые-карты"><img src="assets/badge_gpu.svg" alt="GPU: NVIDIA Pascal–RTX 50 + CMP | AMD RX 400–9000"></a>
 </p>
@@ -37,7 +37,7 @@
 
 ## Обзор
 
-ForgeMiner — высокопроизводительный, полностью нативный GPU-майнер для NVIDIA и AMD. С картами NVIDIA он работает напрямую через CUDA Driver API, с AMD Radeon — через OpenCL, без Python, WSL и лишних рантаймов, поэтому стартует мгновенно и легко идёт даже на слабых ригах. Майнит **Pearl (PRL)**, **QubitCoin (QTC)**, **KawPow** (Ravencoin RVN, Quai QUAI, Neurai XNA), **Cryptix (CYTX)**, **BTX (btx.dev)**, **Xelis (XEL)**, **Conflux (CFX)**, **NOID (Parano1d)**, **Quantus (QTC)**, **Iron Fish (IRON)**, **Compute Substrate (CSD)**, **Zano (ZANO)** и **Proxima (PROX)** из одного бинарника — монета выбирается одним флагом — и новые монеты в разработке. Карты NVIDIA и AMD майнят вместе в одном риге.
+ForgeMiner — высокопроизводительный, полностью нативный GPU-майнер для NVIDIA и AMD. С картами NVIDIA он работает напрямую через CUDA Driver API, с AMD Radeon — через OpenCL, без Python, WSL и лишних рантаймов, поэтому стартует мгновенно и легко идёт даже на слабых ригах. Майнит **Pearl (PRL)**, **QubitCoin (QTC)**, **KawPow** (Ravencoin RVN, Quai QUAI, Neurai XNA), **Cryptix (CYTX)**, **BTX (btx.dev)**, **Xelis (XEL)**, **Conflux (CFX)**, **NOID (Parano1d)**, **Quantus (QTC)**, **Compute Substrate (CSD)**, **Zano (ZANO)**, **Proxima (PROX)** и **NEB** из одного бинарника — монета выбирается одним флагом — и новые монеты в разработке. Карты NVIDIA и AMD майнят вместе в одном риге.
 
 Для каждого алгоритма есть отдельная сборка под архитектуру каждой карты — она выбирается автоматически при запуске, так каждая GPU работает на пике. Риги с CMP 40HX, 50HX, 70HX или 90HX получают встроенный аппаратный разлок на Linux одной командой, на любом ядре — см. [Аппаратный разлок CMP](#аппаратный-разлок-cmp-linux).
 
@@ -65,12 +65,13 @@ ForgeMiner — высокопроизводительный, полностью 
 
 ### Windows
 1. Скачайте и распакуйте Windows-релиз.
-2. Откройте `.bat` под свою монету/пул/регион и впишите кошелёк и воркер. На каждую монету — своя папка, всего 132 готовых запускаторов (`-SSL` = шифрованное соединение):
+2. Откройте `.bat` под свою монету/пул/регион и впишите кошелёк и воркер. На каждую монету — своя папка, всего 145 готовых запускаторов (`-SSL` = шифрованное соединение):
    - `Pearl (PRL)\` — 29: HeroMiners, Kryptex, LuckyPool, Peryn, BaikalMine, 2Miners, AlphaPool, K1Pool
    - `Ravencoin (RVN)\` — 17 · `Quai (QUAI)\` — 14 · `Neurai (XNA)\` — 4
    - `Conflux (CFX)\` — 10 · `Xelis (XEL)\` — 11
-   - `Quantus (QTC)\` — 11 · `QubitCoin (QTC)\` — 6 · `NOID (Parano1d)\` — 5 · `Iron Fish (IRON)\` — 4 · `Zano (ZANO)\` — 4 · `Compute Substrate (CSD)\` — 2 · `Cryptix (CYTX)\` — 2 · `BTX\` — 1
-   - `Proxima (PROX)\` — 12: InnovLab, K1Pool, HimPool
+   - `Quantus (QTC)\` — 11 · `QubitCoin (QTC)\` — 6 · `NOID (Parano1d)\` — 5 · `Zano (ZANO)\` — 4 · `Compute Substrate (CSD)\` — 2 · `Cryptix (CYTX)\` — 2 · `BTX\` — 1
+   - `Proxima (PROX)\` — 15: InnovLab, K1Pool, HimPool, Suprnova, ProximaMine, CryoPool
+   - `NEB\` — 13: InnovLab, K1Pool, Suprnova, AethelBlock, CryoPool
 3. Двойной клик — запуск. Для встроенного разгона — «Запуск от имени администратора». Для карт AMD — те же `.bat`.
 
 ### Linux
@@ -94,14 +95,14 @@ chmod +x forge
 ./forge --algorithm quantus --wallet YOUR_QUANTUS_WALLET --pool de.quantus.herominers.com:1155 --worker rig01
 # NOID (GTX 10-й серии и новее, включая Tesla V100, AMD RX 400 и новее; кроме CMP 170HX)
 ./forge --algorithm noid --wallet YOUR_NOID_WALLET --pool stratum+ssl://eu2.innovlab.cc:19601 --worker rig01
-# Iron Fish (GTX 10-й серии и новее, AMD RX 400 и новее; карта от 6 ГБ)
-./forge --algorithm iron --wallet YOUR_IRON_WALLET --pool iron.kryptex.network:7017 --worker rig01
 # Compute Substrate
 ./forge --algorithm csd --wallet YOUR_CSD_WALLET --pool csd-eu.lproute.com:8760 --worker rig01
 # Zano
 ./forge --algorithm zano --wallet YOUR_ZANO_WALLET --pool zano.luckypool.io:8866 --worker rig01
 # Proxima (InnovLab: ваш PROX-адрес из 64 символов; K1Pool: аккаунт K1Pool Kr... или PROX-адрес)
 ./forge --algorithm prox --wallet YOUR_PROX_ADDRESS --pool stratum+ssl://eu3.innovlab.cc:19701 --worker rig01
+# NEB (файл датасетов neb-datasets.bin есть в пакете; если его нет, майнер один раз скачает его сам)
+./forge --algorithm neb --wallet YOUR_NEB_ADDRESS --pool neb.innovlab.cc:4370 --worker rig01
 ```
 
 Linux-сборка собрана под **glibc 2.17**, поэтому работает начиная с CentOS 7 / Ubuntu 14.04 — не нужен ни CUDA toolkit, ни дополнительные библиотеки, только драйвер NVIDIA. Картам AMD нужны драйвер amdgpu и OpenCL от AMD (ROCm; в HiveOS есть оба), а майнер запускается от root или пользователем из группы `render`. Добавьте `--api-bind 0.0.0.0:7777` к любой команде выше и откройте `http://<rig>:7777` — это встроенный дашборд.
@@ -123,7 +124,7 @@ ForgeMiner есть и во встроенном списке майнеров H
 *Extra config* принимает **обе** формы, по одной в строке, и их можно смешивать:
 
 ```
-FORGE_ALGO=xelis            # или pearlhash / qhash / kawpow / cryptix / btx / cfx / noid / quantus / iron / csd / zano / prox
+FORGE_ALGO=xelis            # или pearlhash / qhash / kawpow / cryptix / btx / cfx / noid / quantus / csd / zano / prox / neb
 FORGE_COIN=xna              # только для KawPow: rvn | quai | xna
 --gpu 0,1,3                 # майнить только эти карты
 --kernel 2                  # Pearl, RTX 50: ядро с меньшим потреблением (по умолчанию 1 = самое быстрое)
@@ -155,21 +156,23 @@ FORGE_AMD=1                 # только карты AMD (FORGE_AMD=0: толь
 | Compute Substrate (CSD) | `csd` | LuckyPool | 1% |
 | QubitCoin (QTC) | `qhash` | LuckyPool · K1Pool | 1% |
 | Xelis (XEL) | `xelis` | Kryptex · HeroMiners · K1Pool | 1% |
-| Proxima (PROX) | `prox` | InnovLab · K1Pool · HimPool | 1% |
+| Proxima (PROX) | `prox` | InnovLab · K1Pool · HimPool · Suprnova · ProximaMine · CryoPool | 1% |
+| NEB | `neb` | InnovLab · K1Pool · Suprnova · AethelBlock · CryoPool | 1% |
 | Ravencoin (RVN) | `kawpow` | Kryptex · HeroMiners · 2Miners · RavenMiner · K1Pool | 0.7% |
 | Quai (QUAI) | `kawpow` `--coin quai` | HeroMiners · Kryptex · K1Pool | 0.7% |
 | Neurai (XNA) | `kawpow` `--coin xna` | 2Miners · Vipor | 0.7% |
 | Zano (ZANO) | `zano` | LuckyPool · K1Pool | 0.7% |
-| Iron Fish (IRON) | `iron` | Kryptex · HeroMiners | 0.7% |
 
 Conflux требует около **9.4 ГБ видеопамяти** (набор данных 8.7 ГиБ), и это требование медленно растёт вместе с сетью:
 карты на 8 ГБ монету не потянут, на 10 ГБ впритык, от 11 ГБ спокойно. Майнер проверяет карту на
 старте и говорит об этом с реальными числами, а не падает посреди подготовки.
 
 NOID работает начиная с GTX 10-й серии (Pascal), включая Tesla V100, и на AMD RX 400 и новее. CMP 170HX
-простаивает и один раз об этом пишет, остальные карты рига майнят. Iron Fish нужна карта от 6 ГБ; датасет
-4.6 ГБ строится на карте за секунды. Proxima работает начиная с GTX 10-й серии и на AMD RX 5000 и новее; на
-InnovLab и HimPool кошелёк — ваш PROX-адрес из 64 символов, на K1Pool — аккаунт K1Pool (Kr...) или PROX-адрес.
+простаивает и один раз об этом пишет, остальные карты рига майнят.
+Proxima работает начиная с GTX 10-й серии (есть и образ для Tesla P100) и на AMD RX 400 и новее, включая RX Vega; на
+InnovLab, HimPool, Suprnova, ProximaMine и CryoPool кошелёк — ваш PROX-адрес из 64 символов, на K1Pool — аккаунт K1Pool (Kr...) или PROX-адрес.
+NEB: кошелёк — ваш NEB-адрес (neb1...), на K1Pool — аккаунт K1Pool (Kr...). NEB читает файл датасетов `neb-datasets.bin`
+(16 МБ, лежит рядом с майнером в каждом пакете релиза); если его нет, майнер один раз скачивает его и проверяет.
 K1Pool на всех своих монетах пускает по аккаунту K1Pool (Kr...).
 
 Комиссия чередуется в потоке (без провалов на графике) и проверяется на пуле. *Больше алгоритмов в разработке.*
@@ -178,9 +181,9 @@ K1Pool на всех своих монетах пускает по аккаун�
 
 ## Возможности
 
-- **Много монет, один бинарь** — Pearl, QubitCoin, KawPow (RVN / QUAI / XNA), Cryptix, BTX, Xelis, Conflux, NOID, Quantus, Iron Fish, Compute Substrate, Zano или Proxima; выбор через `--algorithm`.
+- **Много монет, один бинарь** — Pearl, QubitCoin, KawPow (RVN / QUAI / XNA), Cryptix, BTX, Xelis, Conflux, NOID, Quantus, Compute Substrate, Zano, Proxima или NEB; выбор через `--algorithm`.
 - **Ядра под архитектуру** — отдельное ядро под каждое поколение (Pascal / Volta / Turing / Ampere / Ada / Blackwell, AMD RDNA 1–4), выбирается при старте.
-- **NVIDIA и AMD в одном риге** — Radeon RX 400 / 500 и RX 5000 / 6000 / 7000 / 9000 майнят все монеты, кроме BTX, с теми же командными строками, на Linux / HiveOS и Windows. Смешанный риг работает в одном ForgeMiner: сначала нумеруются карты NVIDIA, потом AMD.
+- **NVIDIA и AMD в одном риге** — Radeon RX 400 / 500, RX Vega и RX 5000 / 6000 / 7000 / 9000 майнят все монеты, кроме BTX, с теми же командными строками, на Linux / HiveOS и Windows. Смешанный риг работает в одном ForgeMiner: сначала нумеруются карты NVIDIA, потом AMD.
 - **Аппаратный разлок CMP 40HX / 50HX / 70HX / 90HX (Linux)** — одна встроенная команда разлочивает любую из этих карт со стокового задушенного хешрейта до полной скорости; никаких сторонних скриптов и точного совпадения ядра (драйвер 610.43.03 по-прежнему нужен).
 - **Нативно и легко** — напрямую через CUDA Driver API на NVIDIA и OpenCL на AMD, почти нулевая нагрузка на CPU; без Python, WSL и рантаймов. Стартует за секунду, идёт на слабых хостах и многокарточных ригах.
 - **Эффективно на забитых ригах** — держит карты загруженными даже при слабом CPU, нескольких инстансах или медленных x1-райзерах.
@@ -199,7 +202,7 @@ K1Pool на всех своих монетах пускает по аккаун�
 
 | Флаг | Env | Описание |
 |------|-----|----------|
-| `--algorithm` | `FORGE_ALGO` | `pearlhash`, `qhash`, `kawpow`, `cryptix`, `btx`, `xelis`, `cfx`, `noid`, `quantus`, `iron`, `csd` (Compute Substrate), `zano` или `prox` (Proxima) (`qhash` — QubitCoin, `quantus` — Quantus: у обеих тикер QTC). |
+| `--algorithm` | `FORGE_ALGO` | `pearlhash`, `qhash`, `kawpow`, `cryptix`, `btx`, `xelis`, `cfx`, `noid`, `quantus`, `csd` (Compute Substrate), `zano`, `prox` (Proxima) или `neb` (NEB) (`qhash` — QubitCoin, `quantus` — Quantus: у обеих тикер QTC). |
 | `--coin` | `FORGE_COIN` | Монета KawPow: `rvn`, `quai` или `xna` (определяется по пулу; для Neurai / Vipor задавать явно). |
 | `--pool` | `FORGE_POOL` | Пул `host:port`. TLS определяется автоматически — префикс `ssl://` нужен только чтобы навязать его. Несколько адресов через запятую для failover. |
 | `--wallet` | `FORGE_WALLET` | Адрес кошелька для выплат. |
@@ -218,6 +221,7 @@ K1Pool на всех своих монетах пускает по аккаун�
 | `--no-color` / `--plain` | `FORGE_NO_COLOR` (или `NO_COLOR`) | Вывод только ASCII, без цвета; включается сам, когда консоли нет (PSEXEC, конвейер, cron). |
 | `--log` | `FORGE_LOG` | Сохранять вывод в файл (вместе с таблицами, без цветовых кодов). По умолчанию выключено, пишет в конец. |
 | `--v1-tui` | — | Запуститься в классическом прокручивающемся виде вместо закреплённой панели. Клавиша `L` переключает в любой момент. |
+| `--cmp-driver` | — | Linux: скачать, проверить и поставить NVIDIA 610.43.03 — драйвер, под который собран разлок CMP (HiveOS: через его собственное обновление драйвера), затем перезагрузка. |
 | `--cmp-install` | — | Linux: поставить аппаратный разлок для CMP 40HX / 50HX / 70HX / 90HX (см. [ниже](#аппаратный-разлок-cmp-linux)). |
 | `--cmp-verify` | — | Linux: показать живой статус разлока по CMP-картам. |
 | `--cmp-rollback` | — | Linux: откатить разлок, вернуть прежний драйвер. |
@@ -283,6 +287,7 @@ CMP 40HX, 50HX, 70HX и 90HX с завода задушены аппаратно
 
 | Команда | Что делает |
 |---|---|
+| `sudo forge --cmp-driver` | скачать, проверить и поставить NVIDIA 610.43.03 (потом перезагрузка) |
 | `sudo forge --cmp-install` | ставит хелпер разлока, перезагружает риг (10 сек на отмену) |
 | `sudo forge --cmp-install --no-reboot` | только установка, ребут делаете сами |
 | `sudo forge --cmp-verify` | живой статус разлока по CMP-картам |
@@ -310,9 +315,10 @@ CMP 40HX, 50HX, 70HX и 90HX с завода задушены аппаратно
 | **AMD RDNA 3** (RX 7000) | 7900 XTX · 7900 XT · 7900 GRE · 7800 XT · 7700 XT · 7600 XT · 7600 |
 | **AMD RDNA 2** (RX 6000) | 6950 XT · 6900 XT · 6800 XT · 6800 · 6750 XT · 6700 XT · 6700 · 6650 XT · 6600 XT · 6600 |
 | **AMD RDNA 1** (RX 5000) | 5700 XT · 5700 · 5600 XT · 5500 XT |
-| **AMD Polaris** (RX 400 / 500) | 590 · 580 · 570 · 480 · 470 *(штатный драйвер; Iron Fish на картах 8 ГБ; без Conflux)* |
+| **AMD Vega** (GCN 5) | Vega 64 · Vega 56 *(без Conflux: 8 ГБ)* |
+| **AMD Polaris** (RX 400 / 500) | 590 · 580 · 570 · 480 · 470 *(штатный драйвер; без Conflux)* |
 
-*Все монеты работают на каждом из перечисленных поколений, с такими исключениями: **BTX** нужен Volta (Tesla V100) или Turing (RTX 20 / CMP 40HX-70HX) и новее, на Pascal и CMP 170HX он не идёт; **Conflux** работает начиная с Pascal на картах с памятью больше 8 ГБ (GTX 1080 Ti, Tesla V100, RTX 20 и новее), кроме CMP 170HX; **Quantus**, **NOID** и **QubitCoin** работают начиная с Pascal (GTX 10), включая Tesla V100, но не на CMP 170HX; **Proxima** работает начиная с Pascal (GTX 10). На **AMD** идут все монеты, кроме **BTX**; Proxima — с серии RX 5000; Conflux и там требует больше 8 ГБ; RX 6500 XT / 6400 и встроенная графика Radeon не поддерживаются. Карта, для которой у выбранной монеты нет ядра, скажет об этом одной строкой, остальные карты продолжат майнить.*
+*Все монеты работают на каждом из перечисленных поколений, с такими исключениями: **BTX** нужен Volta (Tesla V100) или Turing (RTX 20 / CMP 40HX-70HX) и новее, на Pascal и CMP 170HX он не идёт; **Conflux** работает начиная с Pascal на картах с памятью больше 8 ГБ (GTX 1080 Ti, Tesla V100, RTX 20 и новее), кроме CMP 170HX; **Quantus**, **NOID** и **QubitCoin** работают начиная с Pascal (GTX 10), включая Tesla V100, но не на CMP 170HX; **Proxima** и **NEB** работают начиная с Pascal (GTX 10). На **AMD** идут все монеты, кроме **BTX**; Conflux и там требует больше 8 ГБ; RX 6500 XT / 6400 и встроенная графика Radeon не поддерживаются. Карта, для которой у выбранной монеты нет ядра, скажет об этом одной строкой, остальные карты продолжат майнить.*
 
 ---
 
